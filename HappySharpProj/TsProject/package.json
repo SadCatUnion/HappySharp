@@ -1,0 +1,13 @@
+{
+  "name": "tsproj",
+  "version": "1.0.0",
+  "description": "ts project",
+  "scripts": {
+    "build": "tsc -p tsconfig.json",
+    "postbuild": "node ./@tools/copyJsFile.js output ../Assets/StreamingAssets/",
+    "Gen:Api": "node ./@tools/GenApi.js"
+  },
+  "devDependencies": {
+    "@types/node": "^17.0.18"
+  }
+}

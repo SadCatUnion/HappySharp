@@ -1,0 +1,1 @@
+Hello HappySharp: "C:\Program Files\Unity 2021.2.7f1\Editor\Unity.exe" -projectpath C:/Users/zhuzhongnan/Documents/GitHub/HappySharp/HappySharpProj -useHub -hubIPC -cloudEnvironment production -hubSessionId a25f6d30-8d6c-11ec-a8c0-81dd065eba47 -accessToken lELmI_MjfRamLThHy0VH3TnXEMy4JozZ5sKL_KOrPP000bf

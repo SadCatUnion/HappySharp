@@ -1,7 +1,5 @@
 # HappySharp
-The combination of Ts and C# makes the program development process happier
+The combination of Ts and C# and Node.js makes the program development process happier
 
-- Install .NET6 SDK
-- Clone this repo
-- Enter the **HappySharp** Directory
-- **dotnet run**
+Using Unity + Puerts
+
