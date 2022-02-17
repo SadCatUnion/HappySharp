@@ -5,6 +5,7 @@ using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
 
+
 /// <summary>
 /// 如果你全ts/js编程，可以参考这份自动化配置
 /// </summary>
@@ -57,6 +58,8 @@ public class PuertsConfig
             {
                 "UnityEngine",
                 "UnityEngine.UI",
+                "UnityEngine.UIElements",
+                "UnityEngine.UIElements.Experimental",
                 "System",
                 "System.IO",
                 "System.Security",
@@ -184,5 +187,7 @@ public class PuertsConfig
         "System.IO.Stream",
         "System.Net.HttpListenerTimeoutManager",
         "System.Net.Sockets.SocketAsyncEventArgs",
+        "UnityEngine.UIElements.ITransform",
+        "System.Version"
     };
 }

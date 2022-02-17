@@ -13,7 +13,7 @@ public class GlobalJSEnv
         {
             if (_Env == null)
             {
-                _Env = new JsEnv(new LevelScriptLoader(""));
+                _Env = new JsEnv(new LevelScriptLoader(""),4396);
             }
 
             return _Env;

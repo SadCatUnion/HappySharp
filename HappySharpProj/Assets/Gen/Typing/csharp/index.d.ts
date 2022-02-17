@@ -2686,41 +2686,6 @@ declare module 'csharp' {
             public CompareTo ($obj: any) : number
             public static Equals ($objA: any, $objB: any) : boolean
         }
-        class Version extends System.Object implements System.ICloneable, System.ISpanFormattable, System.IComparable, System.IComparable$1<System.Version>, System.IEquatable$1<System.Version>
-        {
-            public get Major(): number;
-            public get Minor(): number;
-            public get Build(): number;
-            public get Revision(): number;
-            public get MajorRevision(): number;
-            public get MinorRevision(): number;
-            public Clone () : any
-            public CompareTo ($version: any) : number
-            public CompareTo ($value: System.Version) : number
-            public Equals ($obj: any) : boolean
-            public Equals ($obj: System.Version) : boolean
-            public ToString () : string
-            public ToString ($fieldCount: number) : string
-            public TryFormat ($destination: System.Span$1<number>, $charsWritten: $Ref<number>) : boolean
-            public TryFormat ($destination: System.Span$1<number>, $fieldCount: number, $charsWritten: $Ref<number>) : boolean
-            public static Parse ($input: string) : System.Version
-            public static Parse ($input: System.ReadOnlySpan$1<number>) : System.Version
-            public static TryParse ($input: string, $result: $Ref<System.Version>) : boolean
-            public static TryParse ($input: System.ReadOnlySpan$1<number>, $result: $Ref<System.Version>) : boolean
-            public static op_Equality ($v1: System.Version, $v2: System.Version) : boolean
-            public static op_Inequality ($v1: System.Version, $v2: System.Version) : boolean
-            public static op_LessThan ($v1: System.Version, $v2: System.Version) : boolean
-            public static op_LessThanOrEqual ($v1: System.Version, $v2: System.Version) : boolean
-            public static op_GreaterThan ($v1: System.Version, $v2: System.Version) : boolean
-            public static op_GreaterThanOrEqual ($v1: System.Version, $v2: System.Version) : boolean
-            public constructor ($major: number, $minor: number, $build: number, $revision: number)
-            public constructor ($major: number, $minor: number, $build: number)
-            public constructor ($major: number, $minor: number)
-            public constructor ($version: string)
-            public constructor ()
-            public CompareTo ($obj: any) : number
-            public static Equals ($objA: any, $objB: any) : boolean
-        }
         interface IServiceProvider
         {
             GetService ($serviceType: System.Type) : any
@@ -2782,6 +2747,11 @@ declare module 'csharp' {
             public Copy () : System.ApplicationId
             public constructor ($publicKeyToken: System.Array$1<number>, $name: string, $version: System.Version, $processorArchitecture: string, $culture: string)
             public constructor ()
+        }
+        class Version extends System.Object implements System.ICloneable, System.ISpanFormattable, System.IComparable, System.IComparable$1<System.Version>, System.IEquatable$1<System.Version>
+        {
+            public Clone () : any
+            public CompareTo ($obj: any) : number
         }
         class CannotUnloadAppDomainException extends System.SystemException implements System.Runtime.Serialization.ISerializable, System.Runtime.InteropServices._Exception
         {
@@ -3651,13 +3621,13 @@ declare module 'csharp' {
         class KeyValuePair$2<TKey, TValue> extends System.ValueType
         {
         }
-        interface IDictionary$2<TKey, TValue> extends System.Collections.Generic.IEnumerable$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>, System.Collections.IEnumerable, System.Collections.Generic.ICollection$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>
-        {
-        }
         class Dictionary$2<TKey, TValue> extends System.Object implements System.Runtime.Serialization.IDeserializationCallback, System.Collections.Generic.IReadOnlyDictionary$2<TKey, TValue>, System.Collections.Generic.IDictionary$2<TKey, TValue>, System.Runtime.Serialization.ISerializable, System.Collections.ICollection, System.Collections.IDictionary, System.Collections.Generic.IEnumerable$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>, System.Collections.IEnumerable, System.Collections.Generic.IReadOnlyCollection$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>, System.Collections.Generic.ICollection$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>
         {
         }
         interface IReadOnlyDictionary$2<TKey, TValue> extends System.Collections.Generic.IEnumerable$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>, System.Collections.IEnumerable, System.Collections.Generic.IReadOnlyCollection$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>
+        {
+        }
+        interface IDictionary$2<TKey, TValue> extends System.Collections.Generic.IEnumerable$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>, System.Collections.IEnumerable, System.Collections.Generic.ICollection$1<System.Collections.Generic.KeyValuePair$2<TKey, TValue>>
         {
         }
     }
@@ -29985,6 +29955,13275 @@ declare module 'csharp' {
         enum SampleType
         { Layout = 0, Render = 1 }
     }
+    namespace UnityEngine.UIElements {
+        /** 
+        Options to enable or disable filters for the dynamic atlas.
+        */
+        enum DynamicAtlasFilters
+        { None = 0, Readability = 1, Size = 2, Format = 4, ColorSpace = 8, FilterMode = 16 }
+        /** 
+        Delegate that can be used as a custom filter for the dynamic atlas.
+        * @param texture The texture to filter.
+        * @param filtersToApply The filters the dynamic atlas applies when the delegate returns <c>true<c>.
+        by default, this value is equal to <see cref="DynamicAtlasSettings.activeFilters" >.
+        * @returns 
+        When false, the texture cannot be added to the atlas. When true the texture is added to the atlas,
+        as long as it is not excluded by filtersToApply.
+        */
+        interface DynamicAtlasCustomFilter
+        { (texture: UnityEngine.Texture2D, filtersToApply: $Ref<UnityEngine.UIElements.DynamicAtlasFilters>) : boolean; }
+        var DynamicAtlasCustomFilter: { new (func: (texture: UnityEngine.Texture2D, filtersToApply: $Ref<UnityEngine.UIElements.DynamicAtlasFilters>) => boolean): DynamicAtlasCustomFilter; }
+        /** 
+        Element that can be bound to a property.
+        */
+        class BindableElement extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            Binding object that will be updated.
+            */
+            public get binding(): UnityEngine.UIElements.IBinding;
+            public set binding(value: UnityEngine.UIElements.IBinding);
+            /** 
+            Path of the target property to be bound.
+            */
+            public get bindingPath(): string;
+            public set bindingPath(value: string);
+            public constructor ()
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public IsBound () : null
+        }
+        /** 
+        Base class for objects that are part of the UIElements visual tree.
+        */
+        class VisualElement extends UnityEngine.UIElements.Focusable implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            USS class name of local disabled elements.
+            */
+            public static disabledUssClassName : string/** 
+            Used for view data persistence (ie. tree expanded states, scroll position, zoom level).
+            */
+            public get viewDataKey(): string;
+            public set viewDataKey(value: string);
+            /** 
+            This property can be used to associate application-specific user data with this VisualElement.
+            */
+            public get userData(): any;
+            public set userData(value: any);
+            public get canGrabFocus(): boolean;
+            public get focusController(): UnityEngine.UIElements.FocusController;
+            /** 
+            A combination of hint values that specify high-level intended usage patterns for the VisualElement.
+            This property can only be set when the VisualElement is not yet part of a Panel. Once part of a Panel, this property becomes effectively read-only, and attempts to change it will throw an exception.
+            The specification of proper UsageHints drives the system to make better decisions on how to process or accelerate certain operations based on the anticipated usage pattern.
+            Note that those hints do not affect behavioral or visual results, but only affect the overall performance of the panel and the elements within.
+            It's advised to always consider specifying the proper UsageHints, but keep in mind that some UsageHints might be internally ignored under certain conditions (e.g. due to hardware limitations on the target platform).
+            */
+            public get usageHints(): UnityEngine.UIElements.UsageHints;
+            public set usageHints(value: UnityEngine.UIElements.UsageHints);
+            /** 
+            Returns a transform object for this VisualElement.
+            ITransform
+            */
+            public get transform(): UnityEngine.UIElements.ITransform;
+            /** 
+            The position and size of the VisualElement relative to its parent, as computed by the layout system.
+            */
+            public get layout(): UnityEngine.Rect;
+            /** 
+            The rectangle of the content area of the element, in the local space of the element.
+            */
+            public get contentRect(): UnityEngine.Rect;
+            /** 
+            AABB after applying the world transform to rect.
+            */
+            public get worldBound(): UnityEngine.Rect;
+            /** 
+            AABB after applying the transform to the rect, but before applying the layout translation.
+            */
+            public get localBound(): UnityEngine.Rect;
+            /** 
+            Returns a matrix that cumulates the following operations (in order):
+            -Local Scaling
+            -Local Rotation
+            -Local Translation
+            -Layout Translation
+            -Parent worldTransform (recursive definition - consider identity when there is no parent)
+            */
+            public get worldTransform(): UnityEngine.Matrix4x4;
+            /** 
+            Determines if this element can be pick during mouseEvents or IPanel.Pick queries.
+            */
+            public get pickingMode(): UnityEngine.UIElements.PickingMode;
+            public set pickingMode(value: UnityEngine.UIElements.PickingMode);
+            /** 
+            The name of this VisualElement.
+            */
+            public get name(): string;
+            public set name(value: string);
+            /** 
+            Returns true if the VisualElement is enabled in its own hierarchy.
+            */
+            public get enabledInHierarchy(): boolean;
+            /** 
+            Returns true if the VisualElement is enabled locally.
+            */
+            public get enabledSelf(): boolean;
+            /** 
+            Indicates whether or not this element should be rendered.
+            */
+            public get visible(): boolean;
+            public set visible(value: boolean);
+            /** 
+            Called when the VisualElement visual contents need to be (re)generated.
+            */
+            public get generateVisualContent(): System.Action$1<UnityEngine.UIElements.MeshGenerationContext>;
+            public set generateVisualContent(value: System.Action$1<UnityEngine.UIElements.MeshGenerationContext>);
+            /** 
+            Returns the UIElements experimental interfaces.
+            */
+            public get experimental(): UnityEngine.UIElements.IExperimentalFeatures;
+            /** 
+            Access to this element physical hierarchy
+            */
+            public get hierarchy(): UnityEngine.UIElements.VisualElement.Hierarchy;
+            /** 
+            The parent of this VisualElement.
+            */
+            public get parent(): UnityEngine.UIElements.VisualElement;
+            /** 
+            The panel onto which this VisualElement is attached.
+            */
+            public get panel(): UnityEngine.UIElements.IPanel;
+            /** 
+            child elements are added to this element, usually this
+            */
+            public get contentContainer(): UnityEngine.UIElements.VisualElement;
+            /** 
+            Stores the asset reference, if the generated element is cloned from a VisualTreeAsset.
+            */
+            public get visualTreeAssetSource(): UnityEngine.UIElements.VisualTreeAsset;
+            /** 
+            Number of child elements in this object's contentContainer.
+            */
+            public get childCount(): number;
+            /** 
+            Retrieves this VisualElement's IVisualElementScheduler
+            */
+            public get schedule(): UnityEngine.UIElements.IVisualElementScheduler;
+            /** 
+            Reference to the style object of this element.
+            */
+            public get style(): UnityEngine.UIElements.IStyle;
+            /** 
+            Returns the custom style properties accessor for this element.
+            */
+            public get customStyle(): UnityEngine.UIElements.ICustomStyle;
+            /** 
+            Returns a VisualElementStyleSheetSet that manipulates style sheets attached to this element.
+            */
+            public get styleSheets(): UnityEngine.UIElements.VisualElementStyleSheetSet;
+            /** 
+            Text to display inside an information box after the user hovers the element for a small amount of time.
+            */
+            public get tooltip(): string;
+            public set tooltip(value: string);
+            /** 
+            Returns the VisualElement resolved style values.
+            */
+            public get resolvedStyle(): UnityEngine.UIElements.IResolvedStyle;
+            /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            public get alignContent(): UnityEngine.UIElements.Align;
+            /** 
+            Alignment of children on the cross axis of this container.
+            */
+            public get alignItems(): UnityEngine.UIElements.Align;
+            /** 
+            Similar to align-items, but only for this specific element.
+            */
+            public get alignSelf(): UnityEngine.UIElements.Align;
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            /** 
+            Background image to paint in the element's box.
+            */
+            public get backgroundImage(): UnityEngine.UIElements.Background;
+            /** 
+            Color of the element's bottom border.
+            */
+            public get borderBottomColor(): UnityEngine.Color;
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            /** 
+            Color of the element's left border.
+            */
+            public get borderLeftColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            /** 
+            Color of the element's right border.
+            */
+            public get borderRightColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            /** 
+            Color of the element's top border.
+            */
+            public get borderTopColor(): UnityEngine.Color;
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            /** 
+            Defines how an element is displayed in the layout.
+            */
+            public get display(): UnityEngine.UIElements.DisplayStyle;
+            /** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            public get flexBasis(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Direction of the main axis to layout children in a container.
+            */
+            public get flexDirection(): UnityEngine.UIElements.FlexDirection;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            /** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            public get flexWrap(): UnityEngine.UIElements.Wrap;
+            /** 
+            Font size to draw the element's text.
+            */
+            public get fontSize(): number;
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            /** 
+            Justification of children on the main axis of this container.
+            */
+            public get justifyContent(): UnityEngine.UIElements.Justify;
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            /** 
+            Increases or decreases the space between characters.
+            */
+            public get letterSpacing(): number;
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            /** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            public get maxHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            public get maxWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            public get minHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            public get minWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            /** 
+            Element's positioning in its parent container.
+            */
+            public get position(): UnityEngine.UIElements.Position;
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            /** 
+            A rotation transformation.
+            */
+            public get rotate(): UnityEngine.UIElements.Rotate;
+            /** 
+            A scaling transformation.
+            */
+            public get scale(): UnityEngine.UIElements.Scale;
+            /** 
+            The element's text overflow mode.
+            */
+            public get textOverflow(): UnityEngine.UIElements.TextOverflow;
+            /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            /** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            public get transformOrigin(): UnityEngine.Vector3;
+            /** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            public get transitionDelay(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Time a transition animation should take to complete.
+            */
+            public get transitionDuration(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Properties to which a transition effect should be applied.
+            */
+            public get transitionProperty(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>;
+            /** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            public get transitionTimingFunction(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>;
+            /** 
+            A translate transformation.
+            */
+            public get translate(): UnityEngine.Vector3;
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            /** 
+            Background image scaling in the element's box.
+            */
+            public get unityBackgroundScaleMode(): UnityEngine.ScaleMode;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFont(): UnityEngine.Font;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFontDefinition(): UnityEngine.UIElements.FontDefinition;
+            /** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            public get unityFontStyleAndWeight(): UnityEngine.FontStyle;
+            /** 
+            Increases or decreases the space between paragraphs.
+            */
+            public get unityParagraphSpacing(): number;
+            /** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            public get unitySliceBottom(): number;
+            /** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            public get unitySliceLeft(): number;
+            /** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            public get unitySliceRight(): number;
+            /** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            public get unitySliceTop(): number;
+            /** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            public get unityTextAlign(): UnityEngine.TextAnchor;
+            /** 
+            Outline color of the text.
+            */
+            public get unityTextOutlineColor(): UnityEngine.Color;
+            /** 
+            Outline width of the text.
+            */
+            public get unityTextOutlineWidth(): number;
+            /** 
+            The element's text overflow position.
+            */
+            public get unityTextOverflowPosition(): UnityEngine.UIElements.TextOverflowPosition;
+            /** 
+            Specifies whether or not an element is visible.
+            */
+            public get visibility(): UnityEngine.UIElements.Visibility;
+            /** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            public get whiteSpace(): UnityEngine.UIElements.WhiteSpace;
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            /** 
+            Increases or decreases the space between words.
+            */
+            public get wordSpacing(): number;
+            /** 
+            Returns the animation experimental interface.
+            */
+            public get animation(): UnityEngine.UIElements.Experimental.ITransitionAnimations;
+            /** 
+            Changes the VisualElement enabled state. A disabled VisualElement does not receive most events.
+            * @param value New enabled state
+            */
+            public SetEnabled ($value: boolean) : void
+            public MarkDirtyRepaint () : void
+            /** 
+            Checks if the specified point intersects with this VisualElement's layout.
+            * @param localPoint The point in the local space of the element.
+            * @returns Returns true if the point is contained within the element's layout. Otherwise, returns false. 
+            */
+            public ContainsPoint ($localPoint: UnityEngine.Vector2) : boolean
+            public Overlaps ($rectangle: UnityEngine.Rect) : boolean
+            public GetClasses () : System.Collections.Generic.IEnumerable$1<string>
+            public ClearClassList () : void
+            /** 
+            Adds a class to the class list of the element in order to assign styles from USS.
+            * @param className The name of the class to add to the list.
+            */
+            public AddToClassList ($className: string) : void
+            /** 
+            Removes a class from the class list of the element.
+            * @param className The name of the class to remove to the list.
+            */
+            public RemoveFromClassList ($className: string) : void
+            /** 
+            Toggles between adding and removing the given class name from the class list.
+            * @param className The class name to add or remove from the class list.
+            */
+            public ToggleInClassList ($className: string) : void
+            /** 
+            Enables or disables the class with the given name.
+            * @param className The name of the class to enable or disable.
+            * @param enable A boolean flag that adds or removes the class name from the class list. If true, EnableInClassList adds the class name to the class list. If false, EnableInClassList removes the class name from the class list.
+            */
+            public EnableInClassList ($className: string, $enable: boolean) : void
+            /** 
+            Searches for a class in the class list of this element.
+            * @param cls The name of the class for the search query.
+            * @returns Returns true if the class is part of the list. Otherwise, returns false. 
+            */
+            public ClassListContains ($cls: string) : boolean
+            public FindAncestorUserData () : any
+            /** 
+            Add an element to this element's contentContainer
+            */
+            public Add ($child: UnityEngine.UIElements.VisualElement) : void
+            /** 
+            Insert an element into this element's contentContainer
+            */
+            public Insert ($index: number, $element: UnityEngine.UIElements.VisualElement) : void
+            /** 
+            Removes this child from the hierarchy
+            */
+            public Remove ($element: UnityEngine.UIElements.VisualElement) : void
+            /** 
+            Remove the child element located at this position from this element's contentContainer
+            */
+            public RemoveAt ($index: number) : void
+            public Clear () : void
+            /** 
+            Retrieves the child element at a specific index.
+            * @param index The index of the element.
+            */
+            public ElementAt ($index: number) : UnityEngine.UIElements.VisualElement
+            public get_Item ($key: number) : UnityEngine.UIElements.VisualElement
+            /** 
+            Retrieves the child index of the specified VisualElement.
+            * @param element The child element to retrieve.
+            * @returns The index of the child, or -1 if the child is not found. 
+            */
+            public IndexOf ($element: UnityEngine.UIElements.VisualElement) : number
+            public Children () : System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.VisualElement>
+            public Sort ($comp: System.Comparison$1<UnityEngine.UIElements.VisualElement>) : void
+            public BringToFront () : void
+            public SendToBack () : void
+            /** 
+            Places this element right before the sibling element in their parent children list. If the element and the sibling position overlap, the element will be visually behind of its sibling.
+            * @param sibling The sibling element.
+            */
+            public PlaceBehind ($sibling: UnityEngine.UIElements.VisualElement) : void
+            /** 
+            Places this element right after the sibling element in their parent children list. If the element and the sibling position overlap, the element will be visually in front of its sibling.
+            * @param sibling The sibling element.
+            */
+            public PlaceInFront ($sibling: UnityEngine.UIElements.VisualElement) : void
+            public RemoveFromHierarchy () : void
+            /** 
+            Checks if this element is an ancestor of the specified child element.
+            * @param child The child element to test against.
+            * @returns Returns true if this element is a ancestor of the child element, false otherwise. 
+            */
+            public Contains ($child: UnityEngine.UIElements.VisualElement) : boolean
+            /** 
+            Finds the lowest common ancestor between two VisualElements inside the VisualTree hierarchy.
+            */
+            public FindCommonAncestor ($other: UnityEngine.UIElements.VisualElement) : UnityEngine.UIElements.VisualElement
+            public constructor ()
+            public Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            public Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+            public Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            public Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            public TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            public Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            public Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            public Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            public Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+        }
+        /** 
+        Base class for objects that are part of the UIElements visual tree.
+        */
+        interface VisualElement {
+            /** 
+            Convenience overload, shorthand for Query&lt;T&gt;.Build().First().
+            * @param e Root VisualElement on which the selector will be applied.
+            * @param name If specified, will select elements with this name.
+            * @param classes If specified, will select elements with the given class (not to be confused with Type).
+            * @returns The first element matching all the criteria, or null if none was found. 
+            */
+            Q ($name?: string, ...classes: string[]) : UnityEngine.UIElements.VisualElement;
+            /** 
+            Convenience overload, shorthand for Query&lt;T&gt;.Build().First().
+            * @param e Root VisualElement on which the selector will be applied.
+            * @param name If specified, will select elements with this name.
+            * @param className If specified, will select elements with the given class (not to be confused with Type).
+            * @returns The first element matching all the criteria, or null if none was found. 
+            */
+            Q ($name?: string, $className?: string) : UnityEngine.UIElements.VisualElement;
+            /** 
+            Initializes a QueryBuilder with the specified selection rules.
+            * @param e Root VisualElement on which the selector will be applied.
+            * @param name If specified, will select elements with this name.
+            * @param classes If specified, will select elements with the given class (not to be confused with Type).
+            * @returns QueryBuilder configured with the associated selection rules. 
+            */
+            Query ($name?: string, ...classes: string[]) : UnityEngine.UIElements.UQueryBuilder$1<UnityEngine.UIElements.VisualElement>;
+            /** 
+            Initializes a QueryBuilder with the specified selection rules.
+            * @param e Root VisualElement on which the selector will be applied.
+            * @param name If specified, will select elements with this name.
+            * @param className If specified, will select elements with the given class (not to be confused with Type).
+            * @returns QueryBuilder configured with the associated selection rules. 
+            */
+            Query ($name?: string, $className?: string) : UnityEngine.UIElements.UQueryBuilder$1<UnityEngine.UIElements.VisualElement>;
+            /** 
+            Initializes a QueryBuilder with the specified selection rules.
+            * @param e Root VisualElement on which the selector will be applied.
+            * @returns QueryBuilder configured with the associated selection rules. 
+            */
+            Query () : UnityEngine.UIElements.UQueryBuilder$1<UnityEngine.UIElements.VisualElement>;
+            /** 
+            Aligns a VisualElement's left, top, right and bottom edges with the corresponding edges of its parent.
+            * @param elem The element to be aligned with its parent
+            */
+            StretchToParentSize () : void;
+            /** 
+            Aligns a VisualElement's left and right edges with the corresponding edges of its parent.
+            * @param elem The element to be aligned with its parent
+            */
+            StretchToParentWidth () : void;
+            /** 
+            Add a manipulator associated to a VisualElement.
+            * @param ele VisualElement associated to the manipulator.
+            * @param manipulator Manipulator to be added to the VisualElement.
+            */
+            AddManipulator ($manipulator: UnityEngine.UIElements.IManipulator) : void;
+            /** 
+            Remove a manipulator associated to a VisualElement.
+            * @param ele VisualElement associated to the manipulator.
+            * @param manipulator Manipulator to be removed from the VisualElement.
+            */
+            RemoveManipulator ($manipulator: UnityEngine.UIElements.IManipulator) : void;
+            /** 
+            Transforms a point from the world space to the local space of the element.
+            * @param ele The element to use as a reference for the local space.
+            * @param p The point to transform, in world space.
+            * @returns A point in the local space of the element. 
+            */
+            WorldToLocal ($p: UnityEngine.Vector2) : UnityEngine.Vector2;
+            /** 
+            Transforms a point from the local space of the element to the world space.
+            * @param ele The element to use as a reference for the local space.
+            * @param p The point to transform, in local space.
+            * @returns A point in the world space. 
+            */
+            LocalToWorld ($p: UnityEngine.Vector2) : UnityEngine.Vector2;
+            /** 
+            Transforms a rectangle from the world space to the local space of the element.
+            * @param ele The element to use as a reference for the local space.
+            * @param r The rectangle to transform, in world space.
+            * @returns A rectangle in the local space of the element. 
+            */
+            WorldToLocal ($r: UnityEngine.Rect) : UnityEngine.Rect;
+            /** 
+            Transforms a rectangle from the local space of the element to the world space.
+            * @param ele The element to use as a reference for the local space.
+            * @param r The rectangle to transform, in local space.
+            * @returns A rectangle in the world space. 
+            */
+            LocalToWorld ($r: UnityEngine.Rect) : UnityEngine.Rect;
+            /** 
+            Transforms a point from the local space of an element to the local space of another element.
+            * @param src The element to use as a reference as the source local space.
+            * @param dest The element to use as a reference as the destination local space.
+            * @param point The point to transform, in the local space of the source element.
+            * @returns A point in the local space of destination element. 
+            */
+            ChangeCoordinatesTo ($dest: UnityEngine.UIElements.VisualElement, $point: UnityEngine.Vector2) : UnityEngine.Vector2;
+            /** 
+            Transforms a rectangle from the local space of an element to the local space of another element.
+            * @param src The element to use as a reference as the source local space.
+            * @param dest The element to use as a reference as the destination local space.
+            * @param rect The rectangle to transform, in the local space of the source element.
+            * @returns A rectangle in the local space of destination element. 
+            */
+            ChangeCoordinatesTo ($dest: UnityEngine.UIElements.VisualElement, $rect: UnityEngine.Rect) : UnityEngine.Rect;
+        }
+        /** 
+        Base class for objects that can get the focus.
+        */
+        class Focusable extends UnityEngine.UIElements.CallbackEventHandler implements UnityEngine.UIElements.IEventHandler
+        {
+        /** 
+            Return the focus controller for this element.
+            */
+            public get focusController(): UnityEngine.UIElements.FocusController;
+            /** 
+            True if the element can be focused.
+            */
+            public get focusable(): boolean;
+            public set focusable(value: boolean);
+            /** 
+            An integer used to sort focusables in the focus ring. Must be greater than or equal to zero.
+            */
+            public get tabIndex(): number;
+            public set tabIndex(value: number);
+            /** 
+            Whether the element should delegate the focus to its children.
+            */
+            public get delegatesFocus(): boolean;
+            public set delegatesFocus(value: boolean);
+            /** 
+            Return true if the element can be focused.
+            */
+            public get canGrabFocus(): boolean;
+            public Focus () : void
+            public Blur () : void
+        }
+        /** 
+        Interface for classes capable of having callbacks to handle events.
+        */
+        class CallbackEventHandler extends System.Object implements UnityEngine.UIElements.IEventHandler
+        {
+        /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            public SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event, most often by executing the callbacks associated with the event.
+            * @param evt The event to handle.
+            */
+            public HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            public HasTrickleDownHandlers () : boolean
+            public HasBubbleUpHandlers () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public HasMouseCapture () : null
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public CaptureMouse () : null
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public ReleaseMouse () : null
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public HasPointerCapture ($pointerId: number) : null
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public CapturePointer ($pointerId: number) : null
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public ReleasePointer ($pointerId: number) : null
+        }
+        interface IEventHandler
+        {
+        /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event.
+            * @param evt The event to handle.
+            */
+            HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            HasTrickleDownHandlers () : boolean
+            HasBubbleUpHandlers () : boolean
+        }
+        interface IEventHandler {
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            HasMouseCapture () : boolean;
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            CaptureMouse () : void;
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            ReleaseMouse () : void;
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            HasPointerCapture ($pointerId: number) : boolean;
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            CapturePointer ($pointerId: number) : void;
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            ReleasePointer ($pointerId: number) : void;
+        }
+        interface IStylePropertyAnimations
+        {
+        }
+        interface IVisualElementScheduler
+        {
+            Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+        }
+        interface IResolvedStyle
+        {
+        /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            alignContent : UnityEngine.UIElements.Align/** 
+            Alignment of children on the cross axis of this container.
+            */
+            alignItems : UnityEngine.UIElements.Align/** 
+            Similar to align-items, but only for this specific element.
+            */
+            alignSelf : UnityEngine.UIElements.Align/** 
+            Background color to paint in the element's box.
+            */
+            backgroundColor : UnityEngine.Color/** 
+            Background image to paint in the element's box.
+            */
+            backgroundImage : UnityEngine.UIElements.Background/** 
+            Color of the element's bottom border.
+            */
+            borderBottomColor : UnityEngine.Color/** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            borderBottomLeftRadius : number/** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            borderBottomRightRadius : number/** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            borderBottomWidth : number/** 
+            Color of the element's left border.
+            */
+            borderLeftColor : UnityEngine.Color/** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            borderLeftWidth : number/** 
+            Color of the element's right border.
+            */
+            borderRightColor : UnityEngine.Color/** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            borderRightWidth : number/** 
+            Color of the element's top border.
+            */
+            borderTopColor : UnityEngine.Color/** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            borderTopLeftRadius : number/** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            borderTopRightRadius : number/** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            borderTopWidth : number/** 
+            Bottom distance from the element's box during layout.
+            */
+            bottom : number/** 
+            Color to use when drawing the text of an element.
+            */
+            color : UnityEngine.Color/** 
+            Defines how an element is displayed in the layout.
+            */
+            display : UnityEngine.UIElements.DisplayStyle/** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            flexBasis : UnityEngine.UIElements.StyleFloat/** 
+            Direction of the main axis to layout children in a container.
+            */
+            flexDirection : UnityEngine.UIElements.FlexDirection/** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            flexGrow : number/** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            flexShrink : number/** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            flexWrap : UnityEngine.UIElements.Wrap/** 
+            Font size to draw the element's text.
+            */
+            fontSize : number/** 
+            Fixed height of an element for the layout.
+            */
+            height : number/** 
+            Justification of children on the main axis of this container.
+            */
+            justifyContent : UnityEngine.UIElements.Justify/** 
+            Left distance from the element's box during layout.
+            */
+            left : number/** 
+            Increases or decreases the space between characters.
+            */
+            letterSpacing : number/** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            marginBottom : number/** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            marginLeft : number/** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            marginRight : number/** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            marginTop : number/** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            maxHeight : UnityEngine.UIElements.StyleFloat/** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            maxWidth : UnityEngine.UIElements.StyleFloat/** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            minHeight : UnityEngine.UIElements.StyleFloat/** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            minWidth : UnityEngine.UIElements.StyleFloat/** 
+            Specifies the transparency of an element.
+            */
+            opacity : number/** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            paddingBottom : number/** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            paddingLeft : number/** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            paddingRight : number/** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            paddingTop : number/** 
+            Element's positioning in its parent container.
+            */
+            position : UnityEngine.UIElements.Position/** 
+            Right distance from the element's box during layout.
+            */
+            right : number/** 
+            A rotation transformation.
+            */
+            rotate : UnityEngine.UIElements.Rotate/** 
+            A scaling transformation.
+            */
+            scale : UnityEngine.UIElements.Scale/** 
+            The element's text overflow mode.
+            */
+            textOverflow : UnityEngine.UIElements.TextOverflow/** 
+            Top distance from the element's box during layout.
+            */
+            top : number/** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            transformOrigin : UnityEngine.Vector3/** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            transitionDelay : System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>/** 
+            Time a transition animation should take to complete.
+            */
+            transitionDuration : System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>/** 
+            Properties to which a transition effect should be applied.
+            */
+            transitionProperty : System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>/** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            transitionTimingFunction : System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>/** 
+            A translate transformation.
+            */
+            translate : UnityEngine.Vector3/** 
+            Tinting color for the element's backgroundImage.
+            */
+            unityBackgroundImageTintColor : UnityEngine.Color/** 
+            Background image scaling in the element's box.
+            */
+            unityBackgroundScaleMode : UnityEngine.ScaleMode/** 
+            Font to draw the element's text.
+            */
+            unityFont : UnityEngine.Font/** 
+            Font to draw the element's text.
+            */
+            unityFontDefinition : UnityEngine.UIElements.FontDefinition/** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            unityFontStyleAndWeight : UnityEngine.FontStyle/** 
+            Increases or decreases the space between paragraphs.
+            */
+            unityParagraphSpacing : number/** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            unitySliceBottom : number/** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            unitySliceLeft : number/** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            unitySliceRight : number/** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            unitySliceTop : number/** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            unityTextAlign : UnityEngine.TextAnchor/** 
+            Outline color of the text.
+            */
+            unityTextOutlineColor : UnityEngine.Color/** 
+            Outline width of the text.
+            */
+            unityTextOutlineWidth : number/** 
+            The element's text overflow position.
+            */
+            unityTextOverflowPosition : UnityEngine.UIElements.TextOverflowPosition/** 
+            Specifies whether or not an element is visible.
+            */
+            visibility : UnityEngine.UIElements.Visibility/** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            whiteSpace : UnityEngine.UIElements.WhiteSpace/** 
+            Fixed width of an element for the layout.
+            */
+            width : number/** 
+            Increases or decreases the space between words.
+            */
+            wordSpacing : number
+        }
+        interface ITransform
+        {
+        }
+        interface IExperimentalFeatures
+        {
+        /** 
+            Returns the animation experimental interface.
+            */
+            animation : UnityEngine.UIElements.Experimental.ITransitionAnimations
+        }
+        interface IBindable
+        {
+        /** 
+            Binding object that will be updated.
+            */
+            binding : UnityEngine.UIElements.IBinding/** 
+            Path of the target property to be bound.
+            */
+            bindingPath : string
+        }
+        interface IBindable {
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            IsBound () : boolean;
+        }
+        interface IBinding
+        {
+            PreUpdate () : void
+            Update () : void
+            Release () : void
+        }
+        /** 
+        Describes a VisualElement derived class for the parsing of UXML files and the generation of UXML schema definition.
+        */
+        class UxmlTraits extends System.Object
+        {
+        /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            Initialize a VisualElement instance with values from the UXML element attributes.
+            * @param ve The VisualElement to initialize.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            */
+            public Init ($ve: UnityEngine.UIElements.VisualElement, $bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : void
+        }
+        class UxmlFactory$2<TCreatedType, TTraits> extends System.Object implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        interface IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            uxmlName : string/** 
+            The namespace of the UXML element read by the factory.
+            */
+            uxmlNamespace : string/** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            uxmlQualifiedName : string/** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            canHaveAnyAttribute : boolean/** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            uxmlAttributesDescription : System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>/** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            uxmlChildElementsDescription : System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>/** 
+            The type of element for which this element type can substitute for.
+            */
+            substituteForTypeName : string/** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            substituteForTypeNamespace : string/** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            substituteForTypeQualifiedName : string/** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        interface IUxmlAttributes
+        {
+        /** 
+            Get the value of an attribute as a string.
+            * @param attributeName Attribute name.
+            * @param value The attribute value or null if not found.
+            * @returns True if the attribute was found, false otherwise. 
+            */
+            TryGetAttributeValue ($attributeName: string, $value: $Ref<string>) : boolean
+        }
+        /** 
+        This structure holds information used during UXML template instantiation.
+        */
+        class CreationContext extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.CreationContext>
+        {
+            public static Default : UnityEngine.UIElements.CreationContext/** 
+            The element into which the visualTreeAsset is being cloned or instantiated.
+            VisualTreeAsset.CloneTree()
+            VisualTreeAsset.Instantiate()
+            */
+            public get target(): UnityEngine.UIElements.VisualElement;
+            /** 
+            The target UXML file to clone or instantiate.
+            */
+            public get visualTreeAsset(): UnityEngine.UIElements.VisualTreeAsset;
+            public get slotInsertionPoints(): System.Collections.Generic.Dictionary$2<string, UnityEngine.UIElements.VisualElement>;
+            public Equals ($obj: any) : boolean
+            public Equals ($other: UnityEngine.UIElements.CreationContext) : boolean
+            public static op_Equality ($context1: UnityEngine.UIElements.CreationContext, $context2: UnityEngine.UIElements.CreationContext) : boolean
+            public static op_Inequality ($context1: UnityEngine.UIElements.CreationContext, $context2: UnityEngine.UIElements.CreationContext) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        /** 
+        Manipulator that tracks Mouse events on an element and callbacks when the elements is clicked.
+        */
+        class Clickable extends UnityEngine.UIElements.PointerManipulator implements UnityEngine.UIElements.IManipulator
+        {
+        /** 
+            Specifies the mouse position saved during the last mouse event on the target Element.
+            */
+            public get lastMousePosition(): UnityEngine.Vector2;
+            public add_clickedWithEventInfo ($value: System.Action$1<UnityEngine.UIElements.EventBase>) : void
+            public remove_clickedWithEventInfo ($value: System.Action$1<UnityEngine.UIElements.EventBase>) : void
+            public add_clicked ($value: System.Action) : void
+            public remove_clicked ($value: System.Action) : void
+            public constructor ($handler: System.Action, $delay: bigint, $interval: bigint)
+            public constructor ($handler: System.Action$1<UnityEngine.UIElements.EventBase>)
+            public constructor ($handler: System.Action)
+            public constructor ()
+        }
+        /** 
+        PointerManipulators have a list of activation filters.
+        */
+        class PointerManipulator extends UnityEngine.UIElements.MouseManipulator implements UnityEngine.UIElements.IManipulator
+        {
+        }
+        /** 
+        MouseManipulators have a list of activation filters.
+        */
+        class MouseManipulator extends UnityEngine.UIElements.Manipulator implements UnityEngine.UIElements.IManipulator
+        {
+        /** 
+            List of Activationfilters.
+            */
+            public get activators(): System.Collections.Generic.List$1<UnityEngine.UIElements.ManipulatorActivationFilter>;
+        }
+        /** 
+        Base class for all Manipulator implementations.
+        */
+        class Manipulator extends System.Object implements UnityEngine.UIElements.IManipulator
+        {
+        /** 
+            VisualElement being manipulated.
+            */
+            public get target(): UnityEngine.UIElements.VisualElement;
+            public set target(value: UnityEngine.UIElements.VisualElement);
+        }
+        interface IManipulator
+        {
+        /** 
+            VisualElement being manipulated.
+            */
+            target : UnityEngine.UIElements.VisualElement
+        }
+        /** 
+        The base class for all UIElements events.
+        */
+        class EventBase extends System.Object implements System.IDisposable
+        {
+        /** 
+            Retrieves the type ID for this event instance.
+            */
+            public get eventTypeId(): bigint;
+            /** 
+            The time when the event was created.
+            */
+            public get timestamp(): bigint;
+            /** 
+            Returns whether this event type bubbles up in the event propagation path.
+            */
+            public get bubbles(): boolean;
+            /** 
+            Returns whether this event is sent down the event propagation path during the TrickleDown phase.
+            */
+            public get tricklesDown(): boolean;
+            /** 
+            The target visual element that received this event. Unlike currentTarget, this target does not change when the event is sent to other elements along the propagation path.
+            */
+            public get target(): UnityEngine.UIElements.IEventHandler;
+            public set target(value: UnityEngine.UIElements.IEventHandler);
+            /** 
+            Whether StopPropagation() was called for this event.
+            */
+            public get isPropagationStopped(): boolean;
+            /** 
+            Indicates whether StopImmediatePropagation() was called for this event.
+            */
+            public get isImmediatePropagationStopped(): boolean;
+            /** 
+            Returns true if the default actions should not be executed for this event.
+            */
+            public get isDefaultPrevented(): boolean;
+            /** 
+            The current propagation phase.
+            */
+            public get propagationPhase(): UnityEngine.UIElements.PropagationPhase;
+            /** 
+            The current target of the event. This is the VisualElement, in the propagation path, for which event handlers are currently being executed.
+            */
+            public get currentTarget(): UnityEngine.UIElements.IEventHandler;
+            /** 
+            Indicates whether the event is being dispatched to a visual element. An event cannot be redispatched while it being dispatched. If you need to recursively dispatch an event, it is recommended that you use a copy of the event.
+            */
+            public get dispatch(): boolean;
+            /** 
+            The IMGUIEvent at the source of this event. The source can be null since not all events are generated by IMGUI.
+            */
+            public get imguiEvent(): UnityEngine.Event;
+            /** 
+            The original mouse position of the IMGUI event, before it is transformed to the current target local coordinates.
+            */
+            public get originalMousePosition(): UnityEngine.Vector2;
+            public StopPropagation () : void
+            public StopImmediatePropagation () : void
+            public PreventDefault () : void
+            public Dispose () : void
+        }
+        /** 
+        Use this class to display a contextual menu.
+        */
+        class ContextualMenuManager extends System.Object
+        {
+        /** 
+            Checks if the event triggers the display of the contextual menu. This method also displays the menu.
+            * @param evt The event to inspect.
+            * @param eventHandler The element for which the menu is displayed.
+            */
+            public DisplayMenuIfEventMatches ($evt: UnityEngine.UIElements.EventBase, $eventHandler: UnityEngine.UIElements.IEventHandler) : void
+            /** 
+            Displays the contextual menu.
+            * @param triggerEvent The event that triggered the display of the menu.
+            * @param target The element for which the menu is displayed.
+            */
+            public DisplayMenu ($triggerEvent: UnityEngine.UIElements.EventBase, $target: UnityEngine.UIElements.IEventHandler) : void
+        }
+        /** 
+        Manipulator that displays a contextual menu when the user clicks the right mouse button or presses the menu key on the keyboard.
+        */
+        class ContextualMenuManipulator extends UnityEngine.UIElements.MouseManipulator implements UnityEngine.UIElements.IManipulator
+        {
+            public constructor ($menuBuilder: System.Action$1<UnityEngine.UIElements.ContextualMenuPopulateEvent>)
+            public constructor ()
+        }
+        /** 
+        The event sent when a contextual menu requires menu items.
+        */
+        class ContextualMenuPopulateEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.ContextualMenuPopulateEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            The menu to populate.
+            */
+            public get menu(): UnityEngine.UIElements.DropdownMenu;
+            /** 
+            The event that triggered the ContextualMenuPopulateEvent.
+            */
+            public get triggerEvent(): UnityEngine.UIElements.EventBase;
+            /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param triggerEvent The event that triggered the display of the contextual menu.
+            * @param menu The menu to populate.
+            * @param target The element that triggered the display of the contextual menu.
+            * @param menuManager The menu manager that displays the menu.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($triggerEvent: UnityEngine.UIElements.EventBase, $menu: UnityEngine.UIElements.DropdownMenu, $target: UnityEngine.UIElements.IEventHandler, $menuManager: UnityEngine.UIElements.ContextualMenuManager) : UnityEngine.UIElements.ContextualMenuPopulateEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        class MouseEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+        }
+        class EventBase$1<T> extends UnityEngine.UIElements.EventBase implements System.IDisposable
+        {
+        }
+        interface IMouseEvent
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            modifiers : UnityEngine.EventModifiers/** 
+            The mouse position in the panel coordinate system.
+            */
+            mousePosition : UnityEngine.Vector2/** 
+            The mouse position in the current target coordinate system.
+            */
+            localMousePosition : UnityEngine.Vector2/** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            mouseDelta : UnityEngine.Vector2/** 
+            The number of times the button is pressed.
+            */
+            clickCount : number/** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            button : number/** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            pressedButtons : number/** 
+            Return true if the Shift key is pressed.
+            */
+            shiftKey : boolean/** 
+            Return true if the Ctrl key is pressed.
+            */
+            ctrlKey : boolean/** 
+            Return true if the Windows/Command key is pressed.
+            */
+            commandKey : boolean/** 
+            Return true if the Alt key is pressed.
+            */
+            altKey : boolean/** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            actionKey : boolean
+        }
+        interface IMouseEventInternal
+        {
+        }
+        /** 
+        Script interface for VisualElement cursor style property IStyle.cursor.
+        */
+        class Cursor extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.Cursor>
+        {
+        /** 
+            The texture to use for the cursor style. To use a texture as a cursor, import the texture with "Read/Write enabled" in the texture importer (or using the "Cursor" defaults).
+            */
+            public get texture(): UnityEngine.Texture2D;
+            public set texture(value: UnityEngine.Texture2D);
+            /** 
+            The offset from the top left of the texture to use as the target point (must be within the bounds of the cursor).
+            */
+            public get hotspot(): UnityEngine.Vector2;
+            public set hotspot(value: UnityEngine.Vector2);
+            public Equals ($obj: any) : boolean
+            public Equals ($other: UnityEngine.UIElements.Cursor) : boolean
+            public static op_Equality ($style1: UnityEngine.UIElements.Cursor, $style2: UnityEngine.UIElements.Cursor) : boolean
+            public static op_Inequality ($style1: UnityEngine.UIElements.Cursor, $style2: UnityEngine.UIElements.Cursor) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        /** 
+        This class provides information about the event that triggered displaying the drop-down menu.
+        */
+        class DropdownMenuEventInfo extends System.Object
+        {
+        /** 
+            If modifier keys (Alt, Ctrl, Shift, Windows/Command) were pressed to trigger the display of the dropdown menu, this property lists the modifier keys.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            If the triggering event was a mouse event, this property is the mouse position expressed using the global coordinate system. Otherwise this property is zero.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            If the triggering event was a mouse event, this property is the mouse position. The position is expressed using the coordinate system of the element that received the mouse event. Otherwise this property is zero.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            public constructor ($e: UnityEngine.UIElements.EventBase)
+            public constructor ()
+        }
+        /** 
+        An item in a drop-down menu.
+        */
+        class DropdownMenuItem extends System.Object
+        {
+        }
+        /** 
+        A separator menu item.
+        */
+        class DropdownMenuSeparator extends UnityEngine.UIElements.DropdownMenuItem
+        {
+        /** 
+            The submenu path where the separator will be added. Path components are delimited by forward slashes ('/').
+            */
+            public get subMenuPath(): string;
+            public constructor ($subMenuPath: string)
+            public constructor ()
+        }
+        /** 
+        A menu action item.
+        */
+        class DropdownMenuAction extends UnityEngine.UIElements.DropdownMenuItem
+        {
+        /** 
+            The name of the item. The name can be prefixed by its submenu path. Path components are delimited by forward slashes ('/').
+            */
+            public get name(): string;
+            /** 
+            The status of the item.
+            */
+            public get status(): UnityEngine.UIElements.DropdownMenuAction.Status;
+            /** 
+            Provides information on the event that triggered the drop-down menu.
+            */
+            public get eventInfo(): UnityEngine.UIElements.DropdownMenuEventInfo;
+            /** 
+            The userData object stored by the constructor.
+            */
+            public get userData(): any;
+            /** 
+            Status callback that always returns Status.Enabled.
+            * @param a Unused parameter.
+            * @returns Always return Status.Enabled. 
+            */
+            public static AlwaysEnabled ($a: UnityEngine.UIElements.DropdownMenuAction) : UnityEngine.UIElements.DropdownMenuAction.Status
+            /** 
+            Status callback that always returns Status.Disabled.
+            * @param a Unused parameter.
+            * @returns Always return Status.Disabled. 
+            */
+            public static AlwaysDisabled ($a: UnityEngine.UIElements.DropdownMenuAction) : UnityEngine.UIElements.DropdownMenuAction.Status
+            /** 
+            Update the status flag of this item by calling the item status callback.
+            * @param eventInfo Information about the event that triggered the display of the drop-down menu, such as the mouse position or the key pressed.
+            */
+            public UpdateActionStatus ($eventInfo: UnityEngine.UIElements.DropdownMenuEventInfo) : void
+            public Execute () : void
+            public constructor ($actionName: string, $actionCallback: System.Action$1<UnityEngine.UIElements.DropdownMenuAction>, $actionStatusCallback: System.Func$2<UnityEngine.UIElements.DropdownMenuAction, UnityEngine.UIElements.DropdownMenuAction.Status>, $userData?: any)
+            public constructor ()
+        }
+        /** 
+        A drop-down menu.
+        */
+        class DropdownMenu extends System.Object
+        {
+            public MenuItems () : System.Collections.Generic.List$1<UnityEngine.UIElements.DropdownMenuItem>
+            public AppendAction ($actionName: string, $action: System.Action$1<UnityEngine.UIElements.DropdownMenuAction>, $actionStatusCallback: System.Func$2<UnityEngine.UIElements.DropdownMenuAction, UnityEngine.UIElements.DropdownMenuAction.Status>, $userData?: any) : void
+            public AppendAction ($actionName: string, $action: System.Action$1<UnityEngine.UIElements.DropdownMenuAction>, $status?: UnityEngine.UIElements.DropdownMenuAction.Status) : void
+            public InsertAction ($atIndex: number, $actionName: string, $action: System.Action$1<UnityEngine.UIElements.DropdownMenuAction>, $actionStatusCallback: System.Func$2<UnityEngine.UIElements.DropdownMenuAction, UnityEngine.UIElements.DropdownMenuAction.Status>, $userData?: any) : void
+            public InsertAction ($atIndex: number, $actionName: string, $action: System.Action$1<UnityEngine.UIElements.DropdownMenuAction>, $status?: UnityEngine.UIElements.DropdownMenuAction.Status) : void
+            /** 
+            Add a separator line in the menu. The separator is added at the end of the current item list.
+            * @param subMenuPath The submenu path where the separator will be added. Path components are delimited by forward slashes ('/').
+            */
+            public AppendSeparator ($subMenuPath?: string) : void
+            /** 
+            Add a separator line in the menu. The separator is added at the end of the specified index in the list.
+            * @param subMenuPath The submenu path where the separator is added. Path components are delimited by forward slashes ('/').
+            * @param atIndex Index where the separator should be inserted.
+            */
+            public InsertSeparator ($subMenuPath: string, $atIndex: number) : void
+            /** 
+            Remove the menu item at index.
+            * @param index The index of the item to remove.
+            */
+            public RemoveItemAt ($index: number) : void
+            /** 
+            Update the status of all items by calling their status callback and remove the separators in excess. This is called just before displaying the menu.
+            */
+            public PrepareForDisplay ($e: UnityEngine.UIElements.EventBase) : void
+            public constructor ()
+        }
+        /** 
+        Gates control when the dispatcher processes events.
+        */
+        class EventDispatcherGate extends System.ValueType implements System.IDisposable, System.IEquatable$1<UnityEngine.UIElements.EventDispatcherGate>
+        {
+            public Dispose () : void
+            public Equals ($other: UnityEngine.UIElements.EventDispatcherGate) : boolean
+            public Equals ($obj: any) : boolean
+            public static op_Equality ($left: UnityEngine.UIElements.EventDispatcherGate, $right: UnityEngine.UIElements.EventDispatcherGate) : boolean
+            public static op_Inequality ($left: UnityEngine.UIElements.EventDispatcherGate, $right: UnityEngine.UIElements.EventDispatcherGate) : boolean
+            public constructor ($d: UnityEngine.UIElements.EventDispatcher)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Dispatches events to a IPanel.
+        */
+        class EventDispatcher extends System.Object
+        {
+        }
+        /** 
+        Class in charge of managing the focus inside a Panel.
+        */
+        class FocusController extends System.Object
+        {
+        /** 
+            The currently focused VisualElement.
+            */
+            public get focusedElement(): UnityEngine.UIElements.Focusable;
+            public constructor ($focusRing: UnityEngine.UIElements.IFocusRing)
+            public constructor ()
+        }
+        /** 
+        Base class for defining in which direction the focus moves in a focus ring.
+        */
+        class FocusChangeDirection extends System.Object implements System.IDisposable
+        {
+        /** 
+            Focus came from an unspecified direction, for example after a mouse down.
+            */
+            public static get unspecified(): UnityEngine.UIElements.FocusChangeDirection;
+            /** 
+            The null direction. This is usually used when the focus stays on the same element.
+            */
+            public static get none(): UnityEngine.UIElements.FocusChangeDirection;
+            public static op_Implicit ($fcd: UnityEngine.UIElements.FocusChangeDirection) : number
+            public Dispose () : void
+        }
+        interface IFocusRing
+        {
+        /** 
+            Get the direction of the focus change for the given event. For example, when the Tab key is pressed, focus should be given to the element to the right.
+            */
+            GetFocusChangeDirection ($currentFocusable: UnityEngine.UIElements.Focusable, $e: UnityEngine.UIElements.EventBase) : UnityEngine.UIElements.FocusChangeDirection
+            /** 
+            Get the next element in the given direction.
+            */
+            GetNextFocusable ($currentFocusable: UnityEngine.UIElements.Focusable, $direction: UnityEngine.UIElements.FocusChangeDirection) : UnityEngine.UIElements.Focusable
+        }
+        /** 
+        Element that draws IMGUI content.
+        */
+        class IMGUIContainer extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, System.IDisposable
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            The function that's called to render and handle IMGUI events.
+            */
+            public get onGUIHandler(): System.Action;
+            public set onGUIHandler(value: System.Action);
+            /** 
+            When this property is set to true, onGUIHandler is not called when the Element is outside the viewport.
+            */
+            public get cullingEnabled(): boolean;
+            public set cullingEnabled(value: boolean);
+            /** 
+            ContextType of this IMGUIContrainer. Currently only supports ContextType.Editor.
+            */
+            public get contextType(): UnityEngine.UIElements.ContextType;
+            public set contextType(value: UnityEngine.UIElements.ContextType);
+            public get canGrabFocus(): boolean;
+            public MarkDirtyLayout () : void
+            public Dispose () : void
+            public constructor ()
+            public constructor ($onGUIHandler: System.Action)
+        }
+        /** 
+        Describes in which context a VisualElement hierarchy is being ran.
+        */
+        enum ContextType
+        { Player = 0, Editor = 1 }
+        /** 
+        Describe an allowed child element for an element.
+        */
+        class UxmlChildElementDescription extends System.Object
+        {
+        /** 
+            The name of the allowed child element.
+            */
+            public get elementName(): string;
+            /** 
+            The namespace name of the allowed child element.
+            */
+            public get elementNamespace(): string;
+            public constructor ($t: System.Type)
+            public constructor ()
+        }
+        /** 
+        VisualElement that can implement custom immediate mode rendering.
+        */
+        class ImmediateModeElement extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            When this property is set to true, the Element does not repaint itself when it is outside the viewport.
+            */
+            public get cullingEnabled(): boolean;
+            public set cullingEnabled(value: boolean);
+        }
+        /** 
+        Controls how many items can be selected at once.
+        */
+        enum SelectionType
+        { None = 0, Single = 1, Multiple = 2 }
+        /** 
+        Represents an operation that the user is trying to accomplish through a specific input mechanism.
+        */
+        enum KeyboardNavigationOperation
+        { None = 0, SelectAll = 1, Cancel = 2, Submit = 3, Previous = 4, Next = 5, PageUp = 6, PageDown = 7, Begin = 8, End = 9 }
+        /** 
+        Provides a default implementation for translating input device specific events to higher level navigation operations as commonly possible with a keyboard.
+        */
+        class KeyboardNavigationManipulator extends UnityEngine.UIElements.Manipulator implements UnityEngine.UIElements.IManipulator
+        {
+            public constructor ($action: System.Action$2<UnityEngine.UIElements.KeyboardNavigationOperation, UnityEngine.UIElements.EventBase>)
+            public constructor ()
+        }
+        /** 
+        Used by manipulators to match events against their requirements.
+        */
+        class ManipulatorActivationFilter extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.ManipulatorActivationFilter>
+        {
+        /** 
+            The button that activates the manipulation.
+            */
+            public get button(): UnityEngine.UIElements.MouseButton;
+            public set button(value: UnityEngine.UIElements.MouseButton);
+            /** 
+            Any modifier keys (ie. ctrl, alt, ...) that are needed to activate the manipulation.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            public set modifiers(value: UnityEngine.EventModifiers);
+            /** 
+            Number of mouse clicks required to activate the manipulator.
+            */
+            public get clickCount(): number;
+            public set clickCount(value: number);
+            public Equals ($obj: any) : boolean
+            public Equals ($other: UnityEngine.UIElements.ManipulatorActivationFilter) : boolean
+            /** 
+            Checks whether the current mouse event satisfies the activation requirements.
+            * @param e The mouse event.
+            * @returns True if the event matches the requirements. False otherwise. 
+            */
+            public Matches ($e: UnityEngine.UIElements.IMouseEvent) : boolean
+            /** 
+            Checks whether the current mouse event satisfies the activation requirements.
+            * @param e The mouse event.
+            * @returns True if the event matches the requirements. False otherwise. 
+            */
+            public Matches ($e: UnityEngine.UIElements.IPointerEvent) : boolean
+            public static op_Equality ($filter1: UnityEngine.UIElements.ManipulatorActivationFilter, $filter2: UnityEngine.UIElements.ManipulatorActivationFilter) : boolean
+            public static op_Inequality ($filter1: UnityEngine.UIElements.ManipulatorActivationFilter, $filter2: UnityEngine.UIElements.ManipulatorActivationFilter) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        /** 
+        Describes a MouseButton.
+        */
+        enum MouseButton
+        { LeftMouse = 0, RightMouse = 1, MiddleMouse = 2 }
+        interface IPointerEvent
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            pointerId : number/** 
+            Gets the type of pointer that created the event.
+            */
+            pointerType : string/** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            isPrimary : boolean/** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            button : number/** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            pressedButtons : number/** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            position : UnityEngine.Vector3/** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            localPosition : UnityEngine.Vector3/** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            deltaPosition : UnityEngine.Vector3/** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            deltaTime : number/** 
+            Gets the number of times the button was pressed.
+            */
+            clickCount : number/** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            pressure : number/** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            tangentialPressure : number/** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            altitudeAngle : number/** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            azimuthAngle : number/** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            twist : number/** 
+            Gets an estimate of the radius of a touch.
+            */
+            radius : UnityEngine.Vector2/** 
+            Gets the accuracy of the touch radius.
+            */
+            radiusVariance : UnityEngine.Vector2/** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            modifiers : UnityEngine.EventModifiers/** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            shiftKey : boolean/** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            ctrlKey : boolean/** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            commandKey : boolean/** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            altKey : boolean/** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            actionKey : boolean
+        }
+        /** 
+        Class that manages capturing mouse events.
+        */
+        class MouseCaptureController extends System.Object
+        {
+            public static IsMouseCaptured () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public static HasMouseCapture ($handler: UnityEngine.UIElements.IEventHandler) : boolean
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public static CaptureMouse ($handler: UnityEngine.UIElements.IEventHandler) : void
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public static ReleaseMouse ($handler: UnityEngine.UIElements.IEventHandler) : void
+            public static ReleaseMouse () : void
+        }
+        /** 
+        Offers a set of values that describe the intended usage patterns of a specific VisualElement.
+        */
+        enum UsageHints
+        { None = 0, DynamicTransform = 1, GroupTransform = 2, MaskContainer = 4, DynamicColor = 8 }
+        interface IPanel extends System.IDisposable
+        {
+        /** 
+            Root of the VisualElement hierarchy.
+            */
+            visualTree : UnityEngine.UIElements.VisualElement/** 
+            This Panel EventDispatcher.
+            */
+            dispatcher : UnityEngine.UIElements.EventDispatcher/** 
+            Describes in which context a VisualElement hierarchy is being ran.
+            */
+            contextType : UnityEngine.UIElements.ContextType/** 
+            Return the focus controller for this panel.
+            */
+            focusController : UnityEngine.UIElements.FocusController/** 
+            The Contextual menu manager for the panel.
+            */
+            contextualMenuManager : UnityEngine.UIElements.ContextualMenuManager/** 
+            Returns the top element at this position. Will not return elements with pickingMode set to PickingMode.Ignore.
+            * @param point World coordinates.
+            * @returns Top VisualElement at the position. Null if none was found. 
+            */
+            Pick ($point: UnityEngine.Vector2) : UnityEngine.UIElements.VisualElement
+            PickAll ($point: UnityEngine.Vector2, $picked: System.Collections.Generic.List$1<UnityEngine.UIElements.VisualElement>) : UnityEngine.UIElements.VisualElement
+            Dispose () : void
+        }
+        interface IPanel {
+            /** 
+            Returns the element that is capturing the pointer.
+            * @param panel The panel that holds the element.
+            * @param pointerId The captured pointer.
+            * @returns The element that is capturing the pointer. 
+            */
+            GetCapturingElement ($pointerId: number) : UnityEngine.UIElements.IEventHandler;
+            /** 
+            Releases the pointer.
+            * @param panel The panel that holds the element that captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            ReleasePointer ($pointerId: number) : void;
+            /** 
+            Resets the dynamic atlas of the panel. Textured elements will be repainted.
+            */
+            ResetDynamicAtlas () : void;
+            /** 
+            Notifies the dynamic atlas of the panel that the content of the provided texture has changed. If the dynamic
+            atlas contains the texture, it will update it.
+            * @param panel The current panel
+            * @param texture The texture whose content has changed.
+            */
+            SetTextureDirty ($texture: UnityEngine.Texture2D) : void;
+        }
+        /** 
+        A static class to capture and release pointers.
+        */
+        class PointerCaptureHelper extends System.Object
+        {
+        /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public static HasPointerCapture ($handler: UnityEngine.UIElements.IEventHandler, $pointerId: number) : boolean
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public static CapturePointer ($handler: UnityEngine.UIElements.IEventHandler, $pointerId: number) : void
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public static ReleasePointer ($handler: UnityEngine.UIElements.IEventHandler, $pointerId: number) : void
+            /** 
+            Returns the element that is capturing the pointer.
+            * @param panel The panel that holds the element.
+            * @param pointerId The captured pointer.
+            * @returns The element that is capturing the pointer. 
+            */
+            public static GetCapturingElement ($panel: UnityEngine.UIElements.IPanel, $pointerId: number) : UnityEngine.UIElements.IEventHandler
+            /** 
+            Releases the pointer.
+            * @param panel The panel that holds the element that captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public static ReleasePointer ($panel: UnityEngine.UIElements.IPanel, $pointerId: number) : void
+        }
+        /** 
+        Contains timing information of scheduler events.
+        */
+        class TimerState extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.TimerState>
+        {
+        /** 
+            Start time in milliseconds, or last callback time for repeatable IScheduledItem.
+            */
+            public get start(): bigint;
+            public set start(value: bigint);
+            /** 
+            Current time in milliseconds.
+            */
+            public get now(): bigint;
+            public set now(value: bigint);
+            /** 
+            Time difference in milliseconds between now and the previous callback.
+            */
+            public get deltaTime(): bigint;
+            /** 
+            Compare this object with another object and return true if they are equal.
+            * @param obj The object to compare with.
+            * @returns True if the objects are equal. 
+            */
+            public Equals ($obj: any) : boolean
+            /** 
+            Compare this object with another object and return true if they are equal.
+            * @param other The object to compare with.
+            * @returns True if the objects are equal. 
+            */
+            public Equals ($other: UnityEngine.UIElements.TimerState) : boolean
+            public static op_Equality ($state1: UnityEngine.UIElements.TimerState, $state2: UnityEngine.UIElements.TimerState) : boolean
+            public static op_Inequality ($state1: UnityEngine.UIElements.TimerState, $state2: UnityEngine.UIElements.TimerState) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        /** 
+        Defaines how the position values are interpreted by the layout engine.
+        */
+        enum Position
+        { Relative = 0, Absolute = 1 }
+        /** 
+        Defines what should happend if content overflows an element bounds.
+        */
+        enum Overflow
+        { Visible = 0, Hidden = 1 }
+        /** 
+        Boxes against which the VisualElement content is clipped.
+        */
+        enum OverflowClipBox
+        { PaddingBox = 0, ContentBox = 1 }
+        /** 
+        Defines the main-axis of the flex layout.
+        */
+        enum FlexDirection
+        { Column = 0, ColumnReverse = 1, Row = 2, RowReverse = 3 }
+        /** 
+        By default, items will all try to fit onto one line. You can change that and allow the items to wrap as needed with this property.
+        */
+        enum Wrap
+        { NoWrap = 0, Wrap = 1, WrapReverse = 2 }
+        /** 
+        Defines the alignement behavior along an axis.
+        */
+        enum Align
+        { Auto = 0, FlexStart = 1, Center = 2, FlexEnd = 3, Stretch = 4 }
+        /** 
+        Defines the alignment along the main axis, how is extra space distributed.
+        */
+        enum Justify
+        { FlexStart = 0, Center = 1, FlexEnd = 2, SpaceBetween = 3, SpaceAround = 4 }
+        /** 
+        Specifies which part of the text the Element replaces with an ellipsis when textOverflow is set to TextOverflow.Ellipsis.
+        */
+        enum TextOverflowPosition
+        { End = 0, Start = 1, Middle = 2 }
+        /** 
+        Specifies how the text Element treats hidden overflow content.
+        */
+        enum TextOverflow
+        { Clip = 0, Ellipsis = 1 }
+        /** 
+        Specifies the alignment keywords for TransformOrigin.
+        */
+        enum TransformOriginOffset
+        { Left = 1, Right = 2, Top = 3, Bottom = 4, Center = 5 }
+        /** 
+        Specifies whether or not a VisualElement is visible.
+        */
+        enum Visibility
+        { Visible = 0, Hidden = 1 }
+        /** 
+        Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+        */
+        enum WhiteSpace
+        { Normal = 0, NoWrap = 1 }
+        /** 
+        Defines how an element is displayed in the layout.
+        */
+        enum DisplayStyle
+        { Flex = 0, None = 1 }
+        /** 
+        Describes the picking behavior.
+        */
+        enum PickingMode
+        { Position = 0, Ignore = 1 }
+        /** 
+        Provides methods for generating a VisualElement's visual content during the generateVisualContent callback.
+        */
+        class MeshGenerationContext extends System.Object
+        {
+        /** 
+            The element for which VisualElement.generateVisualContent was invoked.
+            */
+            public get visualElement(): UnityEngine.UIElements.VisualElement;
+            /** 
+            Allocates the specified number of vertices and indices required to express geometry for drawing the content of a VisualElement.
+            * @param vertexCount The number of vertices to allocate. The maximum is 65535 (or UInt16.MaxValue).
+            * @param indexCount The number of triangle list indices to allocate. Each 3 indices represent one triangle, so this value should be multiples of 3.
+            * @param texture An optional texture to be applied on the triangles allocated. Pass null to rely on vertex colors only.
+            * @returns An object that gives access to the newely allocated data. If the returned vertex count is 0, then allocation failed (the system ran out of memory). 
+            */
+            public Allocate ($vertexCount: number, $indexCount: number, $texture?: UnityEngine.Texture) : UnityEngine.UIElements.MeshWriteData
+        }
+        /** 
+        An instance of this class holds a tree of VisualElementAssets, created from a UXML file. Each node in the file corresponds to a VisualElementAsset. You can clone a VisualTreeAsset to yield a tree of VisualElements.
+        */
+        class VisualTreeAsset extends UnityEngine.ScriptableObject
+        {
+        /** 
+            Whether there were errors encountered while importing the UXML File
+            */
+            public get importedWithErrors(): boolean;
+            /** 
+            Whether there were warnings encountered while importing the UXML File
+            */
+            public get importedWithWarnings(): boolean;
+            /** 
+            The UXML templates used by this VisualTreeAsset.
+            */
+            public get templateDependencies(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.VisualTreeAsset>;
+            /** 
+            The stylesheets used by this VisualTreeAsset.
+            */
+            public get stylesheets(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StyleSheet>;
+            /** 
+            A hash value computed from the template content.
+            */
+            public get contentHash(): number;
+            public set contentHash(value: number);
+            public Instantiate () : UnityEngine.UIElements.TemplateContainer
+            /** 
+            Build a tree of VisualElements from the asset.
+            * @param bindingPath The path to the property that you want to bind to the root of the cloned tree.
+            * @returns The root of the tree of VisualElements that was just cloned. 
+            */
+            public Instantiate ($bindingPath: string) : UnityEngine.UIElements.TemplateContainer
+            public CloneTree () : UnityEngine.UIElements.TemplateContainer
+            /** 
+            Build a tree of VisualElements from the asset.
+            * @param bindingPath The path to the property that you want to bind to the root of the cloned tree.
+            * @returns The root of the tree of VisualElements that was just cloned. 
+            */
+            public CloneTree ($bindingPath: string) : UnityEngine.UIElements.TemplateContainer
+            /** 
+            Builds a tree of VisualElements from the asset.
+            * @param target A VisualElement that will act as the root of the cloned tree.
+            */
+            public CloneTree ($target: UnityEngine.UIElements.VisualElement) : void
+            public CloneTree ($target: UnityEngine.UIElements.VisualElement, $firstElementIndex: $Ref<number>, $elementAddedCount: $Ref<number>) : void
+            public constructor ()
+            /** Clones the object original and returns the clone.
+            * @param original An existing object that you want to make a copy of.
+            * @param position Position for the new object.
+            * @param rotation Orientation of the new object.
+            * @param parent Parent that will be assigned to the new object.
+            * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent.
+            * @returns The instantiated clone. 
+            */
+            public static Instantiate ($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion) : UnityEngine.Object
+            /** Clones the object original and returns the clone.
+            * @param original An existing object that you want to make a copy of.
+            * @param position Position for the new object.
+            * @param rotation Orientation of the new object.
+            * @param parent Parent that will be assigned to the new object.
+            * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent.
+            * @returns The instantiated clone. 
+            */
+            public static Instantiate ($original: UnityEngine.Object, $position: UnityEngine.Vector3, $rotation: UnityEngine.Quaternion, $parent: UnityEngine.Transform) : UnityEngine.Object
+            /** Clones the object original and returns the clone.
+            * @param original An existing object that you want to make a copy of.
+            * @param position Position for the new object.
+            * @param rotation Orientation of the new object.
+            * @param parent Parent that will be assigned to the new object.
+            * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent.
+            * @returns The instantiated clone. 
+            */
+            public static Instantiate ($original: UnityEngine.Object) : UnityEngine.Object
+            /** Clones the object original and returns the clone.
+            * @param original An existing object that you want to make a copy of.
+            * @param position Position for the new object.
+            * @param rotation Orientation of the new object.
+            * @param parent Parent that will be assigned to the new object.
+            * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent.
+            * @returns The instantiated clone. 
+            */
+            public static Instantiate ($original: UnityEngine.Object, $parent: UnityEngine.Transform) : UnityEngine.Object
+            /** Clones the object original and returns the clone.
+            * @param original An existing object that you want to make a copy of.
+            * @param position Position for the new object.
+            * @param rotation Orientation of the new object.
+            * @param parent Parent that will be assigned to the new object.
+            * @param instantiateInWorldSpace When you assign a parent Object, pass true to position the new object directly in world space. Pass false to set the Object’s position relative to its new parent.
+            * @returns The instantiated clone. 
+            */
+            public static Instantiate ($original: UnityEngine.Object, $parent: UnityEngine.Transform, $instantiateInWorldSpace: boolean) : UnityEngine.Object
+            public static Instantiate ($original: UnityEngine.Object, $parent: UnityEngine.Transform, $worldPositionStays: boolean) : UnityEngine.Object
+        }
+        interface IStyle
+        {
+        /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            alignContent : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.Align>/** 
+            Alignment of children on the cross axis of this container.
+            */
+            alignItems : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.Align>/** 
+            Similar to align-items, but only for this specific element.
+            */
+            alignSelf : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.Align>/** 
+            Background color to paint in the element's box.
+            */
+            backgroundColor : UnityEngine.UIElements.StyleColor/** 
+            Background image to paint in the element's box.
+            */
+            backgroundImage : UnityEngine.UIElements.StyleBackground/** 
+            Color of the element's bottom border.
+            */
+            borderBottomColor : UnityEngine.UIElements.StyleColor/** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            borderBottomLeftRadius : UnityEngine.UIElements.StyleLength/** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            borderBottomRightRadius : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            borderBottomWidth : UnityEngine.UIElements.StyleFloat/** 
+            Color of the element's left border.
+            */
+            borderLeftColor : UnityEngine.UIElements.StyleColor/** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            borderLeftWidth : UnityEngine.UIElements.StyleFloat/** 
+            Color of the element's right border.
+            */
+            borderRightColor : UnityEngine.UIElements.StyleColor/** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            borderRightWidth : UnityEngine.UIElements.StyleFloat/** 
+            Color of the element's top border.
+            */
+            borderTopColor : UnityEngine.UIElements.StyleColor/** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            borderTopLeftRadius : UnityEngine.UIElements.StyleLength/** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            borderTopRightRadius : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            borderTopWidth : UnityEngine.UIElements.StyleFloat/** 
+            Bottom distance from the element's box during layout.
+            */
+            bottom : UnityEngine.UIElements.StyleLength/** 
+            Color to use when drawing the text of an element.
+            */
+            color : UnityEngine.UIElements.StyleColor/** 
+            Mouse cursor to display when the mouse pointer is over an element.
+            */
+            cursor : UnityEngine.UIElements.StyleCursor/** 
+            Defines how an element is displayed in the layout.
+            */
+            display : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.DisplayStyle>/** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            flexBasis : UnityEngine.UIElements.StyleLength/** 
+            Direction of the main axis to layout children in a container.
+            */
+            flexDirection : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.FlexDirection>/** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            flexGrow : UnityEngine.UIElements.StyleFloat/** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            flexShrink : UnityEngine.UIElements.StyleFloat/** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            flexWrap : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.Wrap>/** 
+            Font size to draw the element's text.
+            */
+            fontSize : UnityEngine.UIElements.StyleLength/** 
+            Fixed height of an element for the layout.
+            */
+            height : UnityEngine.UIElements.StyleLength/** 
+            Justification of children on the main axis of this container.
+            */
+            justifyContent : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.Justify>/** 
+            Left distance from the element's box during layout.
+            */
+            left : UnityEngine.UIElements.StyleLength/** 
+            Increases or decreases the space between characters.
+            */
+            letterSpacing : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            marginBottom : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            marginLeft : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            marginRight : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            marginTop : UnityEngine.UIElements.StyleLength/** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            maxHeight : UnityEngine.UIElements.StyleLength/** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            maxWidth : UnityEngine.UIElements.StyleLength/** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            minHeight : UnityEngine.UIElements.StyleLength/** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            minWidth : UnityEngine.UIElements.StyleLength/** 
+            Specifies the transparency of an element.
+            */
+            opacity : UnityEngine.UIElements.StyleFloat/** 
+            How a container behaves if its content overflows its own box.
+            */
+            overflow : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.Overflow>/** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            paddingBottom : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            paddingLeft : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            paddingRight : UnityEngine.UIElements.StyleLength/** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            paddingTop : UnityEngine.UIElements.StyleLength/** 
+            Element's positioning in its parent container.
+            */
+            position : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.Position>/** 
+            Right distance from the element's box during layout.
+            */
+            right : UnityEngine.UIElements.StyleLength/** 
+            A rotation transformation.
+            */
+            rotate : UnityEngine.UIElements.StyleRotate/** 
+            A scaling transformation.
+            */
+            scale : UnityEngine.UIElements.StyleScale/** 
+            The element's text overflow mode.
+            */
+            textOverflow : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.TextOverflow>/** 
+            Drop shadow of the text.
+            */
+            textShadow : UnityEngine.UIElements.StyleTextShadow/** 
+            Top distance from the element's box during layout.
+            */
+            top : UnityEngine.UIElements.StyleLength/** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            transformOrigin : UnityEngine.UIElements.StyleTransformOrigin/** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            transitionDelay : UnityEngine.UIElements.StyleList$1<UnityEngine.UIElements.TimeValue>/** 
+            Time a transition animation should take to complete.
+            */
+            transitionDuration : UnityEngine.UIElements.StyleList$1<UnityEngine.UIElements.TimeValue>/** 
+            Properties to which a transition effect should be applied.
+            */
+            transitionProperty : UnityEngine.UIElements.StyleList$1<UnityEngine.UIElements.StylePropertyName>/** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            transitionTimingFunction : UnityEngine.UIElements.StyleList$1<UnityEngine.UIElements.EasingFunction>/** 
+            A translate transformation.
+            */
+            translate : UnityEngine.UIElements.StyleTranslate/** 
+            Tinting color for the element's backgroundImage.
+            */
+            unityBackgroundImageTintColor : UnityEngine.UIElements.StyleColor/** 
+            Background image scaling in the element's box.
+            */
+            unityBackgroundScaleMode : UnityEngine.UIElements.StyleEnum$1<UnityEngine.ScaleMode>/** 
+            Font to draw the element's text.
+            */
+            unityFont : UnityEngine.UIElements.StyleFont/** 
+            Font to draw the element's text.
+            */
+            unityFontDefinition : UnityEngine.UIElements.StyleFontDefinition/** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            unityFontStyleAndWeight : UnityEngine.UIElements.StyleEnum$1<UnityEngine.FontStyle>/** 
+            Specifies which box the element content is clipped against.
+            */
+            unityOverflowClipBox : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.OverflowClipBox>/** 
+            Increases or decreases the space between paragraphs.
+            */
+            unityParagraphSpacing : UnityEngine.UIElements.StyleLength/** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            unitySliceBottom : UnityEngine.UIElements.StyleInt/** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            unitySliceLeft : UnityEngine.UIElements.StyleInt/** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            unitySliceRight : UnityEngine.UIElements.StyleInt/** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            unitySliceTop : UnityEngine.UIElements.StyleInt/** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            unityTextAlign : UnityEngine.UIElements.StyleEnum$1<UnityEngine.TextAnchor>/** 
+            Outline color of the text.
+            */
+            unityTextOutlineColor : UnityEngine.UIElements.StyleColor/** 
+            Outline width of the text.
+            */
+            unityTextOutlineWidth : UnityEngine.UIElements.StyleFloat/** 
+            The element's text overflow position.
+            */
+            unityTextOverflowPosition : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.TextOverflowPosition>/** 
+            Specifies whether or not an element is visible.
+            */
+            visibility : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.Visibility>/** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            whiteSpace : UnityEngine.UIElements.StyleEnum$1<UnityEngine.UIElements.WhiteSpace>/** 
+            Fixed width of an element for the layout.
+            */
+            width : UnityEngine.UIElements.StyleLength/** 
+            Increases or decreases the space between words.
+            */
+            wordSpacing : UnityEngine.UIElements.StyleLength
+        }
+        interface ICustomStyle
+        {
+            TryGetValue ($property: UnityEngine.UIElements.CustomStyleProperty$1<number>, $value: $Ref<number>) : boolean
+            TryGetValue ($property: UnityEngine.UIElements.CustomStyleProperty$1<number>, $value: $Ref<number>) : boolean
+            TryGetValue ($property: UnityEngine.UIElements.CustomStyleProperty$1<boolean>, $value: $Ref<boolean>) : boolean
+            TryGetValue ($property: UnityEngine.UIElements.CustomStyleProperty$1<UnityEngine.Color>, $value: $Ref<UnityEngine.Color>) : boolean
+            TryGetValue ($property: UnityEngine.UIElements.CustomStyleProperty$1<UnityEngine.Texture2D>, $value: $Ref<UnityEngine.Texture2D>) : boolean
+            TryGetValue ($property: UnityEngine.UIElements.CustomStyleProperty$1<UnityEngine.Sprite>, $value: $Ref<UnityEngine.Sprite>) : boolean
+            TryGetValue ($property: UnityEngine.UIElements.CustomStyleProperty$1<UnityEngine.UIElements.VectorImage>, $value: $Ref<UnityEngine.UIElements.VectorImage>) : boolean
+            TryGetValue ($property: UnityEngine.UIElements.CustomStyleProperty$1<string>, $value: $Ref<string>) : boolean
+        }
+        /** 
+        This structure manipulates the set of StyleSheet objects attached to the owner VisualElement.
+        */
+        class VisualElementStyleSheetSet extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.VisualElementStyleSheetSet>
+        {
+        /** 
+            Number of style sheets attached to the owner element.
+            */
+            public get count(): number;
+            /** 
+            Adds a style sheet for the owner element.
+            */
+            public Add ($styleSheet: UnityEngine.UIElements.StyleSheet) : void
+            public Clear () : void
+            /** 
+            Removes a style sheet for the owner element.
+            */
+            public Remove ($styleSheet: UnityEngine.UIElements.StyleSheet) : boolean
+            /** 
+            Looks for the specified StyleSheet
+            * @returns Returns true if the style sheet is attached to the owner element, false otherwise. 
+            */
+            public Contains ($styleSheet: UnityEngine.UIElements.StyleSheet) : boolean
+            public get_Item ($index: number) : UnityEngine.UIElements.StyleSheet
+            /** 
+            Compares instances of the VisualElementStyleSheetSet struct for equality.
+            * @param other The structure to compare with.
+            * @returns Returns true if the two instances refer to the same element, false otherwise. 
+            */
+            public Equals ($other: UnityEngine.UIElements.VisualElementStyleSheetSet) : boolean
+            public Equals ($obj: any) : boolean
+            public static op_Equality ($left: UnityEngine.UIElements.VisualElementStyleSheetSet, $right: UnityEngine.UIElements.VisualElementStyleSheetSet) : boolean
+            public static op_Inequality ($left: UnityEngine.UIElements.VisualElementStyleSheetSet, $right: UnityEngine.UIElements.VisualElementStyleSheetSet) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        /** 
+        Defines the name of a style property.
+        */
+        class StylePropertyName extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.StylePropertyName>
+        {
+        /** 
+            Checks if the StylePropertyName is null or empty.
+            * @param propertyName StylePropertyName you want to check.
+            * @returns True if propertyName is invalid. False otherwise. 
+            */
+            public static IsNullOrEmpty ($propertyName: UnityEngine.UIElements.StylePropertyName) : boolean
+            public static op_Equality ($lhs: UnityEngine.UIElements.StylePropertyName, $rhs: UnityEngine.UIElements.StylePropertyName) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StylePropertyName, $rhs: UnityEngine.UIElements.StylePropertyName) : boolean
+            public static op_Implicit ($name: string) : UnityEngine.UIElements.StylePropertyName
+            public Equals ($other: any) : boolean
+            public Equals ($other: UnityEngine.UIElements.StylePropertyName) : boolean
+            public constructor ($name: string)
+            public Equals ($obj: any) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Represents the root VisualElement of UXML file.
+        */
+        class TemplateContainer extends UnityEngine.UIElements.BindableElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            The local ID of the template in the parent UXML file (Read Only).
+            */
+            public get templateId(): string;
+            /** 
+            Stores the template asset reference, if the generated element is cloned from a VisualTreeAsset as a
+            Template declaration inside another VisualTreeAsset.
+            */
+            public get templateSource(): UnityEngine.UIElements.VisualTreeAsset;
+            public get contentContainer(): UnityEngine.UIElements.VisualElement;
+            public constructor ()
+            public constructor ($templateId: string)
+        }
+        /** 
+        Use this as the super class if you are declaring a custom VisualElement that displays text. For example, Button or Label use this as their base class.
+        */
+        class TextElement extends UnityEngine.UIElements.BindableElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.ITextElement, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.INotifyValueChanged$1<string>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            The text to be displayed.
+            */
+            public get text(): string;
+            public set text(value: string);
+            /** 
+            When false, rich text tags will not be parsed.
+            */
+            public get enableRichText(): boolean;
+            public set enableRichText(value: boolean);
+            /** 
+            When true, a tooltip displays the full version of elided text, and also if a tooltip had been previously
+            provided, it will be overwritten.
+            */
+            public get displayTooltipWhenElided(): boolean;
+            public set displayTooltipWhenElided(value: boolean);
+            /** 
+            Returns true if text is elided, false otherwise.
+            */
+            public get isElided(): boolean;
+            public MeasureTextSize ($textToMeasure: string, $width: number, $widthMode: UnityEngine.UIElements.VisualElement.MeasureMode, $height: number, $heightMode: UnityEngine.UIElements.VisualElement.MeasureMode) : UnityEngine.Vector2
+            public constructor ()
+        }
+        interface ITextElement
+        {
+        }
+        interface INotifyValueChanged$1<T>
+        {
+        }
+        /** 
+        Script interface for VisualElement text-shadow style property IStyle.textShadow.
+        */
+        class TextShadow extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.TextShadow>
+        {
+        /** 
+            The offset of the shadow.
+            */
+            public offset : UnityEngine.Vector2/** 
+            The blur radius of the shadow.
+            */
+            public blurRadius : number/** 
+            The color of the shadow.
+            */
+            public color : UnityEngine.Color
+            public Equals ($obj: any) : boolean
+            public Equals ($other: UnityEngine.UIElements.TextShadow) : boolean
+            public static op_Equality ($style1: UnityEngine.UIElements.TextShadow, $style2: UnityEngine.UIElements.TextShadow) : boolean
+            public static op_Inequality ($style1: UnityEngine.UIElements.TextShadow, $style2: UnityEngine.UIElements.TextShadow) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        /** 
+        UQuery is a set of extension methods allowing you to select individual or collection of visualElements inside a complex hierarchy.
+        */
+        class UQuery extends System.Object
+        {
+        }
+        /** 
+        UQuery is a set of extension methods allowing you to select individual or collection of visualElements inside a complex hierarchy.
+        */
+        class UQueryExtensions extends System.Object
+        {
+        /** 
+            Convenience overload, shorthand for Query&lt;T&gt;.Build().First().
+            * @param e Root VisualElement on which the selector will be applied.
+            * @param name If specified, will select elements with this name.
+            * @param classes If specified, will select elements with the given class (not to be confused with Type).
+            * @returns The first element matching all the criteria, or null if none was found. 
+            */
+            public static Q ($e: UnityEngine.UIElements.VisualElement, $name?: string, ...classes: string[]) : UnityEngine.UIElements.VisualElement
+            /** 
+            Convenience overload, shorthand for Query&lt;T&gt;.Build().First().
+            * @param e Root VisualElement on which the selector will be applied.
+            * @param name If specified, will select elements with this name.
+            * @param className If specified, will select elements with the given class (not to be confused with Type).
+            * @returns The first element matching all the criteria, or null if none was found. 
+            */
+            public static Q ($e: UnityEngine.UIElements.VisualElement, $name?: string, $className?: string) : UnityEngine.UIElements.VisualElement
+            /** 
+            Initializes a QueryBuilder with the specified selection rules.
+            * @param e Root VisualElement on which the selector will be applied.
+            * @param name If specified, will select elements with this name.
+            * @param classes If specified, will select elements with the given class (not to be confused with Type).
+            * @returns QueryBuilder configured with the associated selection rules. 
+            */
+            public static Query ($e: UnityEngine.UIElements.VisualElement, $name?: string, ...classes: string[]) : UnityEngine.UIElements.UQueryBuilder$1<UnityEngine.UIElements.VisualElement>
+            /** 
+            Initializes a QueryBuilder with the specified selection rules.
+            * @param e Root VisualElement on which the selector will be applied.
+            * @param name If specified, will select elements with this name.
+            * @param className If specified, will select elements with the given class (not to be confused with Type).
+            * @returns QueryBuilder configured with the associated selection rules. 
+            */
+            public static Query ($e: UnityEngine.UIElements.VisualElement, $name?: string, $className?: string) : UnityEngine.UIElements.UQueryBuilder$1<UnityEngine.UIElements.VisualElement>
+            /** 
+            Initializes a QueryBuilder with the specified selection rules.
+            * @param e Root VisualElement on which the selector will be applied.
+            * @returns QueryBuilder configured with the associated selection rules. 
+            */
+            public static Query ($e: UnityEngine.UIElements.VisualElement) : UnityEngine.UIElements.UQueryBuilder$1<UnityEngine.UIElements.VisualElement>
+        }
+        class UQueryBuilder$1<T> extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.UQueryBuilder$1<T>>
+        {
+        }
+        /** 
+        An asset that represents a vector image.
+        */
+        class VectorImage extends UnityEngine.ScriptableObject
+        {
+            public constructor ()
+        }
+        /** 
+        VisualElementExtensions is a set of extension methods useful for VisualElement.
+        */
+        class VisualElementExtensions extends System.Object
+        {
+        /** 
+            Aligns a VisualElement's left, top, right and bottom edges with the corresponding edges of its parent.
+            * @param elem The element to be aligned with its parent
+            */
+            public static StretchToParentSize ($elem: UnityEngine.UIElements.VisualElement) : void
+            /** 
+            Aligns a VisualElement's left and right edges with the corresponding edges of its parent.
+            * @param elem The element to be aligned with its parent
+            */
+            public static StretchToParentWidth ($elem: UnityEngine.UIElements.VisualElement) : void
+            /** 
+            Add a manipulator associated to a VisualElement.
+            * @param ele VisualElement associated to the manipulator.
+            * @param manipulator Manipulator to be added to the VisualElement.
+            */
+            public static AddManipulator ($ele: UnityEngine.UIElements.VisualElement, $manipulator: UnityEngine.UIElements.IManipulator) : void
+            /** 
+            Remove a manipulator associated to a VisualElement.
+            * @param ele VisualElement associated to the manipulator.
+            * @param manipulator Manipulator to be removed from the VisualElement.
+            */
+            public static RemoveManipulator ($ele: UnityEngine.UIElements.VisualElement, $manipulator: UnityEngine.UIElements.IManipulator) : void
+            /** 
+            Transforms a point from the world space to the local space of the element.
+            * @param ele The element to use as a reference for the local space.
+            * @param p The point to transform, in world space.
+            * @returns A point in the local space of the element. 
+            */
+            public static WorldToLocal ($ele: UnityEngine.UIElements.VisualElement, $p: UnityEngine.Vector2) : UnityEngine.Vector2
+            /** 
+            Transforms a point from the local space of the element to the world space.
+            * @param ele The element to use as a reference for the local space.
+            * @param p The point to transform, in local space.
+            * @returns A point in the world space. 
+            */
+            public static LocalToWorld ($ele: UnityEngine.UIElements.VisualElement, $p: UnityEngine.Vector2) : UnityEngine.Vector2
+            /** 
+            Transforms a rectangle from the world space to the local space of the element.
+            * @param ele The element to use as a reference for the local space.
+            * @param r The rectangle to transform, in world space.
+            * @returns A rectangle in the local space of the element. 
+            */
+            public static WorldToLocal ($ele: UnityEngine.UIElements.VisualElement, $r: UnityEngine.Rect) : UnityEngine.Rect
+            /** 
+            Transforms a rectangle from the local space of the element to the world space.
+            * @param ele The element to use as a reference for the local space.
+            * @param r The rectangle to transform, in local space.
+            * @returns A rectangle in the world space. 
+            */
+            public static LocalToWorld ($ele: UnityEngine.UIElements.VisualElement, $r: UnityEngine.Rect) : UnityEngine.Rect
+            /** 
+            Transforms a point from the local space of an element to the local space of another element.
+            * @param src The element to use as a reference as the source local space.
+            * @param dest The element to use as a reference as the destination local space.
+            * @param point The point to transform, in the local space of the source element.
+            * @returns A point in the local space of destination element. 
+            */
+            public static ChangeCoordinatesTo ($src: UnityEngine.UIElements.VisualElement, $dest: UnityEngine.UIElements.VisualElement, $point: UnityEngine.Vector2) : UnityEngine.Vector2
+            /** 
+            Transforms a rectangle from the local space of an element to the local space of another element.
+            * @param src The element to use as a reference as the source local space.
+            * @param dest The element to use as a reference as the destination local space.
+            * @param rect The rectangle to transform, in the local space of the source element.
+            * @returns A rectangle in the local space of destination element. 
+            */
+            public static ChangeCoordinatesTo ($src: UnityEngine.UIElements.VisualElement, $dest: UnityEngine.UIElements.VisualElement, $rect: UnityEngine.Rect) : UnityEngine.Rect
+        }
+        /** 
+        Define focus change directions for the VisualElementFocusRing.
+        */
+        class VisualElementFocusChangeDirection extends UnityEngine.UIElements.FocusChangeDirection implements System.IDisposable
+        {
+        /** 
+            The focus is moving to the left.
+            */
+            public static get left(): UnityEngine.UIElements.FocusChangeDirection;
+            /** 
+            The focus is moving to the right.
+            */
+            public static get right(): UnityEngine.UIElements.FocusChangeDirection;
+        }
+        /** 
+        Implementation of a linear focus ring. Elements are sorted according to their focusIndex.
+        */
+        class VisualElementFocusRing extends System.Object implements UnityEngine.UIElements.IFocusRing
+        {
+        /** 
+            The focus order for elements having 0 has a focusIndex.
+            */
+            public get defaultFocusOrder(): UnityEngine.UIElements.VisualElementFocusRing.DefaultFocusOrder;
+            public set defaultFocusOrder(value: UnityEngine.UIElements.VisualElementFocusRing.DefaultFocusOrder);
+            /** 
+            Get the direction of the focus change for the given event. For example, when the Tab key is pressed, focus should be given to the element to the right in the focus ring.
+            */
+            public GetFocusChangeDirection ($currentFocusable: UnityEngine.UIElements.Focusable, $e: UnityEngine.UIElements.EventBase) : UnityEngine.UIElements.FocusChangeDirection
+            /** 
+            Get the next element in the given direction.
+            */
+            public GetNextFocusable ($currentFocusable: UnityEngine.UIElements.Focusable, $direction: UnityEngine.UIElements.FocusChangeDirection) : UnityEngine.UIElements.Focusable
+            public constructor ($root: UnityEngine.UIElements.VisualElement, $dfo?: UnityEngine.UIElements.VisualElementFocusRing.DefaultFocusOrder)
+            public constructor ()
+        }
+        interface IVisualElementScheduledItem
+        {
+        /** 
+            Returns the VisualElement this object is associated with.
+            */
+            element : UnityEngine.UIElements.VisualElement/** 
+            Will be true when this item is scheduled. Note that an item's callback will only be executed when it's VisualElement is attached to a panel.
+            */
+            isActive : boolean
+            Resume () : void
+            Pause () : void
+            /** 
+            Cancels any previously scheduled execution of this item and re-schedules the item.
+            * @param delayMs Minimum time in milliseconds before this item will be executed.
+            */
+            ExecuteLater ($delayMs: bigint) : void
+            /** 
+            Adds a delay to the first invokation.
+            * @param delayMs The minimum number of milliseconds after activation where this item's action will be executed.
+            * @returns This ScheduledItem. 
+            */
+            StartingIn ($delayMs: bigint) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Repeats this action after a specified time.
+            * @param intervalMs Minimum amount of time in milliseconds between each action execution.
+            * @returns This ScheduledItem. 
+            */
+            Every ($intervalMs: bigint) : UnityEngine.UIElements.IVisualElementScheduledItem
+            Until ($stopCondition: System.Func$1<boolean>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            After specified duration, the item will be automatically unscheduled.
+            * @param durationMs The total duration in milliseconds where this item will be active.
+            * @returns This ScheduledItem. 
+            */
+            ForDuration ($durationMs: bigint) : UnityEngine.UIElements.IVisualElementScheduledItem
+        }
+        /** 
+        Style sheets are applied to visual elements in order to control the layout and visual appearance of the user interface.
+        */
+        class StyleSheet extends UnityEngine.ScriptableObject
+        {
+        /** 
+            Whether there were errors encountered while importing the StyleSheet
+            */
+            public get importedWithErrors(): boolean;
+            /** 
+            Whether there were warnings encountered while importing the StyleSheet
+            */
+            public get importedWithWarnings(): boolean;
+            /** 
+            A hash value computed from the stylesheet content.
+            */
+            public get contentHash(): number;
+            public set contentHash(value: number);
+            public constructor ()
+        }
+        /** 
+        A BaseBoolField is a clickable element that represents a boolean value.
+        */
+        class BaseBoolField extends UnityEngine.UIElements.BaseField$1<boolean> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<boolean>
+        {
+        /** 
+            Optional text that appears after the BaseBoolField.
+            */
+            public get text(): string;
+            public set text(value: string);
+            /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            public get alignContent(): UnityEngine.UIElements.Align;
+            /** 
+            Alignment of children on the cross axis of this container.
+            */
+            public get alignItems(): UnityEngine.UIElements.Align;
+            /** 
+            Similar to align-items, but only for this specific element.
+            */
+            public get alignSelf(): UnityEngine.UIElements.Align;
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            /** 
+            Background image to paint in the element's box.
+            */
+            public get backgroundImage(): UnityEngine.UIElements.Background;
+            /** 
+            Color of the element's bottom border.
+            */
+            public get borderBottomColor(): UnityEngine.Color;
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            /** 
+            Color of the element's left border.
+            */
+            public get borderLeftColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            /** 
+            Color of the element's right border.
+            */
+            public get borderRightColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            /** 
+            Color of the element's top border.
+            */
+            public get borderTopColor(): UnityEngine.Color;
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            /** 
+            Defines how an element is displayed in the layout.
+            */
+            public get display(): UnityEngine.UIElements.DisplayStyle;
+            /** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            public get flexBasis(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Direction of the main axis to layout children in a container.
+            */
+            public get flexDirection(): UnityEngine.UIElements.FlexDirection;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            /** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            public get flexWrap(): UnityEngine.UIElements.Wrap;
+            /** 
+            Font size to draw the element's text.
+            */
+            public get fontSize(): number;
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            /** 
+            Justification of children on the main axis of this container.
+            */
+            public get justifyContent(): UnityEngine.UIElements.Justify;
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            /** 
+            Increases or decreases the space between characters.
+            */
+            public get letterSpacing(): number;
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            /** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            public get maxHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            public get maxWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            public get minHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            public get minWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            /** 
+            Element's positioning in its parent container.
+            */
+            public get position(): UnityEngine.UIElements.Position;
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            /** 
+            A rotation transformation.
+            */
+            public get rotate(): UnityEngine.UIElements.Rotate;
+            /** 
+            A scaling transformation.
+            */
+            public get scale(): UnityEngine.UIElements.Scale;
+            /** 
+            The element's text overflow mode.
+            */
+            public get textOverflow(): UnityEngine.UIElements.TextOverflow;
+            /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            /** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            public get transformOrigin(): UnityEngine.Vector3;
+            /** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            public get transitionDelay(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Time a transition animation should take to complete.
+            */
+            public get transitionDuration(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Properties to which a transition effect should be applied.
+            */
+            public get transitionProperty(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>;
+            /** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            public get transitionTimingFunction(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>;
+            /** 
+            A translate transformation.
+            */
+            public get translate(): UnityEngine.Vector3;
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            /** 
+            Background image scaling in the element's box.
+            */
+            public get unityBackgroundScaleMode(): UnityEngine.ScaleMode;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFont(): UnityEngine.Font;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFontDefinition(): UnityEngine.UIElements.FontDefinition;
+            /** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            public get unityFontStyleAndWeight(): UnityEngine.FontStyle;
+            /** 
+            Increases or decreases the space between paragraphs.
+            */
+            public get unityParagraphSpacing(): number;
+            /** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            public get unitySliceBottom(): number;
+            /** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            public get unitySliceLeft(): number;
+            /** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            public get unitySliceRight(): number;
+            /** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            public get unitySliceTop(): number;
+            /** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            public get unityTextAlign(): UnityEngine.TextAnchor;
+            /** 
+            Outline color of the text.
+            */
+            public get unityTextOutlineColor(): UnityEngine.Color;
+            /** 
+            Outline width of the text.
+            */
+            public get unityTextOutlineWidth(): number;
+            /** 
+            The element's text overflow position.
+            */
+            public get unityTextOverflowPosition(): UnityEngine.UIElements.TextOverflowPosition;
+            /** 
+            Specifies whether or not an element is visible.
+            */
+            public get visibility(): UnityEngine.UIElements.Visibility;
+            /** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            public get whiteSpace(): UnityEngine.UIElements.WhiteSpace;
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            /** 
+            Increases or decreases the space between words.
+            */
+            public get wordSpacing(): number;
+            /** 
+            Binding object that will be updated.
+            */
+            public get binding(): UnityEngine.UIElements.IBinding;
+            public set binding(value: UnityEngine.UIElements.IBinding);
+            /** 
+            Path of the target property to be bound.
+            */
+            public get bindingPath(): string;
+            public set bindingPath(value: string);
+            /** 
+            Returns the animation experimental interface.
+            */
+            public get animation(): UnityEngine.UIElements.Experimental.ITransitionAnimations;
+            /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            public get showMixedValue(): boolean;
+            public set showMixedValue(value: boolean);
+            /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            public SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event.
+            * @param evt The event to handle.
+            */
+            public HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            public HasTrickleDownHandlers () : boolean
+            public HasBubbleUpHandlers () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public HasMouseCapture () : null
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public CaptureMouse () : null
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public ReleaseMouse () : null
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public HasPointerCapture ($pointerId: number) : null
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public CapturePointer ($pointerId: number) : null
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public ReleasePointer ($pointerId: number) : null
+            public Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            public Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+            public Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            public Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            public TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            public Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            public Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            public Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            public Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public IsBound () : null
+        }
+        class BaseField$1<TValueType> extends UnityEngine.UIElements.BindableElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<TValueType>
+        {
+        /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            public get showMixedValue(): boolean;
+            public set showMixedValue(value: boolean);
+        }
+        interface IMixedValueSupport
+        {
+        /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            showMixedValue : boolean
+        }
+        /** 
+        This is the direction of the Slider and SliderInt.
+        */
+        enum SliderDirection
+        { Horizontal = 0, Vertical = 1 }
+        /** 
+        Options to display alternating background colors for ListView rows.
+        */
+        enum AlternatingRowBackground
+        { None = 0, ContentOnly = 1, All = 2 }
+        /** 
+        Options to change the virtualization method used by the ListView to display its content.
+        */
+        enum CollectionVirtualizationMethod
+        { FixedHeight = 0, DynamicHeight = 1 }
+        /** 
+        Base class for controls that display virtualized vertical content inside a scroll view.
+        */
+        class BaseVerticalCollectionView extends UnityEngine.UIElements.BindableElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.ISerializationCallbackReceiver
+        {
+        /** 
+            The USS class name for BaseVerticalCollectionView elements.
+            */
+            public static ussClassName : string/** 
+            The USS class name for BaseVerticalCollectionView elements with a border.
+            */
+            public static borderUssClassName : string/** 
+            The USS class name of item elements in BaseVerticalCollectionView elements.
+            */
+            public static itemUssClassName : string/** 
+            The USS class name of the drag hover bar.
+            */
+            public static dragHoverBarUssClassName : string/** 
+            The USS class name applied to an item element on drag hover.
+            */
+            public static itemDragHoverUssClassName : string/** 
+            The USS class name of selected item elements in the BaseVerticalCollectionView.
+            */
+            public static itemSelectedVariantUssClassName : string/** 
+            The USS class name for odd rows in the BaseVerticalCollectionView.
+            */
+            public static itemAlternativeBackgroundUssClassName : string/** 
+            The USS class name of the scroll view in the BaseVerticalCollectionView.
+            */
+            public static listScrollViewUssClassName : string/** 
+            The data source for collection items.
+            */
+            public get itemsSource(): System.Collections.IList;
+            public set itemsSource(value: System.Collections.IList);
+            /** 
+            Callback for constructing the VisualElement that is the template for each recycled and re-bound element in the list.
+            */
+            public get makeItem(): System.Func$1<UnityEngine.UIElements.VisualElement>;
+            public set makeItem(value: System.Func$1<UnityEngine.UIElements.VisualElement>);
+            /** 
+            Callback for binding a data item to the visual element.
+            */
+            public get bindItem(): System.Action$2<UnityEngine.UIElements.VisualElement, number>;
+            public set bindItem(value: System.Action$2<UnityEngine.UIElements.VisualElement, number>);
+            /** 
+            Callback for unbinding a data item from the VisualElement.
+            */
+            public get unbindItem(): System.Action$2<UnityEngine.UIElements.VisualElement, number>;
+            public set unbindItem(value: System.Action$2<UnityEngine.UIElements.VisualElement, number>);
+            /** 
+            Callback invoked when a VisualElement created via makeItem is no longer needed and will be destroyed.
+            */
+            public get destroyItem(): System.Action$1<UnityEngine.UIElements.VisualElement>;
+            public set destroyItem(value: System.Action$1<UnityEngine.UIElements.VisualElement>);
+            /** 
+            Returns the content container for the BaseVerticalCollectionView. Because the BaseVerticalCollectionView
+            control automatically manages its content, this always returns null.
+            */
+            public get contentContainer(): UnityEngine.UIElements.VisualElement;
+            /** 
+            Controls the selection type.
+            */
+            public get selectionType(): UnityEngine.UIElements.SelectionType;
+            public set selectionType(value: UnityEngine.UIElements.SelectionType);
+            /** 
+            Returns the selected item from the data source. If multiple items are selected, returns the first selected item.
+            */
+            public get selectedItem(): any;
+            /** 
+            Returns the selected items from the data source. Always returns an enumerable, even if no item is selected, or a single
+            item is selected.
+            */
+            public get selectedItems(): System.Collections.Generic.IEnumerable$1<any>;
+            /** 
+            Returns or sets the selected item's index in the data source. If multiple items are selected, returns the
+            first selected item's index. If multiple items are provided, sets them all as selected.
+            */
+            public get selectedIndex(): number;
+            public set selectedIndex(value: number);
+            /** 
+            Returns the indices of selected items in the data source. Always returns an enumerable, even if no item  is selected, or a
+            single item is selected.
+            */
+            public get selectedIndices(): System.Collections.Generic.IEnumerable$1<number>;
+            /** 
+            Enable this property to display a border around the collection view.
+            */
+            public get showBorder(): boolean;
+            public set showBorder(value: boolean);
+            /** 
+            Gets or sets a value that indicates whether the user can drag list items to reorder them.
+            */
+            public get reorderable(): boolean;
+            public set reorderable(value: boolean);
+            /** 
+            This property controls whether the collection view shows a horizontal scroll bar when its content
+            does not fit in the visible area.
+            */
+            public get horizontalScrollingEnabled(): boolean;
+            public set horizontalScrollingEnabled(value: boolean);
+            /** 
+            This property controls whether the background colors of collection view rows alternate.
+            Takes a value from the AlternatingRowBackground enum.
+            */
+            public get showAlternatingRowBackgrounds(): UnityEngine.UIElements.AlternatingRowBackground;
+            public set showAlternatingRowBackgrounds(value: UnityEngine.UIElements.AlternatingRowBackground);
+            /** 
+            The virtualization method to use for this collection when a scroll bar is visible.
+            Takes a value from the CollectionVirtualizationMethod enum.
+            */
+            public get virtualizationMethod(): UnityEngine.UIElements.CollectionVirtualizationMethod;
+            public set virtualizationMethod(value: UnityEngine.UIElements.CollectionVirtualizationMethod);
+            /** 
+            The height of a single item in the list, in pixels.
+            */
+            public get fixedItemHeight(): number;
+            public set fixedItemHeight(value: number);
+            public add_onItemChosen ($value: System.Action$1<any>) : void
+            public remove_onItemChosen ($value: System.Action$1<any>) : void
+            public add_onItemsChosen ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<any>>) : void
+            public remove_onItemsChosen ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<any>>) : void
+            public add_onSelectionChanged ($value: System.Action$1<System.Collections.Generic.List$1<any>>) : void
+            public remove_onSelectionChanged ($value: System.Action$1<System.Collections.Generic.List$1<any>>) : void
+            public add_onSelectionChange ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<any>>) : void
+            public remove_onSelectionChange ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<any>>) : void
+            public add_onSelectedIndicesChange ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<number>>) : void
+            public remove_onSelectedIndicesChange ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<number>>) : void
+            public add_itemIndexChanged ($value: System.Action$2<number, number>) : void
+            public remove_itemIndexChanged ($value: System.Action$2<number, number>) : void
+            public add_itemsSourceChanged ($value: System.Action) : void
+            public remove_itemsSourceChanged ($value: System.Action) : void
+            /** 
+            Gets the root element the specified TreeView item.
+            * @param id The TreeView item identifier.
+            * @returns The TreeView item's root element. 
+            */
+            public GetRootElementForId ($id: number) : UnityEngine.UIElements.VisualElement
+            /** 
+            Gets the root element the specified collection view item.
+            * @param index The item index.
+            * @returns The item's root element. 
+            */
+            public GetRootElementForIndex ($index: number) : UnityEngine.UIElements.VisualElement
+            /** 
+            Rebinds a single item if it is currently visible in the collection view.
+            * @param index The item index.
+            */
+            public RefreshItem ($index: number) : void
+            public RefreshItems () : void
+            public Rebuild () : void
+            /** 
+            Scrolls to a specific VisualElement.
+            * @param visualElement The element to scroll to.
+            */
+            public ScrollTo ($visualElement: UnityEngine.UIElements.VisualElement) : void
+            /** 
+            Scrolls to a specific item index and makes it visible.
+            * @param index Item index to scroll to. Specify -1 to make the last item visible.
+            */
+            public ScrollToItem ($index: number) : void
+            /** 
+            Scrolls to a specific item id and makes it visible.
+            * @param id Item id to scroll to.
+            */
+            public ScrollToId ($id: number) : void
+            /** 
+            Adds an item to the collection of selected items.
+            * @param index Item index.
+            */
+            public AddToSelection ($index: number) : void
+            /** 
+            Removes an item from the collection of selected items.
+            * @param index The item index.
+            */
+            public RemoveFromSelection ($index: number) : void
+            /** 
+            Sets the currently selected item.
+            * @param index The item index.
+            */
+            public SetSelection ($index: number) : void
+            public SetSelection ($indices: System.Collections.Generic.IEnumerable$1<number>) : void
+            public SetSelectionWithoutNotify ($indices: System.Collections.Generic.IEnumerable$1<number>) : void
+            public ClearSelection () : void
+            public OnBeforeSerialize () : void
+            public OnAfterDeserialize () : void
+        }
+        /** 
+        This event is sent when a key is pressed.
+        */
+        class KeyDownEvent extends UnityEngine.UIElements.KeyboardEventBase$1<UnityEngine.UIElements.KeyDownEvent> implements UnityEngine.UIElements.IKeyboardEvent, System.IDisposable
+        {
+        /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets the character entered.
+            */
+            public get character(): number;
+            /** 
+            The key code.
+            */
+            public get keyCode(): UnityEngine.KeyCode;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        class KeyboardEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements UnityEngine.UIElements.IKeyboardEvent, System.IDisposable
+        {
+        /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets the character entered.
+            */
+            public get character(): number;
+            /** 
+            The key code.
+            */
+            public get keyCode(): UnityEngine.KeyCode;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+        }
+        interface IKeyboardEvent
+        {
+        /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            modifiers : UnityEngine.EventModifiers/** 
+            Gets the character entered.
+            */
+            character : number/** 
+            The key code.
+            */
+            keyCode : UnityEngine.KeyCode/** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            shiftKey : boolean/** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            ctrlKey : boolean/** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            commandKey : boolean/** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            altKey : boolean/** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            actionKey : boolean
+        }
+        /** 
+        Extensions methods to provide additional IBindable functionality.
+        */
+        class IBindingExtensions extends System.Object
+        {
+        /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public static IsBound ($control: UnityEngine.UIElements.IBindable) : boolean
+        }
+        /** 
+        Styled visual element to match the IMGUI Box Style.
+        */
+        class Box extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string
+            public constructor ()
+        }
+        class UxmlFactory$1<TCreatedType> extends UnityEngine.UIElements.UxmlFactory$2<TCreatedType, UnityEngine.UIElements.VisualElement.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        /** 
+        This is a clickable button.
+        */
+        class Button extends UnityEngine.UIElements.TextElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.ITextElement, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.INotifyValueChanged$1<string>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            Clickable MouseManipulator for this Button.
+            */
+            public get clickable(): UnityEngine.UIElements.Clickable;
+            public set clickable(value: UnityEngine.UIElements.Clickable);
+            public add_onClick ($value: System.Action) : void
+            public remove_onClick ($value: System.Action) : void
+            public add_clicked ($value: System.Action) : void
+            public remove_clicked ($value: System.Action) : void
+            public constructor ()
+            public constructor ($clickEvent: System.Action)
+        }
+        /** 
+        A control that allows the user to pick a choice from a list of options.
+        */
+        class DropdownField extends UnityEngine.UIElements.BaseField$1<string> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<string>
+        {
+        /** 
+            This is the text displayed to the user for the current selection of the popup.
+            */
+            public get text(): string;
+            /** 
+            The currently selected index in the popup menu.
+            */
+            public get index(): number;
+            public set index(value: number);
+            /** 
+            The list of choices to display in the popup menu.
+            */
+            public get choices(): System.Collections.Generic.List$1<string>;
+            public set choices(value: System.Collections.Generic.List$1<string>);
+            /** 
+            The currently selected value in the popup menu.
+            */
+            public get value(): string;
+            public set value(value: string);
+            /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            public get alignContent(): UnityEngine.UIElements.Align;
+            /** 
+            Alignment of children on the cross axis of this container.
+            */
+            public get alignItems(): UnityEngine.UIElements.Align;
+            /** 
+            Similar to align-items, but only for this specific element.
+            */
+            public get alignSelf(): UnityEngine.UIElements.Align;
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            /** 
+            Background image to paint in the element's box.
+            */
+            public get backgroundImage(): UnityEngine.UIElements.Background;
+            /** 
+            Color of the element's bottom border.
+            */
+            public get borderBottomColor(): UnityEngine.Color;
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            /** 
+            Color of the element's left border.
+            */
+            public get borderLeftColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            /** 
+            Color of the element's right border.
+            */
+            public get borderRightColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            /** 
+            Color of the element's top border.
+            */
+            public get borderTopColor(): UnityEngine.Color;
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            /** 
+            Defines how an element is displayed in the layout.
+            */
+            public get display(): UnityEngine.UIElements.DisplayStyle;
+            /** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            public get flexBasis(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Direction of the main axis to layout children in a container.
+            */
+            public get flexDirection(): UnityEngine.UIElements.FlexDirection;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            /** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            public get flexWrap(): UnityEngine.UIElements.Wrap;
+            /** 
+            Font size to draw the element's text.
+            */
+            public get fontSize(): number;
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            /** 
+            Justification of children on the main axis of this container.
+            */
+            public get justifyContent(): UnityEngine.UIElements.Justify;
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            /** 
+            Increases or decreases the space between characters.
+            */
+            public get letterSpacing(): number;
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            /** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            public get maxHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            public get maxWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            public get minHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            public get minWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            /** 
+            Element's positioning in its parent container.
+            */
+            public get position(): UnityEngine.UIElements.Position;
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            /** 
+            A rotation transformation.
+            */
+            public get rotate(): UnityEngine.UIElements.Rotate;
+            /** 
+            A scaling transformation.
+            */
+            public get scale(): UnityEngine.UIElements.Scale;
+            /** 
+            The element's text overflow mode.
+            */
+            public get textOverflow(): UnityEngine.UIElements.TextOverflow;
+            /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            /** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            public get transformOrigin(): UnityEngine.Vector3;
+            /** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            public get transitionDelay(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Time a transition animation should take to complete.
+            */
+            public get transitionDuration(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Properties to which a transition effect should be applied.
+            */
+            public get transitionProperty(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>;
+            /** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            public get transitionTimingFunction(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>;
+            /** 
+            A translate transformation.
+            */
+            public get translate(): UnityEngine.Vector3;
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            /** 
+            Background image scaling in the element's box.
+            */
+            public get unityBackgroundScaleMode(): UnityEngine.ScaleMode;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFont(): UnityEngine.Font;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFontDefinition(): UnityEngine.UIElements.FontDefinition;
+            /** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            public get unityFontStyleAndWeight(): UnityEngine.FontStyle;
+            /** 
+            Increases or decreases the space between paragraphs.
+            */
+            public get unityParagraphSpacing(): number;
+            /** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            public get unitySliceBottom(): number;
+            /** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            public get unitySliceLeft(): number;
+            /** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            public get unitySliceRight(): number;
+            /** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            public get unitySliceTop(): number;
+            /** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            public get unityTextAlign(): UnityEngine.TextAnchor;
+            /** 
+            Outline color of the text.
+            */
+            public get unityTextOutlineColor(): UnityEngine.Color;
+            /** 
+            Outline width of the text.
+            */
+            public get unityTextOutlineWidth(): number;
+            /** 
+            The element's text overflow position.
+            */
+            public get unityTextOverflowPosition(): UnityEngine.UIElements.TextOverflowPosition;
+            /** 
+            Specifies whether or not an element is visible.
+            */
+            public get visibility(): UnityEngine.UIElements.Visibility;
+            /** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            public get whiteSpace(): UnityEngine.UIElements.WhiteSpace;
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            /** 
+            Increases or decreases the space between words.
+            */
+            public get wordSpacing(): number;
+            /** 
+            Binding object that will be updated.
+            */
+            public get binding(): UnityEngine.UIElements.IBinding;
+            public set binding(value: UnityEngine.UIElements.IBinding);
+            /** 
+            Path of the target property to be bound.
+            */
+            public get bindingPath(): string;
+            public set bindingPath(value: string);
+            /** 
+            Returns the animation experimental interface.
+            */
+            public get animation(): UnityEngine.UIElements.Experimental.ITransitionAnimations;
+            /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            public get showMixedValue(): boolean;
+            public set showMixedValue(value: boolean);
+            public constructor ()
+            public constructor ($label: string)
+            public constructor ($choices: System.Collections.Generic.List$1<string>, $defaultValue: string, $formatSelectedValueCallback?: System.Func$2<string, string>, $formatListItemCallback?: System.Func$2<string, string>)
+            public constructor ($label: string, $choices: System.Collections.Generic.List$1<string>, $defaultValue: string, $formatSelectedValueCallback?: System.Func$2<string, string>, $formatListItemCallback?: System.Func$2<string, string>)
+            public constructor ($choices: System.Collections.Generic.List$1<string>, $defaultIndex: number, $formatSelectedValueCallback?: System.Func$2<string, string>, $formatListItemCallback?: System.Func$2<string, string>)
+            public constructor ($label: string, $choices: System.Collections.Generic.List$1<string>, $defaultIndex: number, $formatSelectedValueCallback?: System.Func$2<string, string>, $formatListItemCallback?: System.Func$2<string, string>)
+            /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            public SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event.
+            * @param evt The event to handle.
+            */
+            public HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            public HasTrickleDownHandlers () : boolean
+            public HasBubbleUpHandlers () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public HasMouseCapture () : null
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public CaptureMouse () : null
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public ReleaseMouse () : null
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public HasPointerCapture ($pointerId: number) : null
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public CapturePointer ($pointerId: number) : null
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public ReleasePointer ($pointerId: number) : null
+            public Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            public Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+            public Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            public Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            public TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            public Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            public Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            public Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            public Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public IsBound () : null
+        }
+        /** 
+        A Foldout control is a collapsible section of a user interface. When toggled, it expands or collapses, which hides or reveals the elements it contains.
+        */
+        class Foldout extends UnityEngine.UIElements.BindableElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.INotifyValueChanged$1<boolean>
+        {
+        /** 
+            The USS class name for Foldout elements.
+            */
+            public static ussClassName : string/** 
+            The USS class name of Toggle sub-elements in Foldout elements.
+            */
+            public static toggleUssClassName : string/** 
+            The USS class name for the content element in a Foldout.
+            */
+            public static contentUssClassName : string/** 
+            This element contains the elements that are shown or hidden when you toggle the Foldout.
+            */
+            public get contentContainer(): UnityEngine.UIElements.VisualElement;
+            /** 
+            This is the text of the toggle's label.
+            */
+            public get text(): string;
+            public set text(value: string);
+            /** 
+            This is the state of the Foldout's toggle. It is true if the Foldout is open and its contents are
+            visible, and false if the Foldout is closed, and its contents are hidden.
+            */
+            public get value(): boolean;
+            public set value(value: boolean);
+            /** 
+            Sets the value of the Foldout's Toggle sub-element, but does not notify the rest of the hierarchy of the change.
+            * @param newValue The new value of the foldout
+            */
+            public SetValueWithoutNotify ($newValue: boolean) : void
+            public constructor ()
+        }
+        /** 
+        GenericDropdownMenu allows you to display contextual menus with default textual options or any VisualElement.
+        */
+        class GenericDropdownMenu extends System.Object implements UnityEngine.UIElements.IGenericMenu
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            USS class name of labels in elements of this type.
+            */
+            public static itemUssClassName : string/** 
+            USS class name of labels in elements of this type.
+            */
+            public static labelUssClassName : string/** 
+            USS class name of inner containers in elements of this type.
+            */
+            public static containerInnerUssClassName : string/** 
+            USS class name of outer containers in elements of this type.
+            */
+            public static containerOuterUssClassName : string/** 
+            USS class name of separators in elements of this type.
+            */
+            public static checkmarkUssClassName : string/** 
+            USS class name of separators in elements of this type.
+            */
+            public static separatorUssClassName : string/** 
+            Returns the content container for the GenericDropdownMenu. Allows users to create their own
+            dropdown menu if they don't want to use the default implementation.
+            */
+            public get contentContainer(): UnityEngine.UIElements.VisualElement;
+            /** 
+            Adds an item to this menu using a default VisualElement.
+            * @param itemName The text to display to the user.
+            * @param isChecked Indicates whether a checkmark next to the item is displayed.
+            * @param action The callback to invoke when the item is selected by the user.
+            */
+            public AddItem ($itemName: string, $isChecked: boolean, $action: System.Action) : void
+            public AddItem ($itemName: string, $isChecked: boolean, $action: System.Action$1<any>, $data: any) : void
+            /** 
+            Adds a disabled item to this menu using a default VisualElement.
+            * @param itemName The text to display to the user.
+            * @param isChecked Indicates whether a checkmark next to the item is displayed.
+            */
+            public AddDisabledItem ($itemName: string, $isChecked: boolean) : void
+            /** 
+            Adds a visual separator after the previously added items in this menu.
+            * @param path Not used.
+            */
+            public AddSeparator ($path: string) : void
+            /** 
+            Displays the menu at the specified position.
+            * @param position The position in the coordinate space of the panel.
+            * @param targetElement The element used to determine in which root to parent the menu.
+            * @param anchored Whether the menu should use the width of the position argument instead of its normal width.
+            */
+            public DropDown ($position: UnityEngine.Rect, $targetElement?: UnityEngine.UIElements.VisualElement, $anchored?: boolean) : void
+            public constructor ()
+        }
+        interface IGenericMenu
+        {
+        }
+        /** 
+        This is an enclosing container for a group of IGroupBoxOption. All group options within this
+        container will interact together to allow a single selection, using the DefaultGroupManager.
+        Default options are RadioButton, but users can provide other implementations.
+        If no IGroupBox is found in the hierarchy, the default container will be the panel.
+        */
+        class GroupBox extends UnityEngine.UIElements.BindableElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IGroupBox, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            USS class name for GroupBox elements.
+            */
+            public static ussClassName : string/** 
+            USS class name for Labels in GroupBox elements.
+            */
+            public static labelUssClassName : string/** 
+            The title text of the box.
+            */
+            public get text(): string;
+            public set text(value: string);
+            public constructor ()
+            public constructor ($text: string)
+        }
+        interface IGroupBox
+        {
+        }
+        /** 
+        User message types.
+        */
+        enum HelpBoxMessageType
+        { None = 0, Info = 1, Warning = 2, Error = 3 }
+        /** 
+        Makes a help box with a message to the user.
+        */
+        class HelpBox extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            The USS class name for Elements of this type.
+            */
+            public static ussClassName : string/** 
+            The USS class name for labels in Elements of this type.
+            */
+            public static labelUssClassName : string/** 
+            The USS class name for images in Elements of this type.
+            */
+            public static iconUssClassName : string/** 
+            The USS class name for the HelpBoxMessageType.Info state in Elements of this type.
+            */
+            public static iconInfoUssClassName : string/** 
+            The USS class name for the HelpBoxMessageType.Warning state in Elements of this type.
+            */
+            public static iconwarningUssClassName : string/** 
+            The USS class name for the HelpBoxMessageType.Error state in Elements of this type.
+            */
+            public static iconErrorUssClassName : string/** 
+            The message text.
+            */
+            public get text(): string;
+            public set text(value: string);
+            /** 
+            The type of message.
+            */
+            public get messageType(): UnityEngine.UIElements.HelpBoxMessageType;
+            public set messageType(value: UnityEngine.UIElements.HelpBoxMessageType);
+            public constructor ()
+            public constructor ($text: string, $messageType: UnityEngine.UIElements.HelpBoxMessageType)
+        }
+        /** 
+        A VisualElement representing a source texture.
+        */
+        class Image extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            The texture to display in this image.
+            */
+            public get image(): UnityEngine.Texture;
+            public set image(value: UnityEngine.Texture);
+            /** 
+            The sprite to display in this image.
+            */
+            public get sprite(): UnityEngine.Sprite;
+            public set sprite(value: UnityEngine.Sprite);
+            /** 
+            The VectorImage to display in this image.
+            */
+            public get vectorImage(): UnityEngine.UIElements.VectorImage;
+            public set vectorImage(value: UnityEngine.UIElements.VectorImage);
+            /** 
+            The source rectangle inside the texture relative to the top left corner.
+            */
+            public get sourceRect(): UnityEngine.Rect;
+            public set sourceRect(value: UnityEngine.Rect);
+            /** 
+            The base texture coordinates of the Image relative to the bottom left corner.
+            */
+            public get uv(): UnityEngine.Rect;
+            public set uv(value: UnityEngine.Rect);
+            /** 
+            ScaleMode used to display the Image.
+            */
+            public get scaleMode(): UnityEngine.ScaleMode;
+            public set scaleMode(value: UnityEngine.ScaleMode);
+            /** 
+            Tinting color for this Image.
+            */
+            public get tintColor(): UnityEngine.Color;
+            public set tintColor(value: UnityEngine.Color);
+            public constructor ()
+        }
+        /** 
+        INotifyValueChangedExtensions is a set of extension methods useful for objects implementing INotifyValueChanged_1.
+        */
+        class INotifyValueChangedExtensions extends System.Object
+        {
+        }
+        class ChangeEvent$1<T> extends UnityEngine.UIElements.EventBase$1<UnityEngine.UIElements.ChangeEvent$1<T>> implements UnityEngine.UIElements.IChangeEvent, System.IDisposable
+        {
+            public Dispose () : void
+        }
+        interface IChangeEvent
+        {
+        }
+        interface EventCallback$1<TEventType>
+        { (evt: TEventType) : void; }
+        /** 
+        Provides an Element displaying text.
+        */
+        class Label extends UnityEngine.UIElements.TextElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.ITextElement, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.INotifyValueChanged$1<string>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string
+            public constructor ()
+            public constructor ($text: string)
+        }
+        /** 
+        Options to change the drag and drop mode for items in the ListView.
+        */
+        enum ListViewReorderMode
+        { Simple = 0, Animated = 1 }
+        /** 
+        A ListView is a vertically scrollable area that links to, and displays, a list of items.
+        */
+        class ListView extends UnityEngine.UIElements.BaseVerticalCollectionView implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.ISerializationCallbackReceiver
+        {
+        /** 
+            The USS class name for ListView elements.
+            */
+            public static ussClassName : string/** 
+            The USS class name of item elements in ListView elements.
+            */
+            public static itemUssClassName : string/** 
+            The USS class name for label displayed when ListView is empty.
+            */
+            public static emptyLabelUssClassName : string/** 
+            The USS class name for reorderable animated ListView elements.
+            */
+            public static reorderableUssClassName : string/** 
+            The USS class name for item elements in reorderable animated ListView.
+            */
+            public static reorderableItemUssClassName : string/** 
+            The USS class name for item container in reorderable animated ListView.
+            */
+            public static reorderableItemContainerUssClassName : string/** 
+            The USS class name for drag handle in reorderable animated ListView.
+            */
+            public static reorderableItemHandleUssClassName : string/** 
+            The USS class name for drag handle bar in reorderable animated ListView.
+            */
+            public static reorderableItemHandleBarUssClassName : string/** 
+            The USS class name for the footer of the ListView.
+            */
+            public static footerUssClassName : string/** 
+            The USS class name for the foldout header of the ListView.
+            */
+            public static foldoutHeaderUssClassName : string/** 
+            The USS class name for the size field of the ListView when foldout header is enabled.
+            */
+            public static arraySizeFieldUssClassName : string/** 
+            The USS class name for ListView when foldout header is enabled.
+            */
+            public static listViewWithHeaderUssClassName : string/** 
+            The USS class name for ListView when add/remove footer is enabled.
+            */
+            public static listViewWithFooterUssClassName : string/** 
+            The USS class name for scroll view when add/remove footer is enabled.
+            */
+            public static scrollViewWithFooterUssClassName : string/** 
+            This property controls whether the list view displays the collection size (number of items).
+            */
+            public get showBoundCollectionSize(): boolean;
+            public set showBoundCollectionSize(value: boolean);
+            /** 
+            This property controls whether the list view will display a header, in the form of a foldout that can be expanded or collapsed.
+            */
+            public get showFoldoutHeader(): boolean;
+            public set showFoldoutHeader(value: boolean);
+            /** 
+            This property controls the text of the foldout header when using showFoldoutHeader.
+            */
+            public get headerTitle(): string;
+            public set headerTitle(value: string);
+            /** 
+            This property controls whether a footer will be added to the list view.
+            */
+            public get showAddRemoveFooter(): boolean;
+            public set showAddRemoveFooter(value: boolean);
+            /** 
+            This property controls the drag and drop mode for the list view.
+            */
+            public get reorderMode(): UnityEngine.UIElements.ListViewReorderMode;
+            public set reorderMode(value: UnityEngine.UIElements.ListViewReorderMode);
+            public add_itemsAdded ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<number>>) : void
+            public remove_itemsAdded ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<number>>) : void
+            public add_itemsRemoved ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<number>>) : void
+            public remove_itemsRemoved ($value: System.Action$1<System.Collections.Generic.IEnumerable$1<number>>) : void
+            public constructor ()
+            public constructor ($itemsSource: System.Collections.IList, $itemHeight?: number, $makeItem?: System.Func$1<UnityEngine.UIElements.VisualElement>, $bindItem?: System.Action$2<UnityEngine.UIElements.VisualElement, number>)
+        }
+        /** 
+        A min/max slider containing a representation of a range.
+        */
+        class MinMaxSlider extends UnityEngine.UIElements.BaseField$1<UnityEngine.Vector2> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<UnityEngine.Vector2>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            USS class name of labels in elements of this type.
+            */
+            public static labelUssClassName : string/** 
+            USS class name of input elements in elements of this type.
+            */
+            public static inputUssClassName : string/** 
+            USS class name of tracker elements in elements of this type.
+            */
+            public static trackerUssClassName : string/** 
+            USS class name of dragger elements in elements of this type.
+            */
+            public static draggerUssClassName : string/** 
+            USS class name of the minimum thumb elements in elements of this type.
+            */
+            public static minThumbUssClassName : string/** 
+            USS class name of the maximum thumb elements in elements of this type.
+            */
+            public static maxThumbUssClassName : string/** 
+            This is the low value of the range represented on the slider.
+            */
+            public get minValue(): number;
+            public set minValue(value: number);
+            /** 
+            This is the high value of the range represented on the slider.
+            */
+            public get maxValue(): number;
+            public set maxValue(value: number);
+            /** 
+            This is the value of the slider. This is a Vector2 where the x is the lower bound and the y is the higher bound.
+            */
+            public get value(): UnityEngine.Vector2;
+            public set value(value: UnityEngine.Vector2);
+            /** 
+            Returns the range of the low/high limits of the slider.
+            */
+            public get range(): number;
+            /** 
+            This is the low limit of the slider.
+            */
+            public get lowLimit(): number;
+            public set lowLimit(value: number);
+            /** 
+            This is the high limit of the slider.
+            */
+            public get highLimit(): number;
+            public set highLimit(value: number);
+            /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            public get alignContent(): UnityEngine.UIElements.Align;
+            /** 
+            Alignment of children on the cross axis of this container.
+            */
+            public get alignItems(): UnityEngine.UIElements.Align;
+            /** 
+            Similar to align-items, but only for this specific element.
+            */
+            public get alignSelf(): UnityEngine.UIElements.Align;
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            /** 
+            Background image to paint in the element's box.
+            */
+            public get backgroundImage(): UnityEngine.UIElements.Background;
+            /** 
+            Color of the element's bottom border.
+            */
+            public get borderBottomColor(): UnityEngine.Color;
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            /** 
+            Color of the element's left border.
+            */
+            public get borderLeftColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            /** 
+            Color of the element's right border.
+            */
+            public get borderRightColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            /** 
+            Color of the element's top border.
+            */
+            public get borderTopColor(): UnityEngine.Color;
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            /** 
+            Defines how an element is displayed in the layout.
+            */
+            public get display(): UnityEngine.UIElements.DisplayStyle;
+            /** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            public get flexBasis(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Direction of the main axis to layout children in a container.
+            */
+            public get flexDirection(): UnityEngine.UIElements.FlexDirection;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            /** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            public get flexWrap(): UnityEngine.UIElements.Wrap;
+            /** 
+            Font size to draw the element's text.
+            */
+            public get fontSize(): number;
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            /** 
+            Justification of children on the main axis of this container.
+            */
+            public get justifyContent(): UnityEngine.UIElements.Justify;
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            /** 
+            Increases or decreases the space between characters.
+            */
+            public get letterSpacing(): number;
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            /** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            public get maxHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            public get maxWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            public get minHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            public get minWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            /** 
+            Element's positioning in its parent container.
+            */
+            public get position(): UnityEngine.UIElements.Position;
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            /** 
+            A rotation transformation.
+            */
+            public get rotate(): UnityEngine.UIElements.Rotate;
+            /** 
+            A scaling transformation.
+            */
+            public get scale(): UnityEngine.UIElements.Scale;
+            /** 
+            The element's text overflow mode.
+            */
+            public get textOverflow(): UnityEngine.UIElements.TextOverflow;
+            /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            /** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            public get transformOrigin(): UnityEngine.Vector3;
+            /** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            public get transitionDelay(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Time a transition animation should take to complete.
+            */
+            public get transitionDuration(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Properties to which a transition effect should be applied.
+            */
+            public get transitionProperty(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>;
+            /** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            public get transitionTimingFunction(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>;
+            /** 
+            A translate transformation.
+            */
+            public get translate(): UnityEngine.Vector3;
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            /** 
+            Background image scaling in the element's box.
+            */
+            public get unityBackgroundScaleMode(): UnityEngine.ScaleMode;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFont(): UnityEngine.Font;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFontDefinition(): UnityEngine.UIElements.FontDefinition;
+            /** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            public get unityFontStyleAndWeight(): UnityEngine.FontStyle;
+            /** 
+            Increases or decreases the space between paragraphs.
+            */
+            public get unityParagraphSpacing(): number;
+            /** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            public get unitySliceBottom(): number;
+            /** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            public get unitySliceLeft(): number;
+            /** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            public get unitySliceRight(): number;
+            /** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            public get unitySliceTop(): number;
+            /** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            public get unityTextAlign(): UnityEngine.TextAnchor;
+            /** 
+            Outline color of the text.
+            */
+            public get unityTextOutlineColor(): UnityEngine.Color;
+            /** 
+            Outline width of the text.
+            */
+            public get unityTextOutlineWidth(): number;
+            /** 
+            The element's text overflow position.
+            */
+            public get unityTextOverflowPosition(): UnityEngine.UIElements.TextOverflowPosition;
+            /** 
+            Specifies whether or not an element is visible.
+            */
+            public get visibility(): UnityEngine.UIElements.Visibility;
+            /** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            public get whiteSpace(): UnityEngine.UIElements.WhiteSpace;
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            /** 
+            Increases or decreases the space between words.
+            */
+            public get wordSpacing(): number;
+            /** 
+            Binding object that will be updated.
+            */
+            public get binding(): UnityEngine.UIElements.IBinding;
+            public set binding(value: UnityEngine.UIElements.IBinding);
+            /** 
+            Path of the target property to be bound.
+            */
+            public get bindingPath(): string;
+            public set bindingPath(value: string);
+            /** 
+            Returns the animation experimental interface.
+            */
+            public get animation(): UnityEngine.UIElements.Experimental.ITransitionAnimations;
+            /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            public get showMixedValue(): boolean;
+            public set showMixedValue(value: boolean);
+            public constructor ()
+            public constructor ($minValue: number, $maxValue: number, $minLimit: number, $maxLimit: number)
+            public constructor ($label: string, $minValue?: number, $maxValue?: number, $minLimit?: number, $maxLimit?: number)
+            /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            public SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event.
+            * @param evt The event to handle.
+            */
+            public HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            public HasTrickleDownHandlers () : boolean
+            public HasBubbleUpHandlers () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public HasMouseCapture () : null
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public CaptureMouse () : null
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public ReleaseMouse () : null
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public HasPointerCapture ($pointerId: number) : null
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public CapturePointer ($pointerId: number) : null
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public ReleasePointer ($pointerId: number) : null
+            public Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            public Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+            public Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            public Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            public TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            public Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            public Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            public Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            public Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public IsBound () : null
+        }
+        /** 
+        Styled visual element that matches the EditorGUILayout.Popup IMGUI element.
+        */
+        class PopupWindow extends UnityEngine.UIElements.TextElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.ITextElement, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.INotifyValueChanged$1<string>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            USS class name of content elements in elements of this type.
+            */
+            public static contentUssClassName : string
+            public get contentContainer(): UnityEngine.UIElements.VisualElement;
+            public constructor ()
+        }
+        /** 
+        Abstract base class for the ProgressBar.
+        */
+        class AbstractProgressBar extends UnityEngine.UIElements.BindableElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.INotifyValueChanged$1<number>
+        {
+        /** 
+            USS Class Name used to style the ProgressBar.
+            */
+            public static ussClassName : string/** 
+            USS Class Name used to style the container of the ProgressBar.
+            */
+            public static containerUssClassName : string/** 
+            USS Class Name used to style the title of the ProgressBar.
+            */
+            public static titleUssClassName : string/** 
+            USS Class Name used to style the container of the title of the ProgressBar.
+            */
+            public static titleContainerUssClassName : string/** 
+            USS Class Name used to style the progress bar of the ProgressBar.
+            */
+            public static progressUssClassName : string/** 
+            USS Class Name used to style the background of the ProgressBar.
+            */
+            public static backgroundUssClassName : string/** 
+            Sets the title of the ProgressBar that displays in the center of the control.
+            */
+            public get title(): string;
+            public set title(value: string);
+            /** 
+            Sets the minimum value of the ProgressBar.
+            */
+            public get lowValue(): number;
+            public set lowValue(value: number);
+            /** 
+            Sets the maximum value of the ProgressBar.
+            */
+            public get highValue(): number;
+            public set highValue(value: number);
+            /** 
+            Sets the progress value. If the value has changed, dispatches an ChangeEvent_1 of type float.
+            */
+            public get value(): number;
+            public set value(value: number);
+            /** 
+            Sets the progress value.
+            */
+            public SetValueWithoutNotify ($newValue: number) : void
+        }
+        /** 
+        A control that displays the progress between a lower and upper bound value.
+        */
+        class ProgressBar extends UnityEngine.UIElements.AbstractProgressBar implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.INotifyValueChanged$1<number>
+        {
+            public constructor ()
+        }
+        /** 
+        A control that allows users to select a single option inside a RadioButtonGroup
+        */
+        class RadioButton extends UnityEngine.UIElements.BaseBoolField implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IGroupBoxOption, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<boolean>
+        {
+        /** 
+            USS class name for RadioButton elements.
+            */
+            public static ussClassName : string/** 
+            USS class name for Labels in RadioButton elements.
+            */
+            public static labelUssClassName : string/** 
+            USS class name of input elements in RadioButton elements.
+            */
+            public static inputUssClassName : string/** 
+            USS class name of checkmark background in RadioButton elements.
+            */
+            public static checkmarkBackgroundUssClassName : string/** 
+            USS class name of checkmark in RadioButton elements.
+            */
+            public static checkmarkUssClassName : string/** 
+            USS class name of Text elements in RadioButton elements.
+            */
+            public static textUssClassName : string
+            public get value(): boolean;
+            public set value(value: boolean);
+            public SetSelected ($selected: boolean) : void
+            public constructor ()
+            public constructor ($label: string)
+        }
+        interface IGroupBoxOption
+        {
+        }
+        /** 
+        Describes a XML bool attribute.
+        */
+        class UxmlBoolAttributeDescription extends UnityEngine.UIElements.TypedUxmlAttributeDescription$1<boolean>
+        {
+        /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Tries to retrieve the value of this attribute from the attribute bag. Returns true if it is found, otherwise returns false.
+            * @param bag The bag of attributes.
+            * @param cc The context in which the values are retrieved.
+            * @param value The value of the attribute.
+            * @returns True if the value could be retrieved, false otherwise. 
+            */
+            public TryGetValueFromBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext, $value: $Ref<boolean>) : boolean
+            public constructor ()
+        }
+        class TypedUxmlAttributeDescription$1<T> extends UnityEngine.UIElements.UxmlAttributeDescription
+        {
+        }
+        /** 
+        Base class for describing an XML attribute.
+        */
+        class UxmlAttributeDescription extends System.Object
+        {
+        /** 
+            The attribute name.
+            */
+            public get name(): string;
+            public set name(value: string);
+            /** 
+            A list of obsolete names for this attribute.
+            */
+            public get obsoleteNames(): System.Collections.Generic.IEnumerable$1<string>;
+            public set obsoleteNames(value: System.Collections.Generic.IEnumerable$1<string>);
+            /** 
+            Attribute type.
+            */
+            public get type(): string;
+            /** 
+            Attribute namespace.
+            */
+            public get typeNamespace(): string;
+            /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Whether the attribute is optional, required or prohibited.
+            */
+            public get use(): UnityEngine.UIElements.UxmlAttributeDescription.Use;
+            public set use(value: UnityEngine.UIElements.UxmlAttributeDescription.Use);
+            /** 
+            Restrictions on the possible values of the attribute.
+            */
+            public get restriction(): UnityEngine.UIElements.UxmlTypeRestriction;
+            public set restriction(value: UnityEngine.UIElements.UxmlTypeRestriction);
+        }
+        class BaseFieldTraits$2<TValueType, TValueUxmlAttributeType> extends UnityEngine.UIElements.BaseField$1.UxmlTraits<TValueType>
+        {
+        }
+        /** 
+        A control that allows single selection out of a logical group of RadioButton elements. Selecting one will deselect the others.
+        */
+        class RadioButtonGroup extends UnityEngine.UIElements.BaseField$1<number> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IGroupBox, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<number>
+        {
+        /** 
+            USS class name for RadioButtonGroup elements.
+            */
+            public static ussClassName : string/** 
+            The list of available choices in the group.
+            */
+            public get choices(): System.Collections.Generic.IEnumerable$1<string>;
+            public set choices(value: System.Collections.Generic.IEnumerable$1<string>);
+            /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            public get alignContent(): UnityEngine.UIElements.Align;
+            /** 
+            Alignment of children on the cross axis of this container.
+            */
+            public get alignItems(): UnityEngine.UIElements.Align;
+            /** 
+            Similar to align-items, but only for this specific element.
+            */
+            public get alignSelf(): UnityEngine.UIElements.Align;
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            /** 
+            Background image to paint in the element's box.
+            */
+            public get backgroundImage(): UnityEngine.UIElements.Background;
+            /** 
+            Color of the element's bottom border.
+            */
+            public get borderBottomColor(): UnityEngine.Color;
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            /** 
+            Color of the element's left border.
+            */
+            public get borderLeftColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            /** 
+            Color of the element's right border.
+            */
+            public get borderRightColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            /** 
+            Color of the element's top border.
+            */
+            public get borderTopColor(): UnityEngine.Color;
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            /** 
+            Defines how an element is displayed in the layout.
+            */
+            public get display(): UnityEngine.UIElements.DisplayStyle;
+            /** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            public get flexBasis(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Direction of the main axis to layout children in a container.
+            */
+            public get flexDirection(): UnityEngine.UIElements.FlexDirection;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            /** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            public get flexWrap(): UnityEngine.UIElements.Wrap;
+            /** 
+            Font size to draw the element's text.
+            */
+            public get fontSize(): number;
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            /** 
+            Justification of children on the main axis of this container.
+            */
+            public get justifyContent(): UnityEngine.UIElements.Justify;
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            /** 
+            Increases or decreases the space between characters.
+            */
+            public get letterSpacing(): number;
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            /** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            public get maxHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            public get maxWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            public get minHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            public get minWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            /** 
+            Element's positioning in its parent container.
+            */
+            public get position(): UnityEngine.UIElements.Position;
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            /** 
+            A rotation transformation.
+            */
+            public get rotate(): UnityEngine.UIElements.Rotate;
+            /** 
+            A scaling transformation.
+            */
+            public get scale(): UnityEngine.UIElements.Scale;
+            /** 
+            The element's text overflow mode.
+            */
+            public get textOverflow(): UnityEngine.UIElements.TextOverflow;
+            /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            /** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            public get transformOrigin(): UnityEngine.Vector3;
+            /** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            public get transitionDelay(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Time a transition animation should take to complete.
+            */
+            public get transitionDuration(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Properties to which a transition effect should be applied.
+            */
+            public get transitionProperty(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>;
+            /** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            public get transitionTimingFunction(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>;
+            /** 
+            A translate transformation.
+            */
+            public get translate(): UnityEngine.Vector3;
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            /** 
+            Background image scaling in the element's box.
+            */
+            public get unityBackgroundScaleMode(): UnityEngine.ScaleMode;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFont(): UnityEngine.Font;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFontDefinition(): UnityEngine.UIElements.FontDefinition;
+            /** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            public get unityFontStyleAndWeight(): UnityEngine.FontStyle;
+            /** 
+            Increases or decreases the space between paragraphs.
+            */
+            public get unityParagraphSpacing(): number;
+            /** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            public get unitySliceBottom(): number;
+            /** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            public get unitySliceLeft(): number;
+            /** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            public get unitySliceRight(): number;
+            /** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            public get unitySliceTop(): number;
+            /** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            public get unityTextAlign(): UnityEngine.TextAnchor;
+            /** 
+            Outline color of the text.
+            */
+            public get unityTextOutlineColor(): UnityEngine.Color;
+            /** 
+            Outline width of the text.
+            */
+            public get unityTextOutlineWidth(): number;
+            /** 
+            The element's text overflow position.
+            */
+            public get unityTextOverflowPosition(): UnityEngine.UIElements.TextOverflowPosition;
+            /** 
+            Specifies whether or not an element is visible.
+            */
+            public get visibility(): UnityEngine.UIElements.Visibility;
+            /** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            public get whiteSpace(): UnityEngine.UIElements.WhiteSpace;
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            /** 
+            Increases or decreases the space between words.
+            */
+            public get wordSpacing(): number;
+            /** 
+            Binding object that will be updated.
+            */
+            public get binding(): UnityEngine.UIElements.IBinding;
+            public set binding(value: UnityEngine.UIElements.IBinding);
+            /** 
+            Path of the target property to be bound.
+            */
+            public get bindingPath(): string;
+            public set bindingPath(value: string);
+            /** 
+            Returns the animation experimental interface.
+            */
+            public get animation(): UnityEngine.UIElements.Experimental.ITransitionAnimations;
+            /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            public get showMixedValue(): boolean;
+            public set showMixedValue(value: boolean);
+            public constructor ()
+            public constructor ($label: string, $radioButtonChoices?: System.Collections.Generic.List$1<string>)
+            /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            public SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event.
+            * @param evt The event to handle.
+            */
+            public HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            public HasTrickleDownHandlers () : boolean
+            public HasBubbleUpHandlers () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public HasMouseCapture () : null
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public CaptureMouse () : null
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public ReleaseMouse () : null
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public HasPointerCapture ($pointerId: number) : null
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public CapturePointer ($pointerId: number) : null
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public ReleasePointer ($pointerId: number) : null
+            public Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            public Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+            public Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            public Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            public TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            public Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            public Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            public Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            public Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public IsBound () : null
+        }
+        /** 
+        Describes a XML int attribute.
+        */
+        class UxmlIntAttributeDescription extends UnityEngine.UIElements.TypedUxmlAttributeDescription$1<number>
+        {
+        /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Tries to retrieve the value of this attribute from the attribute bag. Returns true if it is found, otherwise returns false.
+            * @param bag The bag of attributes.
+            * @param cc The context in which the values are retrieved.
+            * @param value The value of the attribute.
+            * @returns True if the value could be retrieved, false otherwise. 
+            */
+            public TryGetValueFromBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext, $value: $Ref<number>) : boolean
+            public constructor ()
+        }
+        /** 
+        A button that executes an action repeatedly while it is pressed.
+        */
+        class RepeatButton extends UnityEngine.UIElements.TextElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.ITextElement, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.INotifyValueChanged$1<string>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string
+            public SetAction ($clickEvent: System.Action, $delay: bigint, $interval: bigint) : void
+            public constructor ()
+            public constructor ($clickEvent: System.Action, $delay: bigint, $interval: bigint)
+        }
+        /** 
+        A vertical or horizontal scrollbar.
+        */
+        class Scroller extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            USS class name of elements of this type, when they are displayed horizontally.
+            */
+            public static horizontalVariantUssClassName : string/** 
+            USS class name of elements of this type, when they are displayed vertically.
+            */
+            public static verticalVariantUssClassName : string/** 
+            USS class name of slider elements in elements of this type.
+            */
+            public static sliderUssClassName : string/** 
+            USS class name of low buttons in elements of this type.
+            */
+            public static lowButtonUssClassName : string/** 
+            USS class name of high buttons in elements of this type.
+            */
+            public static highButtonUssClassName : string/** 
+            The slider used by this scroller.
+            */
+            public get slider(): UnityEngine.UIElements.Slider;
+            /** 
+            Bottom or left scroll button.
+            */
+            public get lowButton(): UnityEngine.UIElements.RepeatButton;
+            /** 
+            Top or right scroll button.
+            */
+            public get highButton(): UnityEngine.UIElements.RepeatButton;
+            /** 
+            Value that defines the slider position. It lies between lowValue and highValue.
+            */
+            public get value(): number;
+            public set value(value: number);
+            /** 
+            Minimum value.
+            */
+            public get lowValue(): number;
+            public set lowValue(value: number);
+            /** 
+            Maximum value.
+            */
+            public get highValue(): number;
+            public set highValue(value: number);
+            /** 
+            Direction of this scrollbar.
+            */
+            public get direction(): UnityEngine.UIElements.SliderDirection;
+            public set direction(value: UnityEngine.UIElements.SliderDirection);
+            public add_valueChanged ($value: System.Action$1<number>) : void
+            public remove_valueChanged ($value: System.Action$1<number>) : void
+            /** 
+            Updates the slider element size as a ratio of total range. A value greater than 1 will disable the Scroller.
+            * @param factor Slider size ratio.
+            */
+            public Adjust ($factor: number) : void
+            public ScrollPageUp () : void
+            public ScrollPageDown () : void
+            /** 
+            Will change the value according to the current slider pageSize.
+            */
+            public ScrollPageUp ($factor: number) : void
+            /** 
+            Will change the value according to the current slider pageSize.
+            */
+            public ScrollPageDown ($factor: number) : void
+            public constructor ()
+            public constructor ($lowValue: number, $highValue: number, $valueChanged: System.Action$1<number>, $direction?: UnityEngine.UIElements.SliderDirection)
+        }
+        /** 
+        A slider containing floating point values.
+        */
+        class Slider extends UnityEngine.UIElements.BaseSlider$1<number> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<number>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            USS class name of labels in elements of this type.
+            */
+            public static labelUssClassName : string/** 
+            USS class name of input elements in elements of this type.
+            */
+            public static inputUssClassName : string/** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            public get alignContent(): UnityEngine.UIElements.Align;
+            /** 
+            Alignment of children on the cross axis of this container.
+            */
+            public get alignItems(): UnityEngine.UIElements.Align;
+            /** 
+            Similar to align-items, but only for this specific element.
+            */
+            public get alignSelf(): UnityEngine.UIElements.Align;
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            /** 
+            Background image to paint in the element's box.
+            */
+            public get backgroundImage(): UnityEngine.UIElements.Background;
+            /** 
+            Color of the element's bottom border.
+            */
+            public get borderBottomColor(): UnityEngine.Color;
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            /** 
+            Color of the element's left border.
+            */
+            public get borderLeftColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            /** 
+            Color of the element's right border.
+            */
+            public get borderRightColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            /** 
+            Color of the element's top border.
+            */
+            public get borderTopColor(): UnityEngine.Color;
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            /** 
+            Defines how an element is displayed in the layout.
+            */
+            public get display(): UnityEngine.UIElements.DisplayStyle;
+            /** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            public get flexBasis(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Direction of the main axis to layout children in a container.
+            */
+            public get flexDirection(): UnityEngine.UIElements.FlexDirection;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            /** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            public get flexWrap(): UnityEngine.UIElements.Wrap;
+            /** 
+            Font size to draw the element's text.
+            */
+            public get fontSize(): number;
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            /** 
+            Justification of children on the main axis of this container.
+            */
+            public get justifyContent(): UnityEngine.UIElements.Justify;
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            /** 
+            Increases or decreases the space between characters.
+            */
+            public get letterSpacing(): number;
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            /** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            public get maxHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            public get maxWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            public get minHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            public get minWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            /** 
+            Element's positioning in its parent container.
+            */
+            public get position(): UnityEngine.UIElements.Position;
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            /** 
+            A rotation transformation.
+            */
+            public get rotate(): UnityEngine.UIElements.Rotate;
+            /** 
+            A scaling transformation.
+            */
+            public get scale(): UnityEngine.UIElements.Scale;
+            /** 
+            The element's text overflow mode.
+            */
+            public get textOverflow(): UnityEngine.UIElements.TextOverflow;
+            /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            /** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            public get transformOrigin(): UnityEngine.Vector3;
+            /** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            public get transitionDelay(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Time a transition animation should take to complete.
+            */
+            public get transitionDuration(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Properties to which a transition effect should be applied.
+            */
+            public get transitionProperty(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>;
+            /** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            public get transitionTimingFunction(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>;
+            /** 
+            A translate transformation.
+            */
+            public get translate(): UnityEngine.Vector3;
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            /** 
+            Background image scaling in the element's box.
+            */
+            public get unityBackgroundScaleMode(): UnityEngine.ScaleMode;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFont(): UnityEngine.Font;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFontDefinition(): UnityEngine.UIElements.FontDefinition;
+            /** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            public get unityFontStyleAndWeight(): UnityEngine.FontStyle;
+            /** 
+            Increases or decreases the space between paragraphs.
+            */
+            public get unityParagraphSpacing(): number;
+            /** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            public get unitySliceBottom(): number;
+            /** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            public get unitySliceLeft(): number;
+            /** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            public get unitySliceRight(): number;
+            /** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            public get unitySliceTop(): number;
+            /** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            public get unityTextAlign(): UnityEngine.TextAnchor;
+            /** 
+            Outline color of the text.
+            */
+            public get unityTextOutlineColor(): UnityEngine.Color;
+            /** 
+            Outline width of the text.
+            */
+            public get unityTextOutlineWidth(): number;
+            /** 
+            The element's text overflow position.
+            */
+            public get unityTextOverflowPosition(): UnityEngine.UIElements.TextOverflowPosition;
+            /** 
+            Specifies whether or not an element is visible.
+            */
+            public get visibility(): UnityEngine.UIElements.Visibility;
+            /** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            public get whiteSpace(): UnityEngine.UIElements.WhiteSpace;
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            /** 
+            Increases or decreases the space between words.
+            */
+            public get wordSpacing(): number;
+            /** 
+            Binding object that will be updated.
+            */
+            public get binding(): UnityEngine.UIElements.IBinding;
+            public set binding(value: UnityEngine.UIElements.IBinding);
+            /** 
+            Path of the target property to be bound.
+            */
+            public get bindingPath(): string;
+            public set bindingPath(value: string);
+            /** 
+            Returns the animation experimental interface.
+            */
+            public get animation(): UnityEngine.UIElements.Experimental.ITransitionAnimations;
+            /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            public get showMixedValue(): boolean;
+            public set showMixedValue(value: boolean);
+            public constructor ()
+            public constructor ($start: number, $end: number, $direction?: UnityEngine.UIElements.SliderDirection, $pageSize?: number)
+            public constructor ($label: string, $start?: number, $end?: number, $direction?: UnityEngine.UIElements.SliderDirection, $pageSize?: number)
+            /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            public SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event.
+            * @param evt The event to handle.
+            */
+            public HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            public HasTrickleDownHandlers () : boolean
+            public HasBubbleUpHandlers () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public HasMouseCapture () : null
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public CaptureMouse () : null
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public ReleaseMouse () : null
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public HasPointerCapture ($pointerId: number) : null
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public CapturePointer ($pointerId: number) : null
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public ReleasePointer ($pointerId: number) : null
+            public Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            public Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+            public Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            public Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            public TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            public Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            public Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            public Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            public Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public IsBound () : null
+        }
+        class BaseSlider$1<TValueType> extends UnityEngine.UIElements.BaseField$1<TValueType> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<TValueType>
+        {
+        }
+        /** 
+        Configurations of the ScrollView to influence the layout of its contents and how scrollbars appear.
+        ScrollView.mode
+        */
+        enum ScrollViewMode
+        { Vertical = 0, Horizontal = 1, VerticalAndHorizontal = 2 }
+        /** 
+        Options for controlling the visibility of scroll bars in the ScrollView.
+        */
+        enum ScrollerVisibility
+        { Auto = 0, AlwaysVisible = 1, Hidden = 2 }
+        /** 
+        Displays its contents inside a scrollable frame.
+        */
+        class ScrollView extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            USS class name of viewport elements in elements of this type.
+            */
+            public static viewportUssClassName : string/** 
+            USS class name of content elements in elements of this type.
+            */
+            public static contentAndVerticalScrollUssClassName : string/** 
+            USS class name of content elements in elements of this type.
+            */
+            public static contentUssClassName : string/** 
+            USS class name of horizontal scrollers in elements of this type.
+            */
+            public static hScrollerUssClassName : string/** 
+            USS class name of vertical scrollers in elements of this type.
+            */
+            public static vScrollerUssClassName : string/** 
+            USS class name that's added when the ScrollView is in horizontal mode.
+            ScrollViewMode.Horizontal
+            */
+            public static horizontalVariantUssClassName : string/** 
+            USS class name that's added when the ScrollView is in vertical mode.
+            ScrollViewMode.Vertical
+            */
+            public static verticalVariantUssClassName : string/** 
+            USS class name that's added when the ScrollView is in both horizontal and vertical mode.
+            ScrollViewMode.VerticalAndHorizontal
+            */
+            public static verticalHorizontalVariantUssClassName : string
+            public static scrollVariantUssClassName : string/** 
+            Specifies whether the horizontal scroll bar is visible.
+            */
+            public get horizontalScrollerVisibility(): UnityEngine.UIElements.ScrollerVisibility;
+            public set horizontalScrollerVisibility(value: UnityEngine.UIElements.ScrollerVisibility);
+            /** 
+            Specifies whether the vertical scroll bar is visible.
+            */
+            public get verticalScrollerVisibility(): UnityEngine.UIElements.ScrollerVisibility;
+            public set verticalScrollerVisibility(value: UnityEngine.UIElements.ScrollerVisibility);
+            /** 
+            The current scrolling position.
+            */
+            public get scrollOffset(): UnityEngine.Vector2;
+            public set scrollOffset(value: UnityEngine.Vector2);
+            /** 
+            This property is controlling the scrolling speed of the horizontal scroller.
+            */
+            public get horizontalPageSize(): number;
+            public set horizontalPageSize(value: number);
+            /** 
+            This property is controlling the scrolling speed of the vertical scroller.
+            */
+            public get verticalPageSize(): number;
+            public set verticalPageSize(value: number);
+            /** 
+            Controls the rate at which the scrolling movement slows after a user scrolls using a touch interaction.
+            */
+            public get scrollDecelerationRate(): number;
+            public set scrollDecelerationRate(value: number);
+            /** 
+            The amount of elasticity to use when a user tries to scroll past the boundaries of the scroll view.
+            */
+            public get elasticity(): number;
+            public set elasticity(value: number);
+            /** 
+            The behavior to use when a user tries to scroll past the boundaries of the ScrollView content using a touch interaction.
+            */
+            public get touchScrollBehavior(): UnityEngine.UIElements.ScrollView.TouchScrollBehavior;
+            public set touchScrollBehavior(value: UnityEngine.UIElements.ScrollView.TouchScrollBehavior);
+            /** 
+            Represents the visible part of contentContainer.
+            */
+            public get contentViewport(): UnityEngine.UIElements.VisualElement;
+            /** 
+            Horizontal scrollbar.
+            */
+            public get horizontalScroller(): UnityEngine.UIElements.Scroller;
+            /** 
+            Vertical Scrollbar.
+            */
+            public get verticalScroller(): UnityEngine.UIElements.Scroller;
+            /** 
+            Contains full content, potentially partially visible.
+            */
+            public get contentContainer(): UnityEngine.UIElements.VisualElement;
+            /** 
+            Controls how the ScrollView allows the user to scroll the contents.
+            ScrollViewMode
+            */
+            public get mode(): UnityEngine.UIElements.ScrollViewMode;
+            public set mode(value: UnityEngine.UIElements.ScrollViewMode);
+            /** 
+            Scroll to a specific child element.
+            * @param child The child to scroll to.
+            */
+            public ScrollTo ($child: UnityEngine.UIElements.VisualElement) : void
+            public constructor ()
+            public constructor ($scrollViewMode: UnityEngine.UIElements.ScrollViewMode)
+        }
+        /** 
+        Describes a XML float attribute.
+        */
+        class UxmlFloatAttributeDescription extends UnityEngine.UIElements.TypedUxmlAttributeDescription$1<number>
+        {
+        /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Tries to retrieve the value of this attribute from the attribute bag. Returns true if it is found, otherwise returns false.
+            * @param bag The bag of attributes.
+            * @param cc The context in which the values are retrieved.
+            * @param value The value of the attribute.
+            * @returns True if the value could be retrieved, false otherwise. 
+            */
+            public TryGetValueFromBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext, $value: $Ref<number>) : boolean
+            public constructor ()
+        }
+        /** 
+        A slider containing Integer discrete values.
+        */
+        class SliderInt extends UnityEngine.UIElements.BaseSlider$1<number> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<number>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            USS class name of labels in elements of this type.
+            */
+            public static labelUssClassName : string/** 
+            USS class name of input elements in elements of this type.
+            */
+            public static inputUssClassName : string/** 
+            The value to add or remove to the SliderInt.value when it is clicked.
+            */
+            public get pageSize(): number;
+            public set pageSize(value: number);
+            /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            public get alignContent(): UnityEngine.UIElements.Align;
+            /** 
+            Alignment of children on the cross axis of this container.
+            */
+            public get alignItems(): UnityEngine.UIElements.Align;
+            /** 
+            Similar to align-items, but only for this specific element.
+            */
+            public get alignSelf(): UnityEngine.UIElements.Align;
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            /** 
+            Background image to paint in the element's box.
+            */
+            public get backgroundImage(): UnityEngine.UIElements.Background;
+            /** 
+            Color of the element's bottom border.
+            */
+            public get borderBottomColor(): UnityEngine.Color;
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            /** 
+            Color of the element's left border.
+            */
+            public get borderLeftColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            /** 
+            Color of the element's right border.
+            */
+            public get borderRightColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            /** 
+            Color of the element's top border.
+            */
+            public get borderTopColor(): UnityEngine.Color;
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            /** 
+            Defines how an element is displayed in the layout.
+            */
+            public get display(): UnityEngine.UIElements.DisplayStyle;
+            /** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            public get flexBasis(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Direction of the main axis to layout children in a container.
+            */
+            public get flexDirection(): UnityEngine.UIElements.FlexDirection;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            /** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            public get flexWrap(): UnityEngine.UIElements.Wrap;
+            /** 
+            Font size to draw the element's text.
+            */
+            public get fontSize(): number;
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            /** 
+            Justification of children on the main axis of this container.
+            */
+            public get justifyContent(): UnityEngine.UIElements.Justify;
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            /** 
+            Increases or decreases the space between characters.
+            */
+            public get letterSpacing(): number;
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            /** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            public get maxHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            public get maxWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            public get minHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            public get minWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            /** 
+            Element's positioning in its parent container.
+            */
+            public get position(): UnityEngine.UIElements.Position;
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            /** 
+            A rotation transformation.
+            */
+            public get rotate(): UnityEngine.UIElements.Rotate;
+            /** 
+            A scaling transformation.
+            */
+            public get scale(): UnityEngine.UIElements.Scale;
+            /** 
+            The element's text overflow mode.
+            */
+            public get textOverflow(): UnityEngine.UIElements.TextOverflow;
+            /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            /** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            public get transformOrigin(): UnityEngine.Vector3;
+            /** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            public get transitionDelay(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Time a transition animation should take to complete.
+            */
+            public get transitionDuration(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Properties to which a transition effect should be applied.
+            */
+            public get transitionProperty(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>;
+            /** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            public get transitionTimingFunction(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>;
+            /** 
+            A translate transformation.
+            */
+            public get translate(): UnityEngine.Vector3;
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            /** 
+            Background image scaling in the element's box.
+            */
+            public get unityBackgroundScaleMode(): UnityEngine.ScaleMode;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFont(): UnityEngine.Font;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFontDefinition(): UnityEngine.UIElements.FontDefinition;
+            /** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            public get unityFontStyleAndWeight(): UnityEngine.FontStyle;
+            /** 
+            Increases or decreases the space between paragraphs.
+            */
+            public get unityParagraphSpacing(): number;
+            /** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            public get unitySliceBottom(): number;
+            /** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            public get unitySliceLeft(): number;
+            /** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            public get unitySliceRight(): number;
+            /** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            public get unitySliceTop(): number;
+            /** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            public get unityTextAlign(): UnityEngine.TextAnchor;
+            /** 
+            Outline color of the text.
+            */
+            public get unityTextOutlineColor(): UnityEngine.Color;
+            /** 
+            Outline width of the text.
+            */
+            public get unityTextOutlineWidth(): number;
+            /** 
+            The element's text overflow position.
+            */
+            public get unityTextOverflowPosition(): UnityEngine.UIElements.TextOverflowPosition;
+            /** 
+            Specifies whether or not an element is visible.
+            */
+            public get visibility(): UnityEngine.UIElements.Visibility;
+            /** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            public get whiteSpace(): UnityEngine.UIElements.WhiteSpace;
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            /** 
+            Increases or decreases the space between words.
+            */
+            public get wordSpacing(): number;
+            /** 
+            Binding object that will be updated.
+            */
+            public get binding(): UnityEngine.UIElements.IBinding;
+            public set binding(value: UnityEngine.UIElements.IBinding);
+            /** 
+            Path of the target property to be bound.
+            */
+            public get bindingPath(): string;
+            public set bindingPath(value: string);
+            /** 
+            Returns the animation experimental interface.
+            */
+            public get animation(): UnityEngine.UIElements.Experimental.ITransitionAnimations;
+            /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            public get showMixedValue(): boolean;
+            public set showMixedValue(value: boolean);
+            public constructor ()
+            public constructor ($start: number, $end: number, $direction?: UnityEngine.UIElements.SliderDirection, $pageSize?: number)
+            public constructor ($label: string, $start?: number, $end?: number, $direction?: UnityEngine.UIElements.SliderDirection, $pageSize?: number)
+            /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            public SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event.
+            * @param evt The event to handle.
+            */
+            public HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            public HasTrickleDownHandlers () : boolean
+            public HasBubbleUpHandlers () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public HasMouseCapture () : null
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public CaptureMouse () : null
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public ReleaseMouse () : null
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public HasPointerCapture ($pointerId: number) : null
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public CapturePointer ($pointerId: number) : null
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public ReleasePointer ($pointerId: number) : null
+            public Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            public Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+            public Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            public Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            public TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            public Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            public Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            public Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            public Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public IsBound () : null
+        }
+        /** 
+        A textfield is a rectangular area where the user can edit a string.
+        */
+        class TextField extends UnityEngine.UIElements.TextInputBaseField$1<string> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<string>
+        {
+        /** 
+            USS class name of elements of this type.
+            */
+            public static ussClassName : string/** 
+            USS class name of labels in elements of this type.
+            */
+            public static labelUssClassName : string/** 
+            USS class name of input elements in elements of this type.
+            */
+            public static inputUssClassName : string/** 
+            Set this to true to allow multiple lines in the textfield and false if otherwise.
+            */
+            public get multiline(): boolean;
+            public set multiline(value: boolean);
+            /** 
+            The string currently being exposed by the field.
+            */
+            public get value(): string;
+            public set value(value: string);
+            /** 
+            Alignment of the whole area of children on the cross axis if they span over multiple lines in this container.
+            */
+            public get alignContent(): UnityEngine.UIElements.Align;
+            /** 
+            Alignment of children on the cross axis of this container.
+            */
+            public get alignItems(): UnityEngine.UIElements.Align;
+            /** 
+            Similar to align-items, but only for this specific element.
+            */
+            public get alignSelf(): UnityEngine.UIElements.Align;
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            /** 
+            Background image to paint in the element's box.
+            */
+            public get backgroundImage(): UnityEngine.UIElements.Background;
+            /** 
+            Color of the element's bottom border.
+            */
+            public get borderBottomColor(): UnityEngine.Color;
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            /** 
+            Color of the element's left border.
+            */
+            public get borderLeftColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            /** 
+            Color of the element's right border.
+            */
+            public get borderRightColor(): UnityEngine.Color;
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            /** 
+            Color of the element's top border.
+            */
+            public get borderTopColor(): UnityEngine.Color;
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            /** 
+            Defines how an element is displayed in the layout.
+            */
+            public get display(): UnityEngine.UIElements.DisplayStyle;
+            /** 
+            Initial main size of a flex item, on the main flex axis. The final layout might be smaller or larger, according to the flex shrinking and growing determined by the other flex properties.
+            */
+            public get flexBasis(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Direction of the main axis to layout children in a container.
+            */
+            public get flexDirection(): UnityEngine.UIElements.FlexDirection;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            /** 
+            Placement of children over multiple lines if not enough space is available in this container.
+            */
+            public get flexWrap(): UnityEngine.UIElements.Wrap;
+            /** 
+            Font size to draw the element's text.
+            */
+            public get fontSize(): number;
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            /** 
+            Justification of children on the main axis of this container.
+            */
+            public get justifyContent(): UnityEngine.UIElements.Justify;
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            /** 
+            Increases or decreases the space between characters.
+            */
+            public get letterSpacing(): number;
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            /** 
+            Maximum height for an element, when it is flexible or measures its own size.
+            */
+            public get maxHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Maximum width for an element, when it is flexible or measures its own size.
+            */
+            public get maxWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum height for an element, when it is flexible or measures its own size.
+            */
+            public get minHeight(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Minimum width for an element, when it is flexible or measures its own size.
+            */
+            public get minWidth(): UnityEngine.UIElements.StyleFloat;
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            /** 
+            Element's positioning in its parent container.
+            */
+            public get position(): UnityEngine.UIElements.Position;
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            /** 
+            A rotation transformation.
+            */
+            public get rotate(): UnityEngine.UIElements.Rotate;
+            /** 
+            A scaling transformation.
+            */
+            public get scale(): UnityEngine.UIElements.Scale;
+            /** 
+            The element's text overflow mode.
+            */
+            public get textOverflow(): UnityEngine.UIElements.TextOverflow;
+            /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            /** 
+            The transformation origin is the point around which a transformation is applied.
+            */
+            public get transformOrigin(): UnityEngine.Vector3;
+            /** 
+            Duration to wait before starting a property's transition effect when its value changes.
+            */
+            public get transitionDelay(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Time a transition animation should take to complete.
+            */
+            public get transitionDuration(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.TimeValue>;
+            /** 
+            Properties to which a transition effect should be applied.
+            */
+            public get transitionProperty(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>;
+            /** 
+            Determines how intermediate values are calculated for properties modified by a transition effect.
+            */
+            public get transitionTimingFunction(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.EasingFunction>;
+            /** 
+            A translate transformation.
+            */
+            public get translate(): UnityEngine.Vector3;
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            /** 
+            Background image scaling in the element's box.
+            */
+            public get unityBackgroundScaleMode(): UnityEngine.ScaleMode;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFont(): UnityEngine.Font;
+            /** 
+            Font to draw the element's text.
+            */
+            public get unityFontDefinition(): UnityEngine.UIElements.FontDefinition;
+            /** 
+            Font style and weight (normal, bold, italic) to draw the element's text.
+            */
+            public get unityFontStyleAndWeight(): UnityEngine.FontStyle;
+            /** 
+            Increases or decreases the space between paragraphs.
+            */
+            public get unityParagraphSpacing(): number;
+            /** 
+            Size of the 9-slice's bottom edge when painting an element's background image.
+            */
+            public get unitySliceBottom(): number;
+            /** 
+            Size of the 9-slice's left edge when painting an element's background image.
+            */
+            public get unitySliceLeft(): number;
+            /** 
+            Size of the 9-slice's right edge when painting an element's background image.
+            */
+            public get unitySliceRight(): number;
+            /** 
+            Size of the 9-slice's top edge when painting an element's background image.
+            */
+            public get unitySliceTop(): number;
+            /** 
+            Horizontal and vertical text alignment in the element's box.
+            */
+            public get unityTextAlign(): UnityEngine.TextAnchor;
+            /** 
+            Outline color of the text.
+            */
+            public get unityTextOutlineColor(): UnityEngine.Color;
+            /** 
+            Outline width of the text.
+            */
+            public get unityTextOutlineWidth(): number;
+            /** 
+            The element's text overflow position.
+            */
+            public get unityTextOverflowPosition(): UnityEngine.UIElements.TextOverflowPosition;
+            /** 
+            Specifies whether or not an element is visible.
+            */
+            public get visibility(): UnityEngine.UIElements.Visibility;
+            /** 
+            Word wrapping over multiple lines if not enough space is available to draw the text of an element.
+            */
+            public get whiteSpace(): UnityEngine.UIElements.WhiteSpace;
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            /** 
+            Increases or decreases the space between words.
+            */
+            public get wordSpacing(): number;
+            /** 
+            Binding object that will be updated.
+            */
+            public get binding(): UnityEngine.UIElements.IBinding;
+            public set binding(value: UnityEngine.UIElements.IBinding);
+            /** 
+            Path of the target property to be bound.
+            */
+            public get bindingPath(): string;
+            public set bindingPath(value: string);
+            /** 
+            Returns the animation experimental interface.
+            */
+            public get animation(): UnityEngine.UIElements.Experimental.ITransitionAnimations;
+            /** 
+            Indicates whether to enable the mixed value state on the value field.
+            */
+            public get showMixedValue(): boolean;
+            public set showMixedValue(value: boolean);
+            /** 
+            Selects text in the textfield between cursorIndex and selectionIndex.
+            * @param selectionIndex The selection end position.
+            */
+            public SelectRange ($rangeCursorIndex: number, $selectionIndex: number) : void
+            public constructor ()
+            public constructor ($maxLength: number, $multiline: boolean, $isPasswordField: boolean, $maskChar: number)
+            public constructor ($label: string)
+            public constructor ($label: string, $maxLength: number, $multiline: boolean, $isPasswordField: boolean, $maskChar: number)
+            /** 
+            Sends an event to the event handler.
+            * @param e The event to send.
+            */
+            public SendEvent ($e: UnityEngine.UIElements.EventBase) : void
+            /** 
+            Handle an event.
+            * @param evt The event to handle.
+            */
+            public HandleEvent ($evt: UnityEngine.UIElements.EventBase) : void
+            public HasTrickleDownHandlers () : boolean
+            public HasBubbleUpHandlers () : boolean
+            /** 
+            Checks if the event handler is capturing the mouse.
+            * @param handler Event handler to check.
+            * @returns True if the handler captures the mouse. 
+            */
+            public HasMouseCapture () : null
+            /** 
+            Assigns an event handler to capture mouse events.
+            * @param handler The event handler that captures mouse events.
+            */
+            public CaptureMouse () : null
+            /** 
+            Stops an event handler from capturing the mouse.
+            * @param handler The event handler to stop capturing the mouse. If this handler is not assigned to capturing the mouse, nothing happens.
+            */
+            public ReleaseMouse () : null
+            /** 
+            Tests whether the element has captured the pointer.
+            * @param handler The VisualElement being tested.
+            * @param pointerId The captured pointer.
+            * @returns True if element captured the pointer. 
+            */
+            public HasPointerCapture ($pointerId: number) : null
+            /** 
+            Captures the pointer.
+            * @param handler The VisualElement that captures the pointer.
+            * @param pointerId The pointer to capture.
+            */
+            public CapturePointer ($pointerId: number) : null
+            /** 
+            Tests whether an element captured a pointer and, if so, tells the element to release the pointer.
+            * @param handler The element which potentially captured the pointer.
+            * @param pointerId The captured pointer.
+            */
+            public ReleasePointer ($pointerId: number) : null
+            public Execute ($timerUpdateEvent: System.Action$1<UnityEngine.UIElements.TimerState>) : UnityEngine.UIElements.IVisualElementScheduledItem
+            /** 
+            Schedule this action to be executed later.
+            * @param updateEvent The action to be executed.
+            * @returns Reference to the scheduled action. 
+            */
+            public Execute ($updateEvent: System.Action) : UnityEngine.UIElements.IVisualElementScheduledItem
+            public Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            public Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            public Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            public Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            public TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            public Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            public Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            public Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            public Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Checks if a IBindable is bound to a property.
+            * @param control This Bindable object.
+            * @returns True if this IBindable is bound to a property. 
+            */
+            public IsBound () : null
+        }
+        class TextInputBaseField$1<TValueType> extends UnityEngine.UIElements.BaseField$1<TValueType> implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<TValueType>
+        {
+        }
+        /** 
+        Describes a XML string attribute.
+        */
+        class UxmlStringAttributeDescription extends UnityEngine.UIElements.TypedUxmlAttributeDescription$1<string>
+        {
+        /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Tries to retrieve the value of this attribute from the attribute bag. Returns true if it is found, otherwise returns false.
+            * @param bag The bag of attributes.
+            * @param cc The context in which the values are retrieved.
+            * @param value The value of the attribute.
+            * @returns True if the value could be retrieved, false otherwise. 
+            */
+            public TryGetValueFromBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext, $value: $Ref<string>) : boolean
+            public constructor ()
+        }
+        /** 
+        A Toggle is a clickable element that represents a boolean value.
+        */
+        class Toggle extends UnityEngine.UIElements.BaseBoolField implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.IBindable, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures, UnityEngine.UIElements.IMixedValueSupport, UnityEngine.UIElements.INotifyValueChanged$1<boolean>
+        {
+        /** 
+            USS class name for Toggle elements.
+            */
+            public static ussClassName : string/** 
+            USS class name for Labels in Toggle elements.
+            */
+            public static labelUssClassName : string/** 
+            USS class name of input elements in Toggle elements.
+            */
+            public static inputUssClassName : string/** 
+            USS class name of Images in Toggle elements.
+            */
+            public static checkmarkUssClassName : string/** 
+            USS class name of Text elements in Toggle elements.
+            */
+            public static textUssClassName : string
+            public constructor ()
+            public constructor ($label: string)
+        }
+        /** 
+        A SplitView that contains two resizable panes. One pane is fixed-size while the other pane has flex-grow style set to 1 to take all remaining space. The border between he panes is draggable to resize both panes. Both horizontal and vertical modes are supported. Requires _exactly_ two child elements to operate.
+        */
+        class TwoPaneSplitView extends UnityEngine.UIElements.VisualElement implements UnityEngine.UIElements.IStylePropertyAnimations, UnityEngine.UIElements.IEventHandler, UnityEngine.UIElements.IVisualElementScheduler, UnityEngine.UIElements.Experimental.ITransitionAnimations, UnityEngine.UIElements.IResolvedStyle, UnityEngine.UIElements.ITransform, UnityEngine.UIElements.IExperimentalFeatures
+        {
+        /** 
+            The child element that is set as the fixed size pane.
+            */
+            public get fixedPane(): UnityEngine.UIElements.VisualElement;
+            /** 
+            The child element that is set as the flexable size pane.
+            */
+            public get flexedPane(): UnityEngine.UIElements.VisualElement;
+            /** 
+            0 for setting first child as the fixed pane, 1 for the second child element.
+            */
+            public get fixedPaneIndex(): number;
+            public set fixedPaneIndex(value: number);
+            /** 
+            The initial width or height for the fixed pane.
+            */
+            public get fixedPaneInitialDimension(): number;
+            public set fixedPaneInitialDimension(value: number);
+            /** 
+            Orientation of the split view.
+            */
+            public get orientation(): UnityEngine.UIElements.TwoPaneSplitViewOrientation;
+            public set orientation(value: UnityEngine.UIElements.TwoPaneSplitViewOrientation);
+            public get contentContainer(): UnityEngine.UIElements.VisualElement;
+            /** 
+            Collapse one of the panes of the split view. This will hide the resizer and make the other child take up all available space.
+            * @param index Index of child to collapse.
+            */
+            public CollapseChild ($index: number) : void
+            public UnCollapse () : void
+            public constructor ()
+            public constructor ($fixedPaneIndex: number, $fixedPaneStartDimension: number, $orientation: UnityEngine.UIElements.TwoPaneSplitViewOrientation)
+        }
+        /** 
+        Determines the orientation of the two resizable panes.
+        */
+        enum TwoPaneSplitViewOrientation
+        { Horizontal = 0, Vertical = 1 }
+        interface IPointerCaptureEvent
+        {
+        }
+        /** 
+        Event sent when a VisualElement releases a pointer.
+        */
+        class PointerCaptureOutEvent extends UnityEngine.UIElements.PointerCaptureEventBase$1<UnityEngine.UIElements.PointerCaptureOutEvent> implements UnityEngine.UIElements.IPointerCaptureEvent, System.IDisposable
+        {
+            public constructor ()
+            public Dispose () : void
+        }
+        class PointerCaptureEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements UnityEngine.UIElements.IPointerCaptureEvent, System.IDisposable
+        {
+        }
+        /** 
+        Event sent when a pointer is captured by a VisualElement.
+        */
+        class PointerCaptureEvent extends UnityEngine.UIElements.PointerCaptureEventBase$1<UnityEngine.UIElements.PointerCaptureEvent> implements UnityEngine.UIElements.IPointerCaptureEvent, System.IDisposable
+        {
+            public constructor ()
+            public Dispose () : void
+        }
+        interface IMouseCaptureEvent
+        {
+        }
+        /** 
+        Event sent before a handler stops capturing the mouse.
+        */
+        class MouseCaptureOutEvent extends UnityEngine.UIElements.MouseCaptureEventBase$1<UnityEngine.UIElements.MouseCaptureOutEvent> implements UnityEngine.UIElements.IPointerCaptureEvent, System.IDisposable, UnityEngine.UIElements.IMouseCaptureEvent
+        {
+            public constructor ()
+            public Dispose () : void
+        }
+        class MouseCaptureEventBase$1<T> extends UnityEngine.UIElements.PointerCaptureEventBase$1<T> implements UnityEngine.UIElements.IPointerCaptureEvent, System.IDisposable, UnityEngine.UIElements.IMouseCaptureEvent
+        {
+        }
+        /** 
+        Event sent after a handler starts capturing the mouse.
+        */
+        class MouseCaptureEvent extends UnityEngine.UIElements.MouseCaptureEventBase$1<UnityEngine.UIElements.MouseCaptureEvent> implements UnityEngine.UIElements.IPointerCaptureEvent, System.IDisposable, UnityEngine.UIElements.IMouseCaptureEvent
+        {
+            public constructor ()
+            public Dispose () : void
+        }
+        interface ICommandEvent
+        {
+        /** 
+            Name of the command.
+            */
+            commandName : string
+        }
+        /** 
+        The event sent to probe which elements accepts a command.
+        */
+        class ValidateCommandEvent extends UnityEngine.UIElements.CommandEventBase$1<UnityEngine.UIElements.ValidateCommandEvent> implements UnityEngine.UIElements.ICommandEvent, System.IDisposable
+        {
+        /** 
+            Name of the command.
+            */
+            public get commandName(): string;
+            public constructor ()
+            public Dispose () : void
+        }
+        class CommandEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements UnityEngine.UIElements.ICommandEvent, System.IDisposable
+        {
+        /** 
+            Name of the command.
+            */
+            public get commandName(): string;
+        }
+        /** 
+        The event sent when an element should execute a command.
+        */
+        class ExecuteCommandEvent extends UnityEngine.UIElements.CommandEventBase$1<UnityEngine.UIElements.ExecuteCommandEvent> implements UnityEngine.UIElements.ICommandEvent, System.IDisposable
+        {
+        /** 
+            Name of the command.
+            */
+            public get commandName(): string;
+            public constructor ()
+            public Dispose () : void
+        }
+        interface IDragAndDropEvent
+        {
+        }
+        /** 
+        The event sent to a dragged element when the drag and drop process ends.
+        */
+        class DragExitedEvent extends UnityEngine.UIElements.DragAndDropEventBase$1<UnityEngine.UIElements.DragExitedEvent> implements UnityEngine.UIElements.IDragAndDropEvent, UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param systemEvent An IMGUI drag exited event.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($systemEvent: UnityEngine.Event) : UnityEngine.UIElements.DragExitedEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        class DragAndDropEventBase$1<T> extends UnityEngine.UIElements.MouseEventBase$1<T> implements UnityEngine.UIElements.IDragAndDropEvent, UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        }
+        /** 
+        Use the DragEnterEvent class to manage events that occur when dragging enters an element or one of its descendants. The DragEnterEvent is cancellable, it does not trickle down, and it does not bubble up.
+        */
+        class DragEnterEvent extends UnityEngine.UIElements.DragAndDropEventBase$1<UnityEngine.UIElements.DragEnterEvent> implements UnityEngine.UIElements.IDragAndDropEvent, UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Use the DragLeaveEvent class to manage events sent when dragging leaves an element or one of its descendants. The DragLeaveEvent is cancellable, it does not trickle down, and it does not bubble up.
+        */
+        class DragLeaveEvent extends UnityEngine.UIElements.DragAndDropEventBase$1<UnityEngine.UIElements.DragLeaveEvent> implements UnityEngine.UIElements.IDragAndDropEvent, UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        The event sent when the element being dragged enters a possible drop target.
+        */
+        class DragUpdatedEvent extends UnityEngine.UIElements.DragAndDropEventBase$1<UnityEngine.UIElements.DragUpdatedEvent> implements UnityEngine.UIElements.IDragAndDropEvent, UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param systemEvent An IMGUI drag updated event.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($systemEvent: UnityEngine.Event) : UnityEngine.UIElements.DragUpdatedEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        The event sent to an element when another element is dragged and dropped on the element.
+        */
+        class DragPerformEvent extends UnityEngine.UIElements.DragAndDropEventBase$1<UnityEngine.UIElements.DragPerformEvent> implements UnityEngine.UIElements.IDragAndDropEvent, UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        The propagation phases of an event.
+        */
+        enum PropagationPhase
+        { None = 0, TrickleDown = 1, AtTarget = 2, DefaultActionAtTarget = 5, BubbleUp = 3, DefaultAction = 4 }
+        /** 
+        Use this enum to specify during which phases the event handler is executed.
+        */
+        enum TrickleDown
+        { NoTrickleDown = 0, TrickleDown = 1 }
+        interface EventCallback$2<TEventType, TCallbackArgs>
+        { (evt: TEventType, userArgs: TCallbackArgs) : void; }
+        interface IFocusEvent
+        {
+        /** 
+            Related target. See implementation for specific meaning.
+            */
+            relatedTarget : UnityEngine.UIElements.Focusable/** 
+            Direction of the focus change.
+            */
+            direction : UnityEngine.UIElements.FocusChangeDirection
+        }
+        /** 
+        Event sent immediately before an element loses focus. This event trickles down and bubbles up. This event cannot be cancelled.
+        */
+        class FocusOutEvent extends UnityEngine.UIElements.FocusEventBase$1<UnityEngine.UIElements.FocusOutEvent> implements UnityEngine.UIElements.IFocusEvent, System.IDisposable
+        {
+        /** 
+            Related target. See implementation for specific meaning.
+            */
+            public get relatedTarget(): UnityEngine.UIElements.Focusable;
+            /** 
+            Direction of the focus change.
+            */
+            public get direction(): UnityEngine.UIElements.FocusChangeDirection;
+            public constructor ()
+            public Dispose () : void
+        }
+        class FocusEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements UnityEngine.UIElements.IFocusEvent, System.IDisposable
+        {
+        /** 
+            Related target. See implementation for specific meaning.
+            */
+            public get relatedTarget(): UnityEngine.UIElements.Focusable;
+            /** 
+            Direction of the focus change.
+            */
+            public get direction(): UnityEngine.UIElements.FocusChangeDirection;
+        }
+        /** 
+        Event sent immediately after an element has lost focus. This event trickles down, it does not bubble up, and it cannot be cancelled.
+        */
+        class BlurEvent extends UnityEngine.UIElements.FocusEventBase$1<UnityEngine.UIElements.BlurEvent> implements UnityEngine.UIElements.IFocusEvent, System.IDisposable
+        {
+        /** 
+            Related target. See implementation for specific meaning.
+            */
+            public get relatedTarget(): UnityEngine.UIElements.Focusable;
+            /** 
+            Direction of the focus change.
+            */
+            public get direction(): UnityEngine.UIElements.FocusChangeDirection;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent immediately before an element gains focus. This event trickles down and bubbles up. This event cannot be cancelled.
+        */
+        class FocusInEvent extends UnityEngine.UIElements.FocusEventBase$1<UnityEngine.UIElements.FocusInEvent> implements UnityEngine.UIElements.IFocusEvent, System.IDisposable
+        {
+        /** 
+            Related target. See implementation for specific meaning.
+            */
+            public get relatedTarget(): UnityEngine.UIElements.Focusable;
+            /** 
+            Direction of the focus change.
+            */
+            public get direction(): UnityEngine.UIElements.FocusChangeDirection;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent immediately after an element has gained focus. This event trickles down, it does not bubble up, and it cannot be cancelled.
+        */
+        class FocusEvent extends UnityEngine.UIElements.FocusEventBase$1<UnityEngine.UIElements.FocusEvent> implements UnityEngine.UIElements.IFocusEvent, System.IDisposable
+        {
+        /** 
+            Related target. See implementation for specific meaning.
+            */
+            public get relatedTarget(): UnityEngine.UIElements.Focusable;
+            /** 
+            Direction of the focus change.
+            */
+            public get direction(): UnityEngine.UIElements.FocusChangeDirection;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Sends an event when text from a TextField changes.
+        */
+        class InputEvent extends UnityEngine.UIElements.EventBase$1<UnityEngine.UIElements.InputEvent> implements System.IDisposable
+        {
+        /** 
+            The text before the change occured.
+            */
+            public get previousData(): string;
+            /** 
+            The new text.
+            */
+            public get newData(): string;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param previousData The text before the change occured.
+            * @param newData The new text.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($previousData: string, $newData: string) : UnityEngine.UIElements.InputEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a pressed key is released.
+        */
+        class KeyUpEvent extends UnityEngine.UIElements.KeyboardEventBase$1<UnityEngine.UIElements.KeyUpEvent> implements UnityEngine.UIElements.IKeyboardEvent, System.IDisposable
+        {
+        /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets the character entered.
+            */
+            public get character(): number;
+            /** 
+            The key code.
+            */
+            public get keyCode(): UnityEngine.KeyCode;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent after layout calculations, when the position or the dimension of an element changes.
+        */
+        class GeometryChangedEvent extends UnityEngine.UIElements.EventBase$1<UnityEngine.UIElements.GeometryChangedEvent> implements System.IDisposable
+        {
+        /** 
+            Gets the element's old dimensions.
+            */
+            public get oldRect(): UnityEngine.Rect;
+            /** 
+            Gets the elements's new dimensions.
+            */
+            public get newRect(): UnityEngine.Rect;
+            /** 
+            Gets an event from the event pool, and initializes it with the specified values. Use this method
+            instead of instancing new events. Use Dispose() to release events back to the event pool.
+            * @param oldRect The old dimensions of the element.
+            * @param newRect The new dimensions of the element.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($oldRect: UnityEngine.Rect, $newRect: UnityEngine.Rect) : UnityEngine.UIElements.GeometryChangedEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a mouse button is pressed.
+        */
+        class MouseDownEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseDownEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param systemEvent An IMGUI mouse event.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($systemEvent: UnityEngine.Event) : UnityEngine.UIElements.MouseDownEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a mouse button is released.
+        */
+        class MouseUpEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseUpEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param systemEvent An IMGUI mouse event.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($systemEvent: UnityEngine.Event) : UnityEngine.UIElements.MouseUpEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when the mouse moves.
+        */
+        class MouseMoveEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseMoveEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param systemEvent An IMGUI mouse event.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($systemEvent: UnityEngine.Event) : UnityEngine.UIElements.MouseMoveEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        The event sent when clicking the right mouse button.
+        */
+        class ContextClickEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.ContextClickEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when the mouse wheel moves.
+        */
+        class WheelEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.WheelEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            The amount of scrolling applied with the mouse wheel.
+            */
+            public get delta(): UnityEngine.Vector3;
+            /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param systemEvent A wheel IMGUI event.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($systemEvent: UnityEngine.Event) : UnityEngine.UIElements.WheelEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent when the mouse pointer enters an element or one of its descendent elements. The event is cancellable, it does not trickle down, and it does not bubble up.
+        */
+        class MouseEnterEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseEnterEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent when the mouse pointer exits an element and all its descendent elements. The event is cancellable, it does not trickle down, and it does not bubble up.
+        */
+        class MouseLeaveEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseLeaveEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent when the mouse pointer enters a window. The event is cancellable, it does not trickle down, and it does not bubble up.
+        */
+        class MouseEnterWindowEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseEnterWindowEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent when the mouse pointer exits a window. The event is cancellable, it does not trickle down, and it does not bubble up.
+        */
+        class MouseLeaveWindowEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseLeaveWindowEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param systemEvent An IMGUI MouseLeaveWindow event.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($systemEvent: UnityEngine.Event) : UnityEngine.UIElements.MouseLeaveWindowEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent when the mouse pointer enters an element. The event trickles down, it bubbles up, and it is cancellable.
+        */
+        class MouseOverEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseOverEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent when the mouse pointer exits an element. The event trickles down, it bubbles up, and it is cancellable.
+        */
+        class MouseOutEvent extends UnityEngine.UIElements.MouseEventBase$1<UnityEngine.UIElements.MouseOutEvent> implements UnityEngine.UIElements.IMouseEvent, UnityEngine.UIElements.IMouseEventInternal, System.IDisposable
+        {
+        /** 
+            Flag set holding the pressed modifier keys (Alt, Ctrl, Shift, Windows/Command).
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            The mouse position in the panel coordinate system.
+            */
+            public get mousePosition(): UnityEngine.Vector2;
+            /** 
+            The mouse position in the current target coordinate system.
+            */
+            public get localMousePosition(): UnityEngine.Vector2;
+            /** 
+            Mouse position difference between the last mouse event and this one.
+            */
+            public get mouseDelta(): UnityEngine.Vector2;
+            /** 
+            The number of times the button is pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Integer that indicates which mouse button is pressed: 0 is the left button, 1 is the right button, 2 is the middle button.
+            */
+            public get button(): number;
+            /** 
+            A bitmask that describes the currently pressed buttons.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Return true if the Shift key is pressed.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Return true if the Ctrl key is pressed.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Return true if the Windows/Command key is pressed.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Return true if the Alt key is pressed.
+            */
+            public get altKey(): boolean;
+            /** 
+            Returns true if the platform-specific action key is pressed. This key is Cmd on macOS, and Ctrl on all other platforms.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        interface INavigationEvent
+        {
+        }
+        /** 
+        Event typically sent when the user presses the D-pad, moves a joystick or presses the arrow keys.
+        */
+        class NavigationMoveEvent extends UnityEngine.UIElements.NavigationEventBase$1<UnityEngine.UIElements.NavigationMoveEvent> implements System.IDisposable, UnityEngine.UIElements.INavigationEvent
+        {
+        /** 
+            The direction of the navigation.
+            */
+            public get direction(): UnityEngine.UIElements.NavigationMoveEvent.Direction;
+            /** 
+            The move vector.
+            */
+            public get move(): UnityEngine.Vector2;
+            /** 
+            Gets an event from the event pool and initializes it with the given values.
+            Use this function instead of creating new events.
+            Events obtained from this method should be released back to the pool using Dispose().
+            * @param moveVector The move vector.
+            * @returns An initialized navigation event. 
+            */
+            public static GetPooled ($moveVector: UnityEngine.Vector2) : UnityEngine.UIElements.NavigationMoveEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        class NavigationEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements System.IDisposable, UnityEngine.UIElements.INavigationEvent
+        {
+        }
+        /** 
+        Event sent when the user presses the cancel button.
+        */
+        class NavigationCancelEvent extends UnityEngine.UIElements.NavigationEventBase$1<UnityEngine.UIElements.NavigationCancelEvent> implements System.IDisposable, UnityEngine.UIElements.INavigationEvent
+        {
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent when the user presses the submit button.
+        */
+        class NavigationSubmitEvent extends UnityEngine.UIElements.NavigationEventBase$1<UnityEngine.UIElements.NavigationSubmitEvent> implements System.IDisposable, UnityEngine.UIElements.INavigationEvent
+        {
+            public constructor ()
+            public Dispose () : void
+        }
+        interface IPanelChangedEvent
+        {
+        }
+        /** 
+        Event sent after an element is added to an element that is a descendent of a panel.
+        */
+        class AttachToPanelEvent extends UnityEngine.UIElements.PanelChangedEventBase$1<UnityEngine.UIElements.AttachToPanelEvent> implements UnityEngine.UIElements.IPanelChangedEvent, System.IDisposable
+        {
+            public constructor ()
+            public Dispose () : void
+        }
+        class PanelChangedEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements UnityEngine.UIElements.IPanelChangedEvent, System.IDisposable
+        {
+        }
+        /** 
+        Event sent just before an element is detach from its parent, if the parent is the descendant of a panel.
+        */
+        class DetachFromPanelEvent extends UnityEngine.UIElements.PanelChangedEventBase$1<UnityEngine.UIElements.DetachFromPanelEvent> implements UnityEngine.UIElements.IPanelChangedEvent, System.IDisposable
+        {
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        A static class that holds pointer type values.
+        */
+        class PointerType extends System.Object
+        {
+        /** 
+            The pointer type for mouse events.
+            */
+            public static mouse : string/** 
+            The pointer type for touch events.
+            */
+            public static touch : string/** 
+            The pointer type for pen events.
+            */
+            public static pen : string/** 
+            The pointer type for events created by unknown devices.
+            */
+            public static unknown : string
+        }
+        /** 
+        A static class that holds pointer ID values.
+        */
+        class PointerId extends System.Object
+        {
+        /** 
+            The maximum number of pointers the implementation supports.
+            */
+            public static maxPointers : number/** 
+            Represents an invalid pointer ID value.
+            */
+            public static invalidPointerId : number/** 
+            The mouse pointer ID.
+            */
+            public static mousePointerId : number/** 
+            The base ID for touch pointers.
+            */
+            public static touchPointerIdBase : number/** 
+            The number of touch pointers the implementation supports.
+            */
+            public static touchPointerCount : number/** 
+            The base ID for pen pointers.
+            */
+            public static penPointerIdBase : number/** 
+            The number of pen pointers the implementation supports.
+            */
+            public static penPointerCount : number
+        }
+        /** 
+        This event is sent when a pointer is pressed.
+        */
+        class PointerDownEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerDownEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        class PointerEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+        }
+        interface IPointerEventInternal
+        {
+        }
+        /** 
+        This event is sent when a pointer changes state.
+        */
+        class PointerMoveEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerMoveEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a pointer does not change for a set amount of time, determined by the operating system.
+        */
+        class PointerStationaryEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerStationaryEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a pointer's last pressed button is released.
+        */
+        class PointerUpEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerUpEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when pointer interaction is cancelled.
+        */
+        class PointerCancelEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerCancelEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when the left mouse button is clicked.
+        */
+        class ClickEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.ClickEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a pointer enters a VisualElement or one of its descendants.
+        */
+        class PointerEnterEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerEnterEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a pointer exits an element and all of its descendants.
+        */
+        class PointerLeaveEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerLeaveEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a pointer enters an element.
+        */
+        class PointerOverEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerOverEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        This event is sent when a pointer exits an element.
+        */
+        class PointerOutEvent extends UnityEngine.UIElements.PointerEventBase$1<UnityEngine.UIElements.PointerOutEvent> implements UnityEngine.UIElements.IPointerEvent, UnityEngine.UIElements.IPointerEventInternal, System.IDisposable
+        {
+        /** 
+            Gets the identifier of the pointer that sends the event.
+            */
+            public get pointerId(): number;
+            /** 
+            Gets the type of pointer that created the event.
+            */
+            public get pointerType(): string;
+            /** 
+            Gets a boolean value that indicates whether the pointer is a primary pointer. True means the pointer is a primary
+            pointer. False means it isn't.
+            */
+            public get isPrimary(): boolean;
+            /** 
+            Gets a value that indicates which mouse button was pressed: 0 is the left button, 1 is the right button, 2 is the
+            middle button.
+            */
+            public get button(): number;
+            /** 
+            Gets a bitmask that describes the buttons that are currently pressed.
+            */
+            public get pressedButtons(): number;
+            /** 
+            Gets the pointer position in the Screen or World coordinate system.
+            */
+            public get position(): UnityEngine.Vector3;
+            /** 
+            Gets the pointer position in the current target's coordinate system.
+            */
+            public get localPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the difference between the pointer's position during the previous mouse event and its position during the
+            current mouse event.
+            */
+            public get deltaPosition(): UnityEngine.Vector3;
+            /** 
+            Gets the amount of time that has elapsed since the last recorded change in pointer values, in seconds.
+            */
+            public get deltaTime(): number;
+            /** 
+            Gets the number of times the button was pressed.
+            */
+            public get clickCount(): number;
+            /** 
+            Gets the amount of pressure currently applied by a touch.
+            */
+            public get pressure(): number;
+            /** 
+            Gets the pressure applied to an additional pressure-sensitive control on the stylus.
+            */
+            public get tangentialPressure(): number;
+            /** 
+            Gets the angle of the stylus relative to the surface, in radians
+            */
+            public get altitudeAngle(): number;
+            /** 
+            Gets the angle of the stylus relative to the x-axis, in radians.
+            */
+            public get azimuthAngle(): number;
+            /** 
+            Gets the rotation of the stylus around its axis, in radians.
+            */
+            public get twist(): number;
+            /** 
+            Gets an estimate of the radius of a touch.
+            */
+            public get radius(): UnityEngine.Vector2;
+            /** 
+            Gets the accuracy of the touch radius.
+            */
+            public get radiusVariance(): UnityEngine.Vector2;
+            /** 
+            Gets flags that indicate whether modifier keys (Alt, Ctrl, Shift, Windows/Cmd) are pressed.
+            */
+            public get modifiers(): UnityEngine.EventModifiers;
+            /** 
+            Gets a boolean value that indicates whether the Shift key is pressed. True means the Shift key is pressed.
+            False means it isn't.
+            */
+            public get shiftKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Ctrl key is pressed. True means the Ctrl key is pressed.
+            False means it isn't.
+            */
+            public get ctrlKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the WindowsCmd key is pressed. True means the WindowsCmd key
+            is pressed. False means it isn't.
+            */
+            public get commandKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the Alt key is pressed. True means the Alt key is pressed.
+            False means it isn't.
+            */
+            public get altKey(): boolean;
+            /** 
+            Gets a boolean value that indicates whether the platform-specific action key is pressed. True means the action
+            key is pressed. False means it isn't.
+            */
+            public get actionKey(): boolean;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent after the custom style properties of a VisualElement have been resolved.
+        */
+        class CustomStyleResolvedEvent extends UnityEngine.UIElements.EventBase$1<UnityEngine.UIElements.CustomStyleResolvedEvent> implements System.IDisposable
+        {
+        /** 
+            Returns the custom style properties accessor for the targeted VisualElement.
+            */
+            public get customStyle(): UnityEngine.UIElements.ICustomStyle;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent to find the first VisualElement that displays a tooltip.
+        */
+        class TooltipEvent extends UnityEngine.UIElements.EventBase$1<UnityEngine.UIElements.TooltipEvent> implements System.IDisposable
+        {
+        /** 
+            Text to display inside the tooltip box.
+            */
+            public get tooltip(): string;
+            public set tooltip(value: string);
+            /** 
+            Rectangle of the hovered VisualElement in the panel coordinate system.
+            */
+            public get rect(): UnityEngine.Rect;
+            public set rect(value: UnityEngine.Rect);
+            public constructor ()
+            public Dispose () : void
+        }
+        interface ITransitionEvent
+        {
+        /** 
+            The names of the properties associated with the transition.
+            */
+            stylePropertyNames : UnityEngine.UIElements.StylePropertyNameCollection/** 
+            The number of seconds the transition has been running, excluding delay phase time.
+            */
+            elapsedTime : number
+        }
+        /** 
+        Collection of StylePropertyName.
+        */
+        class StylePropertyNameCollection extends System.ValueType implements System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.StylePropertyName>, System.Collections.IEnumerable
+        {
+            public GetEnumerator () : UnityEngine.UIElements.StylePropertyNameCollection.Enumerator
+            /** 
+            Determines whether a StylePropertyNameCollection contains the specified element.
+            * @param stylePropertyName The element to locate in the <see cref="StylePropertyNameCollection" />.
+            * @returns true if the StylePropertyNameCollection contains the specified element; otherwise, false. 
+            */
+            public Contains ($stylePropertyName: UnityEngine.UIElements.StylePropertyName) : boolean
+        }
+        /** 
+        Event sent when a transition is created (i.e. added to the set of running transitions).
+        */
+        class TransitionRunEvent extends UnityEngine.UIElements.TransitionEventBase$1<UnityEngine.UIElements.TransitionRunEvent> implements UnityEngine.UIElements.ITransitionEvent, System.IDisposable
+        {
+        /** 
+            The names of the properties associated with the transition.
+            */
+            public get stylePropertyNames(): UnityEngine.UIElements.StylePropertyNameCollection;
+            /** 
+            The number of seconds the transition has been running, excluding delay phase time.
+            */
+            public get elapsedTime(): number;
+            public constructor ()
+            public Dispose () : void
+        }
+        class TransitionEventBase$1<T> extends UnityEngine.UIElements.EventBase$1<T> implements UnityEngine.UIElements.ITransitionEvent, System.IDisposable
+        {
+        /** 
+            The names of the properties associated with the transition.
+            */
+            public get stylePropertyNames(): UnityEngine.UIElements.StylePropertyNameCollection;
+            /** 
+            The number of seconds the transition has been running, excluding delay phase time.
+            */
+            public get elapsedTime(): number;
+        }
+        /** 
+        Event sent when a transition's delay phase ends.
+        */
+        class TransitionStartEvent extends UnityEngine.UIElements.TransitionEventBase$1<UnityEngine.UIElements.TransitionStartEvent> implements UnityEngine.UIElements.ITransitionEvent, System.IDisposable
+        {
+        /** 
+            The names of the properties associated with the transition.
+            */
+            public get stylePropertyNames(): UnityEngine.UIElements.StylePropertyNameCollection;
+            /** 
+            The number of seconds the transition has been running, excluding delay phase time.
+            */
+            public get elapsedTime(): number;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent at the completion of the transition. In the case where a transition is removed before completion then the event will not fire.
+        */
+        class TransitionEndEvent extends UnityEngine.UIElements.TransitionEventBase$1<UnityEngine.UIElements.TransitionEndEvent> implements UnityEngine.UIElements.ITransitionEvent, System.IDisposable
+        {
+        /** 
+            The names of the properties associated with the transition.
+            */
+            public get stylePropertyNames(): UnityEngine.UIElements.StylePropertyNameCollection;
+            /** 
+            The number of seconds the transition has been running, excluding delay phase time.
+            */
+            public get elapsedTime(): number;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Event sent when a transition is canceled.
+        */
+        class TransitionCancelEvent extends UnityEngine.UIElements.TransitionEventBase$1<UnityEngine.UIElements.TransitionCancelEvent> implements UnityEngine.UIElements.ITransitionEvent, System.IDisposable
+        {
+        /** 
+            The names of the properties associated with the transition.
+            */
+            public get stylePropertyNames(): UnityEngine.UIElements.StylePropertyNameCollection;
+            /** 
+            The number of seconds the transition has been running, excluding delay phase time.
+            */
+            public get elapsedTime(): number;
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Class used to send a IMGUI event that has no equivalent UIElements event.
+        */
+        class IMGUIEvent extends UnityEngine.UIElements.EventBase$1<UnityEngine.UIElements.IMGUIEvent> implements System.IDisposable
+        {
+        /** 
+            Gets an event from the event pool and initializes it with the given values. Use this function instead of creating new events. Events obtained using this method need to be released back to the pool. You can use Dispose() to release them.
+            * @param systemEvent The IMGUI event used to initialize the event.
+            * @returns An initialized event. 
+            */
+            public static GetPooled ($systemEvent: UnityEngine.Event) : UnityEngine.UIElements.IMGUIEvent
+            public constructor ()
+            public Dispose () : void
+        }
+        /** 
+        Contains the settings used by the dynamic atlas system.
+        */
+        class DynamicAtlasSettings extends System.Object
+        {
+        /** 
+            Specifies the minimum size (width/height) of the atlas texture, in pixels. This value must be a power of two,
+            and must be greater than 0 and less than or equal to maxAtlasSize.
+            */
+            public get minAtlasSize(): number;
+            public set minAtlasSize(value: number);
+            /** 
+            Specifies the maximum size (width/height) of the atlas texture, in pixels. This value must be a power of two,
+            and must be greater than or equal to minAtlasSize.
+            */
+            public get maxAtlasSize(): number;
+            public set maxAtlasSize(value: number);
+            /** 
+            Specifies the maximum size (width/height) of a texture that can be added to the atlas. When activeFilters
+            contains DynamicAtlasFilters.Size, textures larger than this size are excluded from the atlas. Otherwise, this
+            value is not used.
+            */
+            public get maxSubTextureSize(): number;
+            public set maxSubTextureSize(value: number);
+            /** 
+            Defines the filters that the dynamic atlas system uses to exclude textures from the texture atlas.
+            */
+            public get activeFilters(): UnityEngine.UIElements.DynamicAtlasFilters;
+            public set activeFilters(value: UnityEngine.UIElements.DynamicAtlasFilters);
+            /** 
+            Default filters for a dynamic atlas.
+            */
+            public static get defaultFilters(): UnityEngine.UIElements.DynamicAtlasFilters;
+            /** 
+            When a delegate is assigned, the dynamic atlas system calls it to determine whether or not a texture can be added to the atlas.
+            */
+            public get customFilter(): UnityEngine.UIElements.DynamicAtlasCustomFilter;
+            public set customFilter(value: UnityEngine.UIElements.DynamicAtlasCustomFilter);
+            /** 
+            Specifies default values used to initialize the structure.
+            */
+            public static get defaults(): UnityEngine.UIElements.DynamicAtlasSettings;
+            public constructor ()
+        }
+        /** 
+        Options that specify how elements in the panel scale when the screen size changes. See PanelSettings.scaleMode.
+        */
+        enum PanelScaleMode
+        { ConstantPixelSize = 0, ConstantPhysicalSize = 1, ScaleWithScreenSize = 2 }
+        /** 
+        Options that specify how to scale the panel area when the aspect ratio of the current screen resolution
+        does not match the reference resolution. See PanelSettings.screenMatchMode.
+        */
+        enum PanelScreenMatchMode
+        { MatchWidthOrHeight = 0, Shrink = 1, Expand = 2 }
+        /** 
+        Defines a Panel Settings asset that instantiates a panel at runtime. The panel makes it possible for Unity to display
+        UXML-file based UI in the Game view.
+        */
+        class PanelSettings extends UnityEngine.ScriptableObject
+        {
+        /** 
+            Specifies a PanelTextSettings that will be used by every UI Document attached to the panel.
+            */
+            public textSettings : UnityEngine.UIElements.PanelTextSettings/** 
+            Specifies a style sheet that Unity applies to every UI Document attached to the panel.
+            */
+            public get themeStyleSheet(): UnityEngine.UIElements.ThemeStyleSheet;
+            public set themeStyleSheet(value: UnityEngine.UIElements.ThemeStyleSheet);
+            /** 
+            Specifies a Render Texture to render the panel's UI on.
+            */
+            public get targetTexture(): UnityEngine.RenderTexture;
+            public set targetTexture(value: UnityEngine.RenderTexture);
+            /** 
+            Determines how elements in the panel scale when the screen size changes.
+            */
+            public get scaleMode(): UnityEngine.UIElements.PanelScaleMode;
+            public set scaleMode(value: UnityEngine.UIElements.PanelScaleMode);
+            /** 
+            A uniform scaling factor that Unity applies to elements in the panel before
+            the panel transform.
+            */
+            public get scale(): number;
+            public set scale(value: number);
+            /** 
+            The DPI that the UI is designed for.
+            */
+            public get referenceDpi(): number;
+            public set referenceDpi(value: number);
+            /** 
+            The DPI value that Unity uses when it cannot determine the screen DPI.
+            */
+            public get fallbackDpi(): number;
+            public set fallbackDpi(value: number);
+            /** 
+            The resolution the UI is designed for.
+            */
+            public get referenceResolution(): UnityEngine.Vector2Int;
+            public set referenceResolution(value: UnityEngine.Vector2Int);
+            /** 
+            Specifies how to scale the panel area when the aspect ratio of the current resolution
+            does not match the reference resolution.
+            */
+            public get screenMatchMode(): UnityEngine.UIElements.PanelScreenMatchMode;
+            public set screenMatchMode(value: UnityEngine.UIElements.PanelScreenMatchMode);
+            /** 
+            Determines whether Unity uses width, height, or a mix of the two as a reference when it scales the panel area.
+            */
+            public get match(): number;
+            public set match(value: number);
+            /** 
+            When the Scene uses more than one panel, this value determines where this panel appears in the sorting
+            order relative to other panels.
+            */
+            public get sortingOrder(): number;
+            public set sortingOrder(value: number);
+            /** 
+            When the Scene uses more than one panel, this value determines where this panel appears in the sorting
+            order relative to other panels.
+            */
+            public get targetDisplay(): number;
+            public set targetDisplay(value: number);
+            /** 
+            Determines whether the depth/stencil buffer is cleared before the panel is rendered.
+            */
+            public get clearDepthStencil(): boolean;
+            public set clearDepthStencil(value: boolean);
+            /** 
+            The depth used to clear the depth/stencil buffer.
+            */
+            public get depthClearValue(): number;
+            /** 
+            Determines whether the color buffer is cleared before the panel is rendered.
+            */
+            public get clearColor(): boolean;
+            public set clearColor(value: boolean);
+            /** 
+            The color used to clear the color buffer.
+            */
+            public get colorClearValue(): UnityEngine.Color;
+            public set colorClearValue(value: UnityEngine.Color);
+            /** 
+            Settings of the dynamic atlas.
+            */
+            public get dynamicAtlasSettings(): UnityEngine.UIElements.DynamicAtlasSettings;
+            public set dynamicAtlasSettings(value: UnityEngine.UIElements.DynamicAtlasSettings);
+            public SetScreenToPanelSpaceFunction ($screentoPanelSpaceFunction: System.Func$2<UnityEngine.Vector2, UnityEngine.Vector2>) : void
+        }
+        /** 
+        Represents text rendering settings for a specific UI panel.
+        PanelSettings.textSettings
+        */
+        class PanelTextSettings extends UnityEngine.TextCore.Text.TextSettings
+        {
+            public constructor ()
+        }
+        /** 
+        Represents a style sheet that's assembled from other style sheets.
+        */
+        class ThemeStyleSheet extends UnityEngine.UIElements.StyleSheet
+        {
+            public constructor ()
+        }
+        /** 
+        A collection of static methods that provide simple World, Screen, and Panel coordinate transformations.
+        */
+        class RuntimePanelUtils extends System.Object
+        {
+        /** 
+            Transforms a screen absolute position to its equivalent local coordinate on given panel.
+            <param name="panel">The local coordinates reference panel.<param>
+            <param name="screenPosition">The screen position to transform.<param>
+            <returns>A position in panel coordinates that corresponds to the provided screen position.</returns>
+            */
+            public static ScreenToPanel ($panel: UnityEngine.UIElements.IPanel, $screenPosition: UnityEngine.Vector2) : UnityEngine.Vector2
+            /** 
+            Transforms a world absolute position to its equivalent local coordinate on given panel,
+            using provided camera for internal WorldToScreen transformation.
+            <param name="panel">The local coordinates reference panel.<param>
+            <param name="worldPosition">The world position to transform.<param>
+            <param name="camera">The Camera used for internal WorldToScreen transformation.<param>
+            <returns>A position in panel coordinates that corresponds to the provided world position.<returns>
+            */
+            public static CameraTransformWorldToPanel ($panel: UnityEngine.UIElements.IPanel, $worldPosition: UnityEngine.Vector3, $camera: UnityEngine.Camera) : UnityEngine.Vector2
+            /** 
+            Transforms a world position and size (in world units) to their equivalent local position and size
+            on given panel, using provided camera for internal WorldToScreen transformation.
+            <param name="panel">The local coordinates reference panel.<param>
+            <param name="worldPosition">The world position to transform.<param>
+            <param name="worldSize">The world size to transform. The object in the panel will appear to have
+            that size when compared to other 3D objects at neighboring positions.<param>
+            <param name="camera">The Camera used for internal WorldToScreen transformation.<param>
+            <returns>A (position, size) Rect in panel coordinates that corresponds to the provided world position
+            and size.</returns>
+            */
+            public static CameraTransformWorldToPanelRect ($panel: UnityEngine.UIElements.IPanel, $worldPosition: UnityEngine.Vector3, $worldSize: UnityEngine.Vector2, $camera: UnityEngine.Camera) : UnityEngine.Rect
+            /** 
+            Resets the dynamic atlas of the panel. Textured elements will be repainted.
+            */
+            public static ResetDynamicAtlas ($panel: UnityEngine.UIElements.IPanel) : void
+            /** 
+            Notifies the dynamic atlas of the panel that the content of the provided texture has changed. If the dynamic
+            atlas contains the texture, it will update it.
+            * @param panel The current panel
+            * @param texture The texture whose content has changed.
+            */
+            public static SetTextureDirty ($panel: UnityEngine.UIElements.IPanel, $texture: UnityEngine.Texture2D) : void
+        }
+        /** 
+        Defines a Component that connects VisualElements to GameObjects. This makes it
+        possible to render UI defined in UXML documents in the Game view.
+        */
+        class UIDocument extends UnityEngine.MonoBehaviour
+        {
+        /** 
+            Specifies the PanelSettings instance to connect this UIDocument component to.
+            */
+            public get panelSettings(): UnityEngine.UIElements.PanelSettings;
+            public set panelSettings(value: UnityEngine.UIElements.PanelSettings);
+            /** 
+            If the GameObject that this UIDocument component is attached to has a parent GameObject, and
+            that parent GameObject also has a UIDocument component attached to it, this value is set to
+            the parent GameObject's UIDocument component automatically.
+            */
+            public get parentUI(): UnityEngine.UIElements.UIDocument;
+            /** 
+            The VisualTreeAsset loaded into the root visual element automatically.
+            */
+            public get visualTreeAsset(): UnityEngine.UIElements.VisualTreeAsset;
+            public set visualTreeAsset(value: UnityEngine.UIElements.VisualTreeAsset);
+            /** 
+            The root visual element where the UI hierarchy starts.
+            */
+            public get rootVisualElement(): UnityEngine.UIElements.VisualElement;
+            /** 
+            The order in which this UIDocument will show up on the hierarchy in relation to other UIDocuments either
+            attached to the same PanelSettings, or with the same UIDocument parent.
+            */
+            public get sortingOrder(): number;
+            public set sortingOrder(value: number);
+        }
+        /** 
+        Represents a vertex of geometry for drawing content of VisualElement.
+        */
+        class Vertex extends System.ValueType
+        {
+        /** 
+            A special value representing the near clipping plane. Always use this value as the vertex position's z component when building 2D (flat) UI geometry.
+            */
+            public static nearZ : number/** 
+            Describes the vertex's position.
+            */
+            public position : UnityEngine.Vector3/** 
+            A color value for the vertex.
+            */
+            public tint : UnityEngine.Color32/** 
+            The UV coordinate of the vertex.
+            */
+            public uv : UnityEngine.Vector2
+        }
+        /** 
+        A class that represents the vertex and index data allocated for drawing the content of a VisualElement.
+        */
+        class MeshWriteData extends System.Object
+        {
+        /** 
+            The number of vertices successfully allocated for VisualElement content drawing.
+            */
+            public get vertexCount(): number;
+            /** 
+            The number of indices successfully allocated for VisualElement content drawing.
+            */
+            public get indexCount(): number;
+            /** 
+            A rectangle describing the UV region holding the texture passed to MeshGenerationContext.Allocate.
+            */
+            public get uvRegion(): UnityEngine.Rect;
+            /** 
+            Assigns the value of the next vertex of the allocated vertices list.
+            * @param vertex The value of the next vertex.
+            */
+            public SetNextVertex ($vertex: UnityEngine.UIElements.Vertex) : void
+            public SetNextIndex ($index: number) : void
+            /** 
+            Fills the values of the allocated vertices with values copied directly from an array.
+            When this method is called, it is not possible to use SetNextVertex to fill the allocated vertices array.
+            * @param vertices The array of vertices to copy from. The length of the array must match the allocated vertex count.
+            */
+            public SetAllVertices ($vertices: System.Array$1<UnityEngine.UIElements.Vertex>) : void
+            public SetAllVertices ($vertices: Unity.Collections.NativeSlice$1<UnityEngine.UIElements.Vertex>) : void
+            public SetAllIndices ($indices: System.Array$1<number>) : void
+            public SetAllIndices ($indices: Unity.Collections.NativeSlice$1<number>) : void
+        }
+        /** 
+        Unit of measurement used to express the value of an Angle.
+        */
+        enum AngleUnit
+        { Degree = 0, Gradian = 1, Radian = 2, Turn = 3 }
+        /** 
+        Represents an angle value.
+        */
+        class Angle extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.Angle>
+        {
+        /** 
+            The angle value.
+            */
+            public get value(): number;
+            public set value(value: number);
+            /** 
+            The unit of the value property.
+            */
+            public get unit(): UnityEngine.UIElements.AngleUnit;
+            public set unit(value: UnityEngine.UIElements.AngleUnit);
+            /** 
+            Creates a percentage Angle from a float.
+            * @returns The created angle. 
+            */
+            public static Degrees ($value: number) : UnityEngine.UIElements.Angle
+            public ToDegrees () : number
+            public static op_Implicit ($value: number) : UnityEngine.UIElements.Angle
+            public static op_Equality ($lhs: UnityEngine.UIElements.Angle, $rhs: UnityEngine.UIElements.Angle) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.Angle, $rhs: UnityEngine.UIElements.Angle) : boolean
+            public Equals ($other: UnityEngine.UIElements.Angle) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($value: number)
+            public constructor ($value: number, $unit: UnityEngine.UIElements.AngleUnit)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Describes a VisualElement background.
+        */
+        class Background extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.Background>
+        {
+        /** 
+            The texture to display as a background.
+            */
+            public get texture(): UnityEngine.Texture2D;
+            public set texture(value: UnityEngine.Texture2D);
+            /** 
+            The sprite to display as a background.
+            */
+            public get sprite(): UnityEngine.Sprite;
+            public set sprite(value: UnityEngine.Sprite);
+            /** 
+            The RenderTexture to display as a background.
+            */
+            public get renderTexture(): UnityEngine.RenderTexture;
+            public set renderTexture(value: UnityEngine.RenderTexture);
+            /** 
+            The VectorImage to display as a background.
+            */
+            public get vectorImage(): UnityEngine.UIElements.VectorImage;
+            public set vectorImage(value: UnityEngine.UIElements.VectorImage);
+            /** 
+            Creates a background from a Texture2D.
+            * @param t The texture to use as a background.
+            * @returns A new background object. 
+            */
+            public static FromTexture2D ($t: UnityEngine.Texture2D) : UnityEngine.UIElements.Background
+            /** 
+            Creates a background from a RenderTexture.
+            * @param rt The render texture to use as a background.
+            * @returns A new background object. 
+            */
+            public static FromRenderTexture ($rt: UnityEngine.RenderTexture) : UnityEngine.UIElements.Background
+            /** 
+            Creates a background from a Sprite.
+            * @param s The sprite to use as a background.
+            * @returns A new background object. 
+            */
+            public static FromSprite ($s: UnityEngine.Sprite) : UnityEngine.UIElements.Background
+            /** 
+            Creates a background from a VectorImage.
+            * @param vi The vector image to use as a background.
+            * @returns A new background object. 
+            */
+            public static FromVectorImage ($vi: UnityEngine.UIElements.VectorImage) : UnityEngine.UIElements.Background
+            public static op_Equality ($lhs: UnityEngine.UIElements.Background, $rhs: UnityEngine.UIElements.Background) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.Background, $rhs: UnityEngine.UIElements.Background) : boolean
+            public Equals ($other: UnityEngine.UIElements.Background) : boolean
+            public Equals ($obj: any) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        class CustomStyleProperty$1<T> extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.CustomStyleProperty$1<T>>
+        {
+        }
+        /** 
+        Represents a mathematical function that describes the rate at which a numerical value changes.
+        */
+        enum EasingMode
+        { Ease = 0, EaseIn = 1, EaseOut = 2, EaseInOut = 3, Linear = 4, EaseInSine = 5, EaseOutSine = 6, EaseInOutSine = 7, EaseInCubic = 8, EaseOutCubic = 9, EaseInOutCubic = 10, EaseInCirc = 11, EaseOutCirc = 12, EaseInOutCirc = 13, EaseInElastic = 14, EaseOutElastic = 15, EaseInOutElastic = 16, EaseInBack = 17, EaseOutBack = 18, EaseInOutBack = 19, EaseInBounce = 20, EaseOutBounce = 21, EaseInOutBounce = 22 }
+        /** 
+        Determines how intermediate values are calculated for a transition.
+        */
+        class EasingFunction extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.EasingFunction>
+        {
+        /** 
+            The value of the EasingMode.
+            */
+            public get mode(): UnityEngine.UIElements.EasingMode;
+            public set mode(value: UnityEngine.UIElements.EasingMode);
+            public static op_Implicit ($easingMode: UnityEngine.UIElements.EasingMode) : UnityEngine.UIElements.EasingFunction
+            public static op_Equality ($lhs: UnityEngine.UIElements.EasingFunction, $rhs: UnityEngine.UIElements.EasingFunction) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.EasingFunction, $rhs: UnityEngine.UIElements.EasingFunction) : boolean
+            public Equals ($other: UnityEngine.UIElements.EasingFunction) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($mode: UnityEngine.UIElements.EasingMode)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Describes a VisualElement font.
+        */
+        class FontDefinition extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.FontDefinition>
+        {
+        /** 
+            Font to use to display text. You cannot set this and FontDefinition.fontAsset at the same time.
+            */
+            public get font(): UnityEngine.Font;
+            public set font(value: UnityEngine.Font);
+            /** 
+            SDF font to use to display text. You cannot set this and FontDefinition.font at the same time.
+            */
+            public get fontAsset(): UnityEngine.TextCore.Text.FontAsset;
+            public set fontAsset(value: UnityEngine.TextCore.Text.FontAsset);
+            /** 
+            Create a FontDefinition from Font.
+            * @param f The font to use to display text.
+            * @returns A new FontDefinition object. 
+            */
+            public static FromFont ($f: UnityEngine.Font) : UnityEngine.UIElements.FontDefinition
+            /** 
+            Create a FontDefinition from FontAsset.
+            * @param f The SDF font to use to display text.
+            * @returns A new FontDefinition object. 
+            */
+            public static FromSDFFont ($f: UnityEngine.TextCore.Text.FontAsset) : UnityEngine.UIElements.FontDefinition
+            public Equals ($other: UnityEngine.UIElements.FontDefinition) : boolean
+            public Equals ($obj: any) : boolean
+            public static op_Equality ($left: UnityEngine.UIElements.FontDefinition, $right: UnityEngine.UIElements.FontDefinition) : boolean
+            public static op_Inequality ($left: UnityEngine.UIElements.FontDefinition, $right: UnityEngine.UIElements.FontDefinition) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        /** 
+        Describes how to interpret a Length value.
+        */
+        enum LengthUnit
+        { Pixel = 0, Percent = 1 }
+        /** 
+        Represents a distance value.
+        */
+        class Length extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.Length>
+        {
+        /** 
+            The length value.
+            */
+            public get value(): number;
+            public set value(value: number);
+            /** 
+            The unit of the value property.
+            */
+            public get unit(): UnityEngine.UIElements.LengthUnit;
+            public set unit(value: UnityEngine.UIElements.LengthUnit);
+            /** 
+            Creates a percentage Length from a float.
+            * @returns The created length. 
+            */
+            public static Percent ($value: number) : UnityEngine.UIElements.Length
+            public static op_Implicit ($value: number) : UnityEngine.UIElements.Length
+            public static op_Equality ($lhs: UnityEngine.UIElements.Length, $rhs: UnityEngine.UIElements.Length) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.Length, $rhs: UnityEngine.UIElements.Length) : boolean
+            public Equals ($other: UnityEngine.UIElements.Length) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($value: number)
+            public constructor ($value: number, $unit: UnityEngine.UIElements.LengthUnit)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Provides rotation information for visual elements that rotates around the TransformOrigin. Positive values represent clockwise rotation.
+        */
+        class Rotate extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.Rotate>
+        {
+        /** 
+            The angle applied by the rotation. Positive values represent clockwise rotation and negative values represent counterclockwise rotation.
+            */
+            public get angle(): UnityEngine.UIElements.Angle;
+            public set angle(value: UnityEngine.UIElements.Angle);
+            public static None () : UnityEngine.UIElements.Rotate
+            public static op_Equality ($lhs: UnityEngine.UIElements.Rotate, $rhs: UnityEngine.UIElements.Rotate) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.Rotate, $rhs: UnityEngine.UIElements.Rotate) : boolean
+            public Equals ($other: UnityEngine.UIElements.Rotate) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($angle: UnityEngine.UIElements.Angle)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Reprensents the scale applied as an element's transformations. The center point that will not move when the scaling is applied is the TransformOrigin.
+        */
+        class Scale extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.Scale>
+        {
+            public get value(): UnityEngine.Vector3;
+            public set value(value: UnityEngine.Vector3);
+            public static None () : UnityEngine.UIElements.Scale
+            public static op_Equality ($lhs: UnityEngine.UIElements.Scale, $rhs: UnityEngine.UIElements.Scale) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.Scale, $rhs: UnityEngine.UIElements.Scale) : boolean
+            public Equals ($other: UnityEngine.UIElements.Scale) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($scale: UnityEngine.Vector3)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a Background or a StyleKeyword.
+        */
+        class StyleBackground extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.Background>, System.IEquatable$1<UnityEngine.UIElements.StyleBackground>
+        {
+        /** 
+            The Background value.
+            */
+            public get value(): UnityEngine.UIElements.Background;
+            public set value(value: UnityEngine.UIElements.Background);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleBackground, $rhs: UnityEngine.UIElements.StyleBackground) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleBackground, $rhs: UnityEngine.UIElements.StyleBackground) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleBackground
+            public static op_Implicit ($v: UnityEngine.UIElements.Background) : UnityEngine.UIElements.StyleBackground
+            public static op_Implicit ($v: UnityEngine.Texture2D) : UnityEngine.UIElements.StyleBackground
+            public Equals ($other: UnityEngine.UIElements.StyleBackground) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.UIElements.Background)
+            public constructor ($v: UnityEngine.Texture2D)
+            public constructor ($v: UnityEngine.Sprite)
+            public constructor ($v: UnityEngine.UIElements.VectorImage)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        interface IStyleValue$1<T>
+        {
+        }
+        /** 
+        Keyword that can be used on any style value types.
+        */
+        enum StyleKeyword
+        { Undefined = 0, Null = 1, Auto = 2, None = 3, Initial = 4 }
+        /** 
+        Style value that can be either a Color or a StyleKeyword.
+        */
+        class StyleColor extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.Color>, System.IEquatable$1<UnityEngine.UIElements.StyleColor>
+        {
+        /** 
+            The Color value.
+            */
+            public get value(): UnityEngine.Color;
+            public set value(value: UnityEngine.Color);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleColor, $rhs: UnityEngine.UIElements.StyleColor) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleColor, $rhs: UnityEngine.UIElements.StyleColor) : boolean
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleColor, $rhs: UnityEngine.Color) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleColor, $rhs: UnityEngine.Color) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleColor
+            public static op_Implicit ($v: UnityEngine.Color) : UnityEngine.UIElements.StyleColor
+            public Equals ($other: UnityEngine.UIElements.StyleColor) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.Color)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a Cursor or a StyleKeyword.
+        */
+        class StyleCursor extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.Cursor>, System.IEquatable$1<UnityEngine.UIElements.StyleCursor>
+        {
+        /** 
+            The Cursor value.
+            */
+            public get value(): UnityEngine.UIElements.Cursor;
+            public set value(value: UnityEngine.UIElements.Cursor);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleCursor, $rhs: UnityEngine.UIElements.StyleCursor) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleCursor, $rhs: UnityEngine.UIElements.StyleCursor) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleCursor
+            public static op_Implicit ($v: UnityEngine.UIElements.Cursor) : UnityEngine.UIElements.StyleCursor
+            public Equals ($other: UnityEngine.UIElements.StyleCursor) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.UIElements.Cursor)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a float or a StyleKeyword.
+        */
+        class StyleFloat extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<number>, System.IEquatable$1<UnityEngine.UIElements.StyleFloat>
+        {
+        /** 
+            The float value.
+            */
+            public get value(): number;
+            public set value(value: number);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleFloat, $rhs: UnityEngine.UIElements.StyleFloat) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleFloat, $rhs: UnityEngine.UIElements.StyleFloat) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleFloat
+            public static op_Implicit ($v: number) : UnityEngine.UIElements.StyleFloat
+            public Equals ($other: UnityEngine.UIElements.StyleFloat) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: number)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a Font or a StyleKeyword.
+        */
+        class StyleFont extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.Font>, System.IEquatable$1<UnityEngine.UIElements.StyleFont>
+        {
+        /** 
+            The Font value.
+            */
+            public get value(): UnityEngine.Font;
+            public set value(value: UnityEngine.Font);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleFont, $rhs: UnityEngine.UIElements.StyleFont) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleFont, $rhs: UnityEngine.UIElements.StyleFont) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleFont
+            public static op_Implicit ($v: UnityEngine.Font) : UnityEngine.UIElements.StyleFont
+            public Equals ($other: UnityEngine.UIElements.StyleFont) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.Font)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a FontDefinition or a StyleKeyword.
+        */
+        class StyleFontDefinition extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.FontDefinition>, System.IEquatable$1<UnityEngine.UIElements.StyleFontDefinition>
+        {
+        /** 
+            The actual value of the definition.
+            */
+            public get value(): UnityEngine.UIElements.FontDefinition;
+            public set value(value: UnityEngine.UIElements.FontDefinition);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleFontDefinition
+            public static op_Implicit ($f: UnityEngine.UIElements.FontDefinition) : UnityEngine.UIElements.StyleFontDefinition
+            public Equals ($other: UnityEngine.UIElements.StyleFontDefinition) : boolean
+            public Equals ($obj: any) : boolean
+            public static op_Equality ($left: UnityEngine.UIElements.StyleFontDefinition, $right: UnityEngine.UIElements.StyleFontDefinition) : boolean
+            public static op_Inequality ($left: UnityEngine.UIElements.StyleFontDefinition, $right: UnityEngine.UIElements.StyleFontDefinition) : boolean
+            public constructor ($f: UnityEngine.UIElements.FontDefinition)
+            public constructor ($f: UnityEngine.TextCore.Text.FontAsset)
+            public constructor ($f: UnityEngine.Font)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either an integer or a StyleKeyword.
+        */
+        class StyleInt extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<number>, System.IEquatable$1<UnityEngine.UIElements.StyleInt>
+        {
+        /** 
+            The integer value.
+            */
+            public get value(): number;
+            public set value(value: number);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleInt, $rhs: UnityEngine.UIElements.StyleInt) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleInt, $rhs: UnityEngine.UIElements.StyleInt) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleInt
+            public static op_Implicit ($v: number) : UnityEngine.UIElements.StyleInt
+            public Equals ($other: UnityEngine.UIElements.StyleInt) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: number)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a Length or a StyleKeyword.
+        */
+        class StyleLength extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.Length>, System.IEquatable$1<UnityEngine.UIElements.StyleLength>
+        {
+        /** 
+            The Length value.
+            */
+            public get value(): UnityEngine.UIElements.Length;
+            public set value(value: UnityEngine.UIElements.Length);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleLength, $rhs: UnityEngine.UIElements.StyleLength) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleLength, $rhs: UnityEngine.UIElements.StyleLength) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleLength
+            public static op_Implicit ($v: number) : UnityEngine.UIElements.StyleLength
+            public static op_Implicit ($v: UnityEngine.UIElements.Length) : UnityEngine.UIElements.StyleLength
+            public Equals ($other: UnityEngine.UIElements.StyleLength) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: number)
+            public constructor ($v: UnityEngine.UIElements.Length)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Represents a style value that can be either a Rotate or a StyleKeyword.
+        */
+        class StyleRotate extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.Rotate>, System.IEquatable$1<UnityEngine.UIElements.StyleRotate>
+        {
+        /** 
+            The Rotate value.
+            */
+            public get value(): UnityEngine.UIElements.Rotate;
+            public set value(value: UnityEngine.UIElements.Rotate);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleRotate, $rhs: UnityEngine.UIElements.StyleRotate) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleRotate, $rhs: UnityEngine.UIElements.StyleRotate) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleRotate
+            public static op_Implicit ($v: UnityEngine.UIElements.Rotate) : UnityEngine.UIElements.StyleRotate
+            public Equals ($other: UnityEngine.UIElements.StyleRotate) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.UIElements.Rotate)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a Scale or a StyleKeyword.
+        */
+        class StyleScale extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.Scale>, System.IEquatable$1<UnityEngine.UIElements.StyleScale>
+        {
+        /** 
+            The Scale value.
+            */
+            public get value(): UnityEngine.UIElements.Scale;
+            public set value(value: UnityEngine.UIElements.Scale);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleScale, $rhs: UnityEngine.UIElements.StyleScale) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleScale, $rhs: UnityEngine.UIElements.StyleScale) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleScale
+            public static op_Implicit ($v: UnityEngine.UIElements.Scale) : UnityEngine.UIElements.StyleScale
+            public Equals ($other: UnityEngine.UIElements.StyleScale) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.UIElements.Scale)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a Translate or a StyleKeyword.
+        */
+        class StyleTranslate extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.Translate>, System.IEquatable$1<UnityEngine.UIElements.StyleTranslate>
+        {
+        /** 
+            The Translate value.
+            */
+            public get value(): UnityEngine.UIElements.Translate;
+            public set value(value: UnityEngine.UIElements.Translate);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleTranslate, $rhs: UnityEngine.UIElements.StyleTranslate) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleTranslate, $rhs: UnityEngine.UIElements.StyleTranslate) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleTranslate
+            public static op_Implicit ($v: UnityEngine.UIElements.Translate) : UnityEngine.UIElements.StyleTranslate
+            public Equals ($other: UnityEngine.UIElements.StyleTranslate) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.UIElements.Translate)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Represents a translation of the object. Percentage values in X and Y are relative to the width and height of the visual element where the style value is applied.
+        */
+        class Translate extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.Translate>
+        {
+            public get x(): UnityEngine.UIElements.Length;
+            public set x(value: UnityEngine.UIElements.Length);
+            public get y(): UnityEngine.UIElements.Length;
+            public set y(value: UnityEngine.UIElements.Length);
+            public get z(): number;
+            public set z(value: number);
+            public static None () : UnityEngine.UIElements.Translate
+            public static op_Equality ($lhs: UnityEngine.UIElements.Translate, $rhs: UnityEngine.UIElements.Translate) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.Translate, $rhs: UnityEngine.UIElements.Translate) : boolean
+            public Equals ($other: UnityEngine.UIElements.Translate) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($x: UnityEngine.UIElements.Length, $y: UnityEngine.UIElements.Length, $z: number)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Style value that can be either a TextShadow or a StyleKeyword.
+        */
+        class StyleTextShadow extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.TextShadow>, System.IEquatable$1<UnityEngine.UIElements.StyleTextShadow>
+        {
+        /** 
+            The TextShadow value.
+            */
+            public get value(): UnityEngine.UIElements.TextShadow;
+            public set value(value: UnityEngine.UIElements.TextShadow);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleTextShadow, $rhs: UnityEngine.UIElements.StyleTextShadow) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleTextShadow, $rhs: UnityEngine.UIElements.StyleTextShadow) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleTextShadow
+            public static op_Implicit ($v: UnityEngine.UIElements.TextShadow) : UnityEngine.UIElements.StyleTextShadow
+            public Equals ($other: UnityEngine.UIElements.StyleTextShadow) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.UIElements.TextShadow)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Represents a style value that can be either a TransformOrigin or a StyleKeyword.
+        */
+        class StyleTransformOrigin extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<UnityEngine.UIElements.TransformOrigin>, System.IEquatable$1<UnityEngine.UIElements.StyleTransformOrigin>
+        {
+        /** 
+            The TransformOrigin value.
+            */
+            public get value(): UnityEngine.UIElements.TransformOrigin;
+            public set value(value: UnityEngine.UIElements.TransformOrigin);
+            /** 
+            The style keyword.
+            */
+            public get keyword(): UnityEngine.UIElements.StyleKeyword;
+            public set keyword(value: UnityEngine.UIElements.StyleKeyword);
+            public static op_Equality ($lhs: UnityEngine.UIElements.StyleTransformOrigin, $rhs: UnityEngine.UIElements.StyleTransformOrigin) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.StyleTransformOrigin, $rhs: UnityEngine.UIElements.StyleTransformOrigin) : boolean
+            public static op_Implicit ($keyword: UnityEngine.UIElements.StyleKeyword) : UnityEngine.UIElements.StyleTransformOrigin
+            public static op_Implicit ($v: UnityEngine.UIElements.TransformOrigin) : UnityEngine.UIElements.StyleTransformOrigin
+            public Equals ($other: UnityEngine.UIElements.StyleTransformOrigin) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($v: UnityEngine.UIElements.TransformOrigin)
+            public constructor ($keyword: UnityEngine.UIElements.StyleKeyword)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Represents the point of origin where the (Scale, Translate, Rotate) transformations are applied.
+        */
+        class TransformOrigin extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.TransformOrigin>
+        {
+            public get x(): UnityEngine.UIElements.Length;
+            public set x(value: UnityEngine.UIElements.Length);
+            public get y(): UnityEngine.UIElements.Length;
+            public set y(value: UnityEngine.UIElements.Length);
+            public get z(): number;
+            public set z(value: number);
+            public static Initial () : UnityEngine.UIElements.TransformOrigin
+            public static op_Equality ($lhs: UnityEngine.UIElements.TransformOrigin, $rhs: UnityEngine.UIElements.TransformOrigin) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.TransformOrigin, $rhs: UnityEngine.UIElements.TransformOrigin) : boolean
+            public Equals ($other: UnityEngine.UIElements.TransformOrigin) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($x: UnityEngine.UIElements.Length, $y: UnityEngine.UIElements.Length, $z: number)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        /** 
+        Describes how to interpret a TimeValue.
+        */
+        enum TimeUnit
+        { Second = 0, Millisecond = 1 }
+        /** 
+        Represents a time value.
+        */
+        class TimeValue extends System.ValueType implements System.IEquatable$1<UnityEngine.UIElements.TimeValue>
+        {
+        /** 
+            The time value.
+            */
+            public get value(): number;
+            public set value(value: number);
+            /** 
+            The unit of the value property.
+            */
+            public get unit(): UnityEngine.UIElements.TimeUnit;
+            public set unit(value: UnityEngine.UIElements.TimeUnit);
+            public static op_Implicit ($value: number) : UnityEngine.UIElements.TimeValue
+            public static op_Equality ($lhs: UnityEngine.UIElements.TimeValue, $rhs: UnityEngine.UIElements.TimeValue) : boolean
+            public static op_Inequality ($lhs: UnityEngine.UIElements.TimeValue, $rhs: UnityEngine.UIElements.TimeValue) : boolean
+            public Equals ($other: UnityEngine.UIElements.TimeValue) : boolean
+            public Equals ($obj: any) : boolean
+            public constructor ($value: number)
+            public constructor ($value: number, $unit: UnityEngine.UIElements.TimeUnit)
+            public static Equals ($objA: any, $objB: any) : boolean
+            public constructor ()
+        }
+        class StyleEnum$1<T> extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<T>, System.IEquatable$1<UnityEngine.UIElements.StyleEnum$1<T>>
+        {
+        }
+        class StyleList$1<T> extends System.ValueType implements UnityEngine.UIElements.IStyleValue$1<System.Collections.Generic.List$1<T>>, System.IEquatable$1<UnityEngine.UIElements.StyleList$1<T>>
+        {
+        }
+        /** 
+        Factory for the root UXML element.
+        */
+        class UxmlRootElementFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.VisualElement, UnityEngine.UIElements.UxmlRootElementTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            Returns "UXML".
+            */
+            public get uxmlName(): string;
+            /** 
+            Returns the qualified name for this element.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Returns the empty string, as the root element can not appear anywhere else bit at the root of the document.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            Returns the empty string, as the root element can not appear anywhere else bit at the root of the document.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            Returns the empty string, as the root element can not appear anywhere else bit at the root of the document.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        /** 
+        Defines UxmlTraits for the UXML root element.
+        */
+        class UxmlRootElementTraits extends UnityEngine.UIElements.UxmlTraits
+        {
+        /** 
+            Returns an enumerable containing UxmlChildElementDescription(typeof(VisualElement)), since the root element can contain VisualElements.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+        /** 
+        Factory for the root Style element.
+        */
+        class UxmlStyleFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.VisualElement, UnityEngine.UIElements.UxmlStyleTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+            public get uxmlName(): string;
+            public get uxmlQualifiedName(): string;
+            public get substituteForTypeName(): string;
+            public get substituteForTypeNamespace(): string;
+            public get substituteForTypeQualifiedName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        /** 
+        Defines UxmlTraits for the Style tag.
+        */
+        class UxmlStyleTraits extends UnityEngine.UIElements.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+        /** 
+        Factory for the root Template element.
+        */
+        class UxmlTemplateFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.VisualElement, UnityEngine.UIElements.UxmlTemplateTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+            public get uxmlName(): string;
+            public get uxmlQualifiedName(): string;
+            public get substituteForTypeName(): string;
+            public get substituteForTypeNamespace(): string;
+            public get substituteForTypeQualifiedName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        /** 
+        Defines UxmlTraits for the Template tag.
+        */
+        class UxmlTemplateTraits extends UnityEngine.UIElements.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+        /** 
+        Factory for the root AttributeOverrides element.
+        */
+        class UxmlAttributeOverridesFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.VisualElement, UnityEngine.UIElements.UxmlAttributeOverridesTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+            public get uxmlName(): string;
+            public get uxmlQualifiedName(): string;
+            public get substituteForTypeName(): string;
+            public get substituteForTypeNamespace(): string;
+            public get substituteForTypeQualifiedName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        /** 
+        Defines UxmlTraits for the AttributeOverrides tag.
+        */
+        class UxmlAttributeOverridesTraits extends UnityEngine.UIElements.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+        /** 
+        Base class to restricts the value of an attribute.
+        */
+        class UxmlTypeRestriction extends System.Object implements System.IEquatable$1<UnityEngine.UIElements.UxmlTypeRestriction>
+        {
+        /** 
+            Indicates whether the current UxmlTypeRestriction object is equal to another object of the same type.
+            * @param other The object to compare with.
+            * @returns True if the otheer object is equal to this one. 
+            */
+            public Equals ($other: UnityEngine.UIElements.UxmlTypeRestriction) : boolean
+            public Equals ($obj: any) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        /** 
+        Describes a XML double attribute.
+        */
+        class UxmlDoubleAttributeDescription extends UnityEngine.UIElements.TypedUxmlAttributeDescription$1<number>
+        {
+        /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Tries to retrieve the value of this attribute from the attribute bag. Returns true if it is found, otherwise returns false.
+            * @param bag The bag of attributes.
+            * @param cc The context in which the values are retrieved.
+            * @param value The value of the attribute.
+            * @returns True if the value could be retrieved, false otherwise. 
+            */
+            public TryGetValueFromBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext, $value: $Ref<number>) : boolean
+            public constructor ()
+        }
+        /** 
+        Describes a XML long attribute.
+        */
+        class UxmlLongAttributeDescription extends UnityEngine.UIElements.TypedUxmlAttributeDescription$1<bigint>
+        {
+        /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Tries to retrieve the value of this attribute from the attribute bag. Returns true if it is found, otherwise returns false.
+            * @param bag The bag of attributes.
+            * @param cc The context in which the values are retrieved.
+            * @param value The value of the attribute.
+            * @returns True if the value could be retrieved, false otherwise. 
+            */
+            public TryGetValueFromBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext, $value: $Ref<bigint>) : boolean
+            public constructor ()
+        }
+        /** 
+        Describes a XML attribute representing a Color as a string.
+        */
+        class UxmlColorAttributeDescription extends UnityEngine.UIElements.TypedUxmlAttributeDescription$1<UnityEngine.Color>
+        {
+        /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Tries to retrieve the value of this attribute from the attribute bag. Returns true if it is found, otherwise returns false.
+            * @param bag The bag of attributes.
+            * @param cc The context in which the values are retrieved.
+            * @param value The value of the attribute.
+            * @returns True if the value could be retrieved, false otherwise. 
+            */
+            public TryGetValueFromBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext, $value: $Ref<UnityEngine.Color>) : boolean
+            public constructor ()
+        }
+        /** 
+        Describes a XML Hash128 attribute.
+        */
+        class UxmlHash128AttributeDescription extends UnityEngine.UIElements.TypedUxmlAttributeDescription$1<UnityEngine.Hash128>
+        {
+        /** 
+            The default value for the attribute, as a string.
+            */
+            public get defaultValueAsString(): string;
+            /** 
+            Tries to retrieve the value of this attribute from the attribute bag. Returns true if it is found, otherwise returns false.
+            * @param bag The bag of attributes.
+            * @param cc The context in which the values are retrieved.
+            * @param value The value of the attribute.
+            * @returns True if the value could be retrieved, false otherwise. 
+            */
+            public TryGetValueFromBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext, $value: $Ref<UnityEngine.Hash128>) : boolean
+            public constructor ()
+        }
+        /** 
+        Restricts the value of an attribute to match a regular expression.
+        */
+        class UxmlValueMatches extends UnityEngine.UIElements.UxmlTypeRestriction implements System.IEquatable$1<UnityEngine.UIElements.UxmlTypeRestriction>
+        {
+        /** 
+            The regular expression that should be matched by the value.
+            */
+            public get regex(): string;
+            public set regex(value: string);
+            public constructor ()
+        }
+        /** 
+        Restricts the value of an attribute to be within the specified bounds.
+        */
+        class UxmlValueBounds extends UnityEngine.UIElements.UxmlTypeRestriction implements System.IEquatable$1<UnityEngine.UIElements.UxmlTypeRestriction>
+        {
+        /** 
+            The minimum value for the attribute.
+            */
+            public get min(): string;
+            public set min(value: string);
+            /** 
+            The maximum value for the attribute.
+            */
+            public get max(): string;
+            public set max(value: string);
+            /** 
+            True if the bounds exclude min.
+            */
+            public get excludeMin(): boolean;
+            public set excludeMin(value: boolean);
+            /** 
+            True if the bounds exclude max.
+            */
+            public get excludeMax(): boolean;
+            public set excludeMax(value: boolean);
+            public constructor ()
+        }
+        /** 
+        Restricts the value of an attribute to be taken from a list of values.
+        */
+        class UxmlEnumeration extends UnityEngine.UIElements.UxmlTypeRestriction implements System.IEquatable$1<UnityEngine.UIElements.UxmlTypeRestriction>
+        {
+        /** 
+            The list of values the attribute can take.
+            */
+            public get values(): System.Collections.Generic.IEnumerable$1<string>;
+            public set values(value: System.Collections.Generic.IEnumerable$1<string>);
+            public constructor ()
+        }
+        class PanelEventHandler extends UnityEngine.EventSystems.UIBehaviour implements UnityEngine.EventSystems.ICancelHandler, UnityEngine.UIElements.IRuntimePanelComponent, UnityEngine.EventSystems.IEventSystemHandler, UnityEngine.EventSystems.IScrollHandler, UnityEngine.EventSystems.IPointerMoveHandler, UnityEngine.EventSystems.ISelectHandler, UnityEngine.EventSystems.IDeselectHandler, UnityEngine.EventSystems.IPointerDownHandler, UnityEngine.EventSystems.IMoveHandler, UnityEngine.EventSystems.IPointerUpHandler, UnityEngine.EventSystems.ISubmitHandler
+        {
+            public get panel(): UnityEngine.UIElements.IPanel;
+            public set panel(value: UnityEngine.UIElements.IPanel);
+            public OnSelect ($eventData: UnityEngine.EventSystems.BaseEventData) : void
+            public OnDeselect ($eventData: UnityEngine.EventSystems.BaseEventData) : void
+            public OnPointerMove ($eventData: UnityEngine.EventSystems.PointerEventData) : void
+            public OnPointerUp ($eventData: UnityEngine.EventSystems.PointerEventData) : void
+            public OnPointerDown ($eventData: UnityEngine.EventSystems.PointerEventData) : void
+            public OnSubmit ($eventData: UnityEngine.EventSystems.BaseEventData) : void
+            public OnCancel ($eventData: UnityEngine.EventSystems.BaseEventData) : void
+            public OnMove ($eventData: UnityEngine.EventSystems.AxisEventData) : void
+            public OnScroll ($eventData: UnityEngine.EventSystems.PointerEventData) : void
+            public constructor ()
+        }
+        interface IRuntimePanelComponent
+        {
+        }
+        class PanelRaycaster extends UnityEngine.EventSystems.BaseRaycaster implements UnityEngine.UIElements.IRuntimePanelComponent
+        {
+            public get panel(): UnityEngine.UIElements.IPanel;
+            public set panel(value: UnityEngine.UIElements.IPanel);
+            public get sortOrderPriority(): number;
+            public get renderOrderPriority(): number;
+            public get eventCamera(): UnityEngine.Camera;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.Experimental {
+        interface ITransitionAnimations
+        {
+            Start ($from: number, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            Start ($from: UnityEngine.Rect, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            Start ($from: UnityEngine.Color, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            Start ($from: UnityEngine.Vector3, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            Start ($from: UnityEngine.Vector2, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            Start ($from: UnityEngine.Quaternion, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param from Start value.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            Start ($from: UnityEngine.UIElements.Experimental.StyleValues, $to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            /** 
+            Starts a transition animation on this VisualElement.
+            * @param to End value.
+            * @param durationMs Duration of the transition in milliseconds.
+            * @returns The created animation object. 
+            */
+            Start ($to: UnityEngine.UIElements.Experimental.StyleValues, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.UIElements.Experimental.StyleValues>
+            Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, number>, $to: number, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, number>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>, $to: UnityEngine.Rect, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Rect>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>, $to: UnityEngine.Color, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Color>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Color>
+            Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>, $to: UnityEngine.Vector3, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector3>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>, $to: UnityEngine.Vector2, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Vector2>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            Start ($fromValueGetter: System.Func$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>, $to: UnityEngine.Quaternion, $durationMs: number, $onValueChanged: System.Action$2<UnityEngine.UIElements.VisualElement, UnityEngine.Quaternion>) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+            /** 
+            Triggers an animation changing this element's layout style values.
+            */
+            Layout ($to: UnityEngine.Rect, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Rect>
+            /** 
+            Triggers an animation changing this element's positioning style values.
+            */
+            TopLeft ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's size style values.
+            */
+            Size ($to: UnityEngine.Vector2, $durationMs: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector2>
+            /** 
+            Triggers an animation changing this element's transform scale.
+            */
+            Scale ($to: number, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<number>
+            /** 
+            Triggers an animation changing this element's transform position.
+            */
+            Position ($to: UnityEngine.Vector3, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Vector3>
+            /** 
+            Triggers an animation changing this element's transform rotation.
+            */
+            Rotation ($to: UnityEngine.Quaternion, $duration: number) : UnityEngine.UIElements.Experimental.ValueAnimation$1<UnityEngine.Quaternion>
+        }
+        /** 
+        A collection of easing curves to be used with ValueAnimations.
+        */
+        class Easing extends System.Object
+        {
+            public static Step ($t: number) : number
+            public static Linear ($t: number) : number
+            public static InSine ($t: number) : number
+            public static OutSine ($t: number) : number
+            public static InOutSine ($t: number) : number
+            public static InQuad ($t: number) : number
+            public static OutQuad ($t: number) : number
+            public static InOutQuad ($t: number) : number
+            public static InCubic ($t: number) : number
+            public static OutCubic ($t: number) : number
+            public static InOutCubic ($t: number) : number
+            public static InPower ($t: number, $power: number) : number
+            public static OutPower ($t: number, $power: number) : number
+            public static InOutPower ($t: number, $power: number) : number
+            public static InBounce ($t: number) : number
+            public static OutBounce ($t: number) : number
+            public static InOutBounce ($t: number) : number
+            public static InElastic ($t: number) : number
+            public static OutElastic ($t: number) : number
+            public static InOutElastic ($t: number) : number
+            public static InBack ($t: number) : number
+            public static OutBack ($t: number) : number
+            public static InOutBack ($t: number) : number
+            public static InBack ($t: number, $s: number) : number
+            public static OutBack ($t: number, $s: number) : number
+            public static InOutBack ($t: number, $s: number) : number
+            public static InCirc ($t: number) : number
+            public static OutCirc ($t: number) : number
+            public static InOutCirc ($t: number) : number
+        }
+        /** 
+        Container object used to animate multiple style values at once.
+        */
+        class StyleValues extends System.ValueType
+        {
+        /** 
+            Top distance from the element's box during layout.
+            */
+            public get top(): number;
+            public set top(value: number);
+            /** 
+            Left distance from the element's box during layout.
+            */
+            public get left(): number;
+            public set left(value: number);
+            /** 
+            Fixed width of an element for the layout.
+            */
+            public get width(): number;
+            public set width(value: number);
+            /** 
+            Fixed height of an element for the layout.
+            */
+            public get height(): number;
+            public set height(value: number);
+            /** 
+            Right distance from the element's box during layout.
+            */
+            public get right(): number;
+            public set right(value: number);
+            /** 
+            Bottom distance from the element's box during layout.
+            */
+            public get bottom(): number;
+            public set bottom(value: number);
+            /** 
+            Color to use when drawing the text of an element.
+            */
+            public get color(): UnityEngine.Color;
+            public set color(value: UnityEngine.Color);
+            /** 
+            Background color to paint in the element's box.
+            */
+            public get backgroundColor(): UnityEngine.Color;
+            public set backgroundColor(value: UnityEngine.Color);
+            /** 
+            Tinting color for the element's backgroundImage.
+            */
+            public get unityBackgroundImageTintColor(): UnityEngine.Color;
+            public set unityBackgroundImageTintColor(value: UnityEngine.Color);
+            /** 
+            Color of the border to paint inside the element's box.
+            */
+            public get borderColor(): UnityEngine.Color;
+            public set borderColor(value: UnityEngine.Color);
+            /** 
+            Space reserved for the left edge of the margin during the layout phase.
+            */
+            public get marginLeft(): number;
+            public set marginLeft(value: number);
+            /** 
+            Space reserved for the top edge of the margin during the layout phase.
+            */
+            public get marginTop(): number;
+            public set marginTop(value: number);
+            /** 
+            Space reserved for the right edge of the margin during the layout phase.
+            */
+            public get marginRight(): number;
+            public set marginRight(value: number);
+            /** 
+            Space reserved for the bottom edge of the margin during the layout phase.
+            */
+            public get marginBottom(): number;
+            public set marginBottom(value: number);
+            /** 
+            Space reserved for the left edge of the padding during the layout phase.
+            */
+            public get paddingLeft(): number;
+            public set paddingLeft(value: number);
+            /** 
+            Space reserved for the top edge of the padding during the layout phase.
+            */
+            public get paddingTop(): number;
+            public set paddingTop(value: number);
+            /** 
+            Space reserved for the right edge of the padding during the layout phase.
+            */
+            public get paddingRight(): number;
+            public set paddingRight(value: number);
+            /** 
+            Space reserved for the bottom edge of the padding during the layout phase.
+            */
+            public get paddingBottom(): number;
+            public set paddingBottom(value: number);
+            /** 
+            Space reserved for the left edge of the border during the layout phase.
+            */
+            public get borderLeftWidth(): number;
+            public set borderLeftWidth(value: number);
+            /** 
+            Space reserved for the right edge of the border during the layout phase.
+            */
+            public get borderRightWidth(): number;
+            public set borderRightWidth(value: number);
+            /** 
+            Space reserved for the top edge of the border during the layout phase.
+            */
+            public get borderTopWidth(): number;
+            public set borderTopWidth(value: number);
+            /** 
+            Space reserved for the bottom edge of the border during the layout phase.
+            */
+            public get borderBottomWidth(): number;
+            public set borderBottomWidth(value: number);
+            /** 
+            The radius of the top-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopLeftRadius(): number;
+            public set borderTopLeftRadius(value: number);
+            /** 
+            The radius of the top-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderTopRightRadius(): number;
+            public set borderTopRightRadius(value: number);
+            /** 
+            The radius of the bottom-left corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomLeftRadius(): number;
+            public set borderBottomLeftRadius(value: number);
+            /** 
+            The radius of the bottom-right corner when a rounded rectangle is drawn in the element's box.
+            */
+            public get borderBottomRightRadius(): number;
+            public set borderBottomRightRadius(value: number);
+            /** 
+            Specifies the transparency of an element.
+            */
+            public get opacity(): number;
+            public set opacity(value: number);
+            /** 
+            Specifies how much the item will grow relative to the rest of the flexible items inside the same container.
+            */
+            public get flexGrow(): number;
+            public set flexGrow(value: number);
+            /** 
+            Specifies how the item will shrink relative to the rest of the flexible items inside the same container.
+            */
+            public get flexShrink(): number;
+            public set flexShrink(value: number);
+        }
+        class ValueAnimation$1<T> extends System.Object implements UnityEngine.UIElements.Experimental.IValueAnimationUpdate, UnityEngine.UIElements.Experimental.IValueAnimation
+        {
+        /** 
+            Tells if the animation is currently active.
+            */
+            public get isRunning(): boolean;
+            /** 
+            Duration of the transition in milliseconds.
+            */
+            public get durationMs(): number;
+            public set durationMs(value: number);
+            public Start () : void
+            public Stop () : void
+            public Recycle () : void
+        }
+        interface IValueAnimationUpdate
+        {
+        }
+        interface IValueAnimation
+        {
+        /** 
+            Tells if the animation is currently active.
+            */
+            isRunning : boolean/** 
+            Duration of the transition in milliseconds.
+            */
+            durationMs : number
+            Start () : void
+            Stop () : void
+            Recycle () : void
+        }
+    }
+    namespace UnityEngine.UIElements.BindableElement {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.BindableElement, UnityEngine.UIElements.BindableElement.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.VisualElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.VisualElement {
+        class UxmlTraits extends UnityEngine.UIElements.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+        class Hierarchy extends System.ValueType
+        {
+            public get parent(): UnityEngine.UIElements.VisualElement;
+            public get childCount(): number;
+            public Add ($child: UnityEngine.UIElements.VisualElement) : void
+            public Insert ($index: number, $child: UnityEngine.UIElements.VisualElement) : void
+            public Remove ($child: UnityEngine.UIElements.VisualElement) : void
+            public RemoveAt ($index: number) : void
+            public Clear () : void
+            public get_Item ($key: number) : UnityEngine.UIElements.VisualElement
+            public IndexOf ($element: UnityEngine.UIElements.VisualElement) : number
+            public ElementAt ($index: number) : UnityEngine.UIElements.VisualElement
+            public Children () : System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.VisualElement>
+            public Sort ($comp: System.Comparison$1<UnityEngine.UIElements.VisualElement>) : void
+            public Equals ($other: UnityEngine.UIElements.VisualElement.Hierarchy) : boolean
+            public Equals ($obj: any) : boolean
+            public static op_Equality ($x: UnityEngine.UIElements.VisualElement.Hierarchy, $y: UnityEngine.UIElements.VisualElement.Hierarchy) : boolean
+            public static op_Inequality ($x: UnityEngine.UIElements.VisualElement.Hierarchy, $y: UnityEngine.UIElements.VisualElement.Hierarchy) : boolean
+            public static Equals ($objA: any, $objB: any) : boolean
+        }
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.VisualElement, UnityEngine.UIElements.VisualElement.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        enum MeasureMode
+        { Undefined = 0, Exactly = 1, AtMost = 2 }
+    }
+    namespace UnityEngine.UIElements.DropdownMenuAction {
+        enum Status
+        { None = 0, Normal = 1, Disabled = 2, Checked = 4, Hidden = 8 }
+    }
+    namespace UnityEngine.UIElements.IMGUIContainer {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.IMGUIContainer, UnityEngine.UIElements.IMGUIContainer.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.VisualElement.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.TemplateContainer {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.TemplateContainer, UnityEngine.UIElements.TemplateContainer.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+            public get uxmlName(): string;
+            public get uxmlQualifiedName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BindableElement.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.TextElement {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.TextElement, UnityEngine.UIElements.TextElement.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BindableElement.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.VisualElementFocusRing {
+        enum DefaultFocusOrder
+        { ChildOrder = 0, PositionXY = 1, PositionYX = 2 }
+    }
+    namespace UnityEngine.UIElements.Box {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$1<UnityEngine.UIElements.Box> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+    }
+    namespace UnityEngine.UIElements.Button {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.Button, UnityEngine.UIElements.Button.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.TextElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.DropdownField {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.DropdownField, UnityEngine.UIElements.DropdownField.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BaseField$1.UxmlTraits<string>
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.BaseField$1 {
+        class UxmlTraits<TValueType> extends UnityEngine.UIElements.BindableElement.UxmlTraits
+        {
+        }
+    }
+    namespace UnityEngine.UIElements.Foldout {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.Foldout, UnityEngine.UIElements.Foldout.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BindableElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.GroupBox {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.GroupBox, UnityEngine.UIElements.GroupBox.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BindableElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.HelpBox {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.HelpBox, UnityEngine.UIElements.HelpBox.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.VisualElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.Image {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.Image, UnityEngine.UIElements.Image.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.VisualElement.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.Label {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.Label, UnityEngine.UIElements.Label.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.TextElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.ListView {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.ListView, UnityEngine.UIElements.ListView.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BindableElement.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.MinMaxSlider {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.MinMaxSlider, UnityEngine.UIElements.MinMaxSlider.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BaseField$1.UxmlTraits<UnityEngine.Vector2>
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.PopupWindow {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.PopupWindow, UnityEngine.UIElements.PopupWindow.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.TextElement.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.AbstractProgressBar {
+        class UxmlTraits extends UnityEngine.UIElements.BindableElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.ProgressBar {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.ProgressBar, UnityEngine.UIElements.AbstractProgressBar.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+    }
+    namespace UnityEngine.UIElements.RadioButton {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.RadioButton, UnityEngine.UIElements.RadioButton.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BaseFieldTraits$2<boolean, UnityEngine.UIElements.UxmlBoolAttributeDescription>
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.RadioButtonGroup {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.RadioButtonGroup, UnityEngine.UIElements.RadioButtonGroup.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BaseFieldTraits$2<number, UnityEngine.UIElements.UxmlIntAttributeDescription>
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.RepeatButton {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.RepeatButton, UnityEngine.UIElements.RepeatButton.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.TextElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.Scroller {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.Scroller, UnityEngine.UIElements.Scroller.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.VisualElement.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.ScrollView {
+        enum TouchScrollBehavior
+        { Unrestricted = 0, Elastic = 1, Clamped = 2 }
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.ScrollView, UnityEngine.UIElements.ScrollView.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.VisualElement.UxmlTraits
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.Slider {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.Slider, UnityEngine.UIElements.Slider.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BaseFieldTraits$2<number, UnityEngine.UIElements.UxmlFloatAttributeDescription>
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.SliderInt {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.SliderInt, UnityEngine.UIElements.SliderInt.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BaseFieldTraits$2<number, UnityEngine.UIElements.UxmlIntAttributeDescription>
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.TextField {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.TextField, UnityEngine.UIElements.TextField.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.TextInputBaseField$1.UxmlTraits<string>
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.TextInputBaseField$1 {
+        class UxmlTraits<TValueType> extends UnityEngine.UIElements.BaseFieldTraits$2<string, UnityEngine.UIElements.UxmlStringAttributeDescription>
+        {
+        }
+    }
+    namespace UnityEngine.UIElements.Toggle {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.Toggle, UnityEngine.UIElements.Toggle.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.BaseFieldTraits$2<boolean, UnityEngine.UIElements.UxmlBoolAttributeDescription>
+        {
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.TwoPaneSplitView {
+        class UxmlFactory extends UnityEngine.UIElements.UxmlFactory$2<UnityEngine.UIElements.TwoPaneSplitView, UnityEngine.UIElements.TwoPaneSplitView.UxmlTraits> implements UnityEngine.UIElements.IUxmlFactory
+        {
+        /** 
+            The name of the UXML element read by the factory.
+            */
+            public get uxmlName(): string;
+            /** 
+            The namespace of the UXML element read by the factory.
+            */
+            public get uxmlNamespace(): string;
+            /** 
+            The fully qualified name of the UXML element read by the factory.
+            */
+            public get uxmlQualifiedName(): string;
+            /** 
+            Must return true if the UXML element attributes are not restricted to the values enumerated by uxmlAttributesDescription.
+            */
+            public get canHaveAnyAttribute(): boolean;
+            /** 
+            Describes the UXML attributes expected by the element. The attributes enumerated here will appear in the UXML schema.
+            */
+            public get uxmlAttributesDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlAttributeDescription>;
+            /** 
+            Describes the types of element that can appear as children of this element in a UXML file.
+            */
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            /** 
+            The type of element for which this element type can substitute for.
+            */
+            public get substituteForTypeName(): string;
+            /** 
+            The UXML namespace for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeNamespace(): string;
+            /** 
+            The fully qualified XML name for the type returned by substituteForTypeName.
+            */
+            public get substituteForTypeQualifiedName(): string;
+            public constructor ()
+            /** 
+            Returns true if the factory accepts the content of the attribute bag.
+            * @param bag The attribute bag.
+            * @returns True if the factory accepts the content of the attribute bag. False otherwise. 
+            */
+            public AcceptsAttributeBag ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : boolean
+            /** 
+            Instantiate and initialize an object of type T0.
+            * @param bag A bag of name-value pairs, one for each attribute of the UXML element. This can be used to initialize the properties of the created object.
+            * @param cc When the element is created as part of a template instance inserted in another document, this contains information about the insertion point.
+            * @returns The created object. 
+            */
+            public Create ($bag: UnityEngine.UIElements.IUxmlAttributes, $cc: UnityEngine.UIElements.CreationContext) : UnityEngine.UIElements.VisualElement
+        }
+        class UxmlTraits extends UnityEngine.UIElements.VisualElement.UxmlTraits
+        {
+            public get uxmlChildElementsDescription(): System.Collections.Generic.IEnumerable$1<UnityEngine.UIElements.UxmlChildElementDescription>;
+            public constructor ()
+        }
+    }
+    namespace UnityEngine.UIElements.NavigationMoveEvent {
+        enum Direction
+        { None = 0, Left = 1, Up = 2, Right = 3, Down = 4 }
+    }
+    namespace UnityEngine.UIElements.StylePropertyNameCollection {
+        class Enumerator extends System.ValueType implements System.Collections.Generic.IEnumerator$1<UnityEngine.UIElements.StylePropertyName>, System.Collections.IEnumerator, System.IDisposable
+        {
+            public get Current(): UnityEngine.UIElements.StylePropertyName;
+            public MoveNext () : boolean
+            public Reset () : void
+            public Dispose () : void
+        }
+    }
+    namespace UnityEngine.TextCore.Text {
+        class TextSettings extends UnityEngine.ScriptableObject
+        {
+        }
+        class FontAsset extends UnityEngine.TextCore.Text.TextAsset
+        {
+        }
+        class TextAsset extends UnityEngine.ScriptableObject
+        {
+        }
+    }
+    namespace UnityEngine.UIElements.UxmlAttributeDescription {
+        enum Use
+        { None = 0, Optional = 1, Prohibited = 2, Required = 3 }
+    }
     namespace UnityEngine.RemoteSettings {
         interface UpdatedEventHandler
         { () : void; }
@@ -31011,6 +44250,9 @@ declare module 'csharp' {
         {
         }
         interface IScrollHandler extends UnityEngine.EventSystems.IEventSystemHandler
+        {
+        }
+        interface IPointerMoveHandler extends UnityEngine.EventSystems.IEventSystemHandler
         {
         }
     }

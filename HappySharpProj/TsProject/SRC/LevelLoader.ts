@@ -1,19 +1,22 @@
-import { Entrance , System, UnityEngine } from "csharp"
+import { Entrance, System, UnityEngine } from "csharp"
 import { ILogicLevel } from "Interface/ILogicLevel";
-import {writeFileSync} from "fs"
+import { writeFileSync } from "fs"
+import { $typeof } from "puerts";
+import { type } from "os";
 
-class GUI extends UnityEngine.GUI{}
-class Rect extends UnityEngine.Rect{}
-class Application extends UnityEngine.Application{}
+class GUI extends UnityEngine.GUI { }
+class Rect extends UnityEngine.Rect { }
+class Application extends UnityEngine.Application { }
 /**
  * Level Loader Load IGameLevel and Run it
  * LevelLoader 加载 IGameLevel 并且运行关卡
  */
+
 class LevelLoader implements ILogicLevel {
 
     public bindTo: Entrance;
 
-    public args:string = ""
+    public args: string = ""
 
     constructor(bindTo: Entrance) {
         this.bindTo = bindTo;
@@ -25,29 +28,33 @@ class LevelLoader implements ILogicLevel {
     }
 
     public OnGUI() {
-        GUI.Box(new UnityEngine.Rect(10,10,100,120), "Test Menu");
-        if(GUI.Button(new Rect(20,40,80,20), "1280x720"))
-        {
-            UnityEngine.Screen.SetResolution(1280,720,UnityEngine.FullScreenMode.Windowed)
+        GUI.Box(new UnityEngine.Rect(10, 10, 100, 120), "Test Menu");
+        if (GUI.Button(new Rect(20, 40, 80, 20), "1280x720")) {
+            let doc: UnityEngine.UIElements.UIDocument =
+                UnityEngine.GameObject.Find("UIDocument").GetComponent($typeof(UnityEngine.UIElements.UIDocument)) as UnityEngine.UIElements.UIDocument
+
+            let text = new UnityEngine.UIElements.Label("测试一下")
+            text.style.fontSize = new UnityEngine.UIElements.StyleLength(40);
+            doc.rootVisualElement.Add(text);
         }
 
-        // 创建第二个按钮。
-        if(GUI.Button(new Rect(20,70,80,20),"Create File")) 
-        {
-            writeFileSync("CreateByNodejs.txt","Hello HappySharp: "+this.args,{
-                encoding:"utf-8"
-            })
-        }
+        // // 创建第二个按钮。
+        // if(GUI.Button(new Rect(20,70,80,20),"Create File")) 
+        // {
+        //     writeFileSync("CreateByNodejs.txt","Hello HappySharp: "+this.args,{
+        //         encoding:"utf-8"
+        //     })
+        // }
 
-        if(GUI.Button(new Rect(20,100,80,20),"Quit")) 
-        {
-            Application.Quit()
-        }
+        // if(GUI.Button(new Rect(20,100,80,20),"Quit")) 
+        // {
+        //     Application.Quit()
+        // }
 
-        GUI.Box(new UnityEngine.Rect(110,10,300,200), "State");
-        if(this.args != ""){
-            GUI.Label(new Rect (125, 25, 300, 80), this.args);
-        }
+        // GUI.Box(new UnityEngine.Rect(110,10,300,200), "State");
+        // if(this.args != ""){
+        //     GUI.Label(new Rect (125, 25, 300, 80), this.args);
+        // }
     }
 
     public OnStart() {
@@ -56,7 +63,9 @@ class LevelLoader implements ILogicLevel {
 
         this.args = System.Environment.CommandLine
 
-        UnityEngine.Screen.SetResolution(800,600,UnityEngine.FullScreenMode.Windowed)
+        //UnityEngine.Screen.SetResolution(800,600,UnityEngine.FullScreenMode.Windowed)
+
+
     }
 
     public OnFixedUpdate() {

@@ -3,7 +3,7 @@ using UnityEngine;
 using System.Collections;
 using NaughtyAttributes;
 using Puerts;
-
+using UnityEngine.UIElements;
 
 public class Entrance : MonoBehaviour
 {
@@ -27,6 +27,8 @@ public class Entrance : MonoBehaviour
     public Action JsOnDestroy;
 
     public Action JsOnGUI;
+
+    UIDocument UICanvas;
 
 
     private void OnEnable()
@@ -55,6 +57,9 @@ public class Entrance : MonoBehaviour
 
     void RunScript()
     {
+
+        //env.WaitDebugger();
+
         var Init = env.Eval<LoaderInit>("const m = require('" + ModName + "'); m.Init;");
         if (Init != null)
         {
@@ -62,12 +67,18 @@ public class Entrance : MonoBehaviour
         }
 
         if (JsStart != null) JsStart();
+
     }
 
 
     void Start()
     {
         RunScript();
+
+        UIDocument doc = GameObject.Find("UIDocument").GetComponent<UIDocument>();
+        var Text = new Label("测试一下");
+        Text.style.fontSize = new StyleLength(40);
+        doc.rootVisualElement.Add(Text);
     }
 
     void OnGUI()
