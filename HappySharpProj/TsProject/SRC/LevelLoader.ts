@@ -33,9 +33,7 @@ class LevelLoader implements ILogicLevel {
             let doc: UnityEngine.UIElements.UIDocument =
                 UnityEngine.GameObject.Find("UIDocument").GetComponent($typeof(UnityEngine.UIElements.UIDocument)) as UnityEngine.UIElements.UIDocument
 
-            let text = new UnityEngine.UIElements.Label("测试一下")
-            text.style.fontSize = new UnityEngine.UIElements.StyleLength(40);
-            doc.rootVisualElement.Add(text);
+            
         }
 
         // // 创建第二个按钮。

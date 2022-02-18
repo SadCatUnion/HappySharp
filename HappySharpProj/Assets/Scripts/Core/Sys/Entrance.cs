@@ -75,10 +75,11 @@ public class Entrance : MonoBehaviour
     {
         RunScript();
 
-        UIDocument doc = GameObject.Find("UIDocument").GetComponent<UIDocument>();
-        var Text = new Label("测试一下");
-        Text.style.fontSize = new StyleLength(40);
-        doc.rootVisualElement.Add(Text);
+        // UIDocument doc = GameObject.Find("UIDocument").GetComponent<UIDocument>();
+        // var Text = new Label("测试一下");
+        // Text.style.fontSize = new StyleLength(40);
+        // doc.rootVisualElement.Add(Text);
+        //UIDocument
     }
 
     void OnGUI()

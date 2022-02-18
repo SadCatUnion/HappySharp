@@ -4,7 +4,7 @@
   "description": "ts project",
   "scripts": {
     "build": "tsc -p tsconfig.json",
-    "postbuild": "node ./@tools/copyJsFile.js output ../Assets/StreamingAssets/",
+    "postbuild": "node ./@tools/copyJsFile.js output ../Assets/StreamingAssets/ && node ./@tools/copyJsFile.js UIPages ../Assets/StreamingAssets/",
     "Gen:Api": "node ./@tools/GenApi.js"
   },
   "devDependencies": {
