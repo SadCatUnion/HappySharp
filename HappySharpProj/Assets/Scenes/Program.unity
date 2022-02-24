@@ -422,30 +422,14 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1950545892}
-  - component: {fileID: 1950545891}
+  - component: {fileID: 1950545893}
   m_Layer: 5
-  m_Name: UIDocument
+  m_Name: UI
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &1950545891
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1950545890}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 19102, guid: 0000000000000000e000000000000000, type: 0}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_PanelSettings: {fileID: 11400000, guid: 9326aeb7e4d4591438b24b1a423e3269, type: 2}
-  m_ParentUI: {fileID: 0}
-  sourceAsset: {fileID: 0}
-  m_SortingOrder: 0
 --- !u!4 &1950545892
 Transform:
   m_ObjectHideFlags: 0
@@ -461,3 +445,46 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1950545893
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1950545890}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f3823c58ff231244a92c4f9877f7911e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  _camera: {fileID: 963194227}
+  _renderFeature: {fileID: 0}
+  _rendererType: 0
+  _platformType: 0
+  _iniSettings: {fileID: 0}
+  _initialConfiguration:
+    ImGuiConfig: 65
+    DoubleClickTime: 0.3
+    DoubleClickMaxDist: 6
+    DragThreshold: 6
+    KeyRepeatDelay: 0.25
+    KeyRepeatRate: 0.05
+    FontGlobalScale: 1
+    FontAllowUserScaling: 0
+    DisplayFramebufferScale: {x: 1, y: 1}
+    MouseDrawCursor: 0
+    TextCursorBlink: 0
+    ResizeFromEdges: 1
+    MoveFromTitleOnly: 1
+    ConfigMemoryCompactTimer: 1
+    ConfigDockingNoSplit: 0
+    ConfigDockingAlwaysTabBar: 0
+    ConfigDockingTransparentPayload: 0
+  _fontCustomInitializer:
+    m_PersistentCalls:
+      m_Calls: []
+  _fontAtlasConfiguration: {fileID: 0}
+  _shaders: {fileID: 11400000, guid: 828790bbaf6c9dc4fb368e73dad77e2a, type: 2}
+  _style: {fileID: 11400000, guid: fa603a3ba7bb88044960ddec45afedc6, type: 2}
+  _cursorShapes: {fileID: 11400000, guid: 4adc52962d5e61042a4ff16c7725b8b3, type: 2}
+  _doGlobalEvents: 1

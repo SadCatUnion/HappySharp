@@ -28,13 +28,10 @@ class LevelLoader implements ILogicLevel {
     }
 
     public OnGUI() {
-        GUI.Box(new UnityEngine.Rect(10, 10, 100, 120), "Test Menu");
-        if (GUI.Button(new Rect(20, 40, 80, 20), "1280x720")) {
-            let doc: UnityEngine.UIElements.UIDocument =
-                UnityEngine.GameObject.Find("UIDocument").GetComponent($typeof(UnityEngine.UIElements.UIDocument)) as UnityEngine.UIElements.UIDocument
-
+        // GUI.Box(new UnityEngine.Rect(10, 10, 100, 120), "Test Menu");
+        // if (GUI.Button(new Rect(20, 40, 80, 20), "1280x720")) {
             
-        }
+        // }
 
         // // 创建第二个按钮。
         // if(GUI.Button(new Rect(20,70,80,20),"Create File")) 

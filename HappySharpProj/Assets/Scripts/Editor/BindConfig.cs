@@ -4,6 +4,7 @@ using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Collections.Generic;
+using ImGuiNET;
 
 
 /// <summary>
@@ -63,7 +64,15 @@ public class PuertsConfig
                 "System",
                 "System.IO",
                 "System.Security",
-                "System.Security.Policy"
+                "System.Security.Policy",
+                "UImGui",
+                "UImGui.Events",
+                "UImGui.Platform",
+                "UImGui.Renderer",
+                "ImGuiNET",
+                "ImGuizmoNET",
+                "ImPlotNET",
+                "imnodesNET"
             };
             var unityTypes = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                               where !(assembly.ManifestModule is System.Reflection.Emit.ModuleBuilder)
@@ -188,6 +197,21 @@ public class PuertsConfig
         "System.Net.HttpListenerTimeoutManager",
         "System.Net.Sockets.SocketAsyncEventArgs",
         "UnityEngine.UIElements.ITransform",
-        "System.Version"
+        "System.Version",
+        "ImGuiNET.ImFontPtr",
+        "ImGuiNET.ImColorPtr",
+        "ImGuiNET.ImDrawChannelPtr",
+        "ImGuiNET.ImPtrVector",
+        "ImGuiNET.ImDrawCmdPtr",
+        "ImGuiNET.ImDrawDataPtr",
+        "ImGuiNET.ImDrawListPtr",
+        "ImGuiNET.ImFontAtlasPtr",
+        "ImGuiNET.ImFont"
     };
+
+    [Filter]
+    static bool Filter(System.Reflection.MemberInfo memberInfo)
+    {
+        return  (memberInfo.DeclaringType.Name == "ImGuiNET.ImGui" && memberInfo.Name == "GetAllocatorFunctions");
+    }
 }

@@ -4,9 +4,45 @@ using System.Collections;
 using NaughtyAttributes;
 using Puerts;
 using UnityEngine.UIElements;
+using UImGui;
+using ImGuiNET;
 
 public class Entrance : MonoBehaviour
 {
+    [SerializeField]
+    private float _sliderFloatValue = 1;
+
+    [SerializeField]
+    private string _inputText;
+    private void OnLayout(UImGui.UImGui obj)
+    {
+        
+        ImGui.Text($"Hello, world {123}");
+        if (ImGui.Button("Save"))
+        {
+            Debug.Log("Save");
+        }
+
+        ImGui.InputText("string", ref _inputText, 100);
+        ImGui.SliderFloat("float", ref _sliderFloatValue, 0.0f, 1.0f);
+    }
+
+    private void OnInitialize(UImGui.UImGui obj)
+    {
+        // runs after UImGui.OnEnable();
+    }
+
+    private void OnDeinitialize(UImGui.UImGui obj)
+    {
+        // runs after UImGui.OnDisable();
+    }
+
+    private void OnDisable()
+    {
+        UImGuiUtility.Layout -= OnLayout;
+        UImGuiUtility.OnInitialize -= OnInitialize;
+        UImGuiUtility.OnDeinitialize -= OnDeinitialize;
+    }
 
     static IEnumerator _WaitForSeconds(float count, Action CallBack)
     {
@@ -36,11 +72,6 @@ public class Entrance : MonoBehaviour
 
     }
 
-    private void OnDisable()
-    {
-        
-    }
-
     void Awake()
     {
 
@@ -48,10 +79,6 @@ public class Entrance : MonoBehaviour
         {
             env = GlobalJSEnv.Env;
         }
-
-    }
-
-    void OnLayout(){
 
     }
 
@@ -75,11 +102,10 @@ public class Entrance : MonoBehaviour
     {
         RunScript();
 
-        // UIDocument doc = GameObject.Find("UIDocument").GetComponent<UIDocument>();
-        // var Text = new Label("测试一下");
-        // Text.style.fontSize = new StyleLength(40);
-        // doc.rootVisualElement.Add(Text);
-        //UIDocument
+        var UIRoot = GameObject.Find("UI").GetComponent<UImGui.UImGui>();
+        UIRoot.Layout += OnLayout;
+        UIRoot.OnInitialize += OnInitialize;
+        UIRoot.OnDeinitialize += OnDeinitialize;
     }
 
     void OnGUI()
