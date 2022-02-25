@@ -18,6 +18,10 @@ interface ILogicLevel {
      * Call On Level Destroy
      */
     OnDestroy(): void
+
+    ImGUILayout():void
+    ImGUIInit():void
+    ImGUIDeInit():void
 }
 
 export {

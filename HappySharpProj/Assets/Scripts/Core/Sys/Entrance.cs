@@ -1,4 +1,5 @@
 using System;
+using System.IO;
 using UnityEngine;
 using System.Collections;
 using NaughtyAttributes;
@@ -16,25 +17,33 @@ public class Entrance : MonoBehaviour
     private string _inputText;
     private void OnLayout(UImGui.UImGui obj)
     {
+        ImGui.Begin("测试");
+        ImGui.End();
+        // ImGui.Text($"Hello, world {123}");
+        // if (ImGui.Button("Save"))
+        // {
+        //     Debug.Log("Save");
+        // }
         
-        ImGui.Text($"Hello, world {123}");
-        if (ImGui.Button("Save"))
-        {
-            Debug.Log("Save");
-        }
-
-        ImGui.InputText("string", ref _inputText, 100);
-        ImGui.SliderFloat("float", ref _sliderFloatValue, 0.0f, 1.0f);
+        // ImGui.InputText("string", ref _inputText, 100);
+        // ImGui.SliderFloat("float", ref _sliderFloatValue, 0.0f, 1.0f);
+        //JsImLayout?.Invoke();
     }
 
     private void OnInitialize(UImGui.UImGui obj)
     {
+        //ImGui.GetIO().Fonts.AddFontDefault();
+        var IO = ImGui.GetIO();
+        string path = Path.Combine(Application.streamingAssetsPath, "arialuni.ttf").Replace("\\","/");
+        IO.Fonts.AddFontFromFileTTF(path, 20.0f, null, IO.Fonts.GetGlyphRangesChineseFull());
         // runs after UImGui.OnEnable();
+        JsImInit?.Invoke();
     }
 
     private void OnDeinitialize(UImGui.UImGui obj)
     {
         // runs after UImGui.OnDisable();
+        JsImDeinit?.Invoke();
     }
 
     private void OnDisable()
@@ -66,6 +75,9 @@ public class Entrance : MonoBehaviour
 
     UIDocument UICanvas;
 
+    public Action JsImInit;
+    public Action JsImLayout;
+    public Action JsImDeinit;
 
     private void OnEnable()
     {
@@ -80,6 +92,8 @@ public class Entrance : MonoBehaviour
             env = GlobalJSEnv.Env;
         }
 
+        //ImGui.GetIO().Fonts.AddFontDefault();
+        
     }
 
     void RunScript()
@@ -95,17 +109,17 @@ public class Entrance : MonoBehaviour
 
         if (JsStart != null) JsStart();
 
+        var UIRoot = GameObject.Find("UI").GetComponent<UImGui.UImGui>();
+        UIRoot.Layout += OnLayout;
+        UIRoot.OnInitialize += OnInitialize;
+        UIRoot.OnDeinitialize += OnDeinitialize;
+
     }
 
 
     void Start()
     {
         RunScript();
-
-        var UIRoot = GameObject.Find("UI").GetComponent<UImGui.UImGui>();
-        UIRoot.Layout += OnLayout;
-        UIRoot.OnInitialize += OnInitialize;
-        UIRoot.OnDeinitialize += OnDeinitialize;
     }
 
     void OnGUI()

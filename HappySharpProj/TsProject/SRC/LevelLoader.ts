@@ -1,4 +1,4 @@
-import { Entrance, System, UnityEngine } from "csharp"
+import { Entrance, ImGUIWrap, System, UnityEngine } from "csharp"
 import { ILogicLevel } from "Interface/ILogicLevel";
 import { writeFileSync } from "fs"
 import { $typeof } from "puerts";
@@ -25,6 +25,24 @@ class LevelLoader implements ILogicLevel {
         this.bindTo.JsOnDestroy = () => this.OnDestroy();
         this.bindTo.JsFixedUpdate = () => this.OnFixedUpdate();
         this.bindTo.JsOnGUI = () => this.OnGUI();
+
+        this.bindTo.JsImLayout = ()=>this.ImGUILayout()
+        this.bindTo.JsImInit = ()=>this.ImGUIInit()
+        this.bindTo.JsImDeinit = ()=>this.ImGUIDeInit()
+    }
+    ImGUILayout(): void {
+        ImGUIWrap.Begin("自定义窗口")
+        ImGUIWrap.Text("Hello, DearImGUI");
+        if(ImGUIWrap.Button("Click Me To Log!!!")){
+            console.warn("Click Click")
+        }
+        ImGUIWrap.End()
+    }
+    ImGUIInit(): void {
+        
+    }
+    ImGUIDeInit(): void {
+        
     }
 
     public OnGUI() {

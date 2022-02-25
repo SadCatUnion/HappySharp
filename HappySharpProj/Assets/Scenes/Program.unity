@@ -345,6 +345,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a0841a6e81a06e41b5a59e2e85f42e7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _sliderFloatValue: 1
+  _inputText: 
   ModName: LevelLoader
 --- !u!1 &1386225150
 GameObject:
