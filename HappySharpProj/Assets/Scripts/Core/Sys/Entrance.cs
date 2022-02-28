@@ -17,25 +17,11 @@ public class Entrance : MonoBehaviour
     private string _inputText;
     private void OnLayout(UImGui.UImGui obj)
     {
-        ImGui.Begin("测试");
-        ImGui.End();
-        // ImGui.Text($"Hello, world {123}");
-        // if (ImGui.Button("Save"))
-        // {
-        //     Debug.Log("Save");
-        // }
-        
-        // ImGui.InputText("string", ref _inputText, 100);
-        // ImGui.SliderFloat("float", ref _sliderFloatValue, 0.0f, 1.0f);
-        //JsImLayout?.Invoke();
+        JsImLayout?.Invoke();
     }
 
     private void OnInitialize(UImGui.UImGui obj)
     {
-        //ImGui.GetIO().Fonts.AddFontDefault();
-        var IO = ImGui.GetIO();
-        string path = Path.Combine(Application.streamingAssetsPath, "arialuni.ttf").Replace("\\","/");
-        IO.Fonts.AddFontFromFileTTF(path, 20.0f, null, IO.Fonts.GetGlyphRangesChineseFull());
         // runs after UImGui.OnEnable();
         JsImInit?.Invoke();
     }
@@ -48,9 +34,9 @@ public class Entrance : MonoBehaviour
 
     private void OnDisable()
     {
-        UImGuiUtility.Layout -= OnLayout;
-        UImGuiUtility.OnInitialize -= OnInitialize;
-        UImGuiUtility.OnDeinitialize -= OnDeinitialize;
+        UIRoot.Layout -= OnLayout;
+        UIRoot.OnInitialize -= OnInitialize;
+        UIRoot.OnDeinitialize -= OnDeinitialize;
     }
 
     static IEnumerator _WaitForSeconds(float count, Action CallBack)
@@ -79,6 +65,7 @@ public class Entrance : MonoBehaviour
     public Action JsImLayout;
     public Action JsImDeinit;
 
+    private UImGui.UImGui UIRoot;
     private void OnEnable()
     {
 
@@ -109,11 +96,11 @@ public class Entrance : MonoBehaviour
 
         if (JsStart != null) JsStart();
 
-        var UIRoot = GameObject.Find("UI").GetComponent<UImGui.UImGui>();
-        UIRoot.Layout += OnLayout;
+        UIRoot = GameObject.Find("UI").GetComponent<UImGui.UImGui>();
         UIRoot.OnInitialize += OnInitialize;
+        UIRoot.Layout += OnLayout;
         UIRoot.OnDeinitialize += OnDeinitialize;
-
+        
     }
 
 

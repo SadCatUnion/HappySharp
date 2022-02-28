@@ -31,12 +31,13 @@ class LevelLoader implements ILogicLevel {
         this.bindTo.JsImDeinit = ()=>this.ImGUIDeInit()
     }
     ImGUILayout(): void {
-        ImGUIWrap.Begin("自定义窗口")
-        ImGUIWrap.Text("Hello, DearImGUI");
-        if(ImGUIWrap.Button("Click Me To Log!!!")){
-            console.warn("Click Click")
-        }
-        ImGUIWrap.End()
+        // ImGUIWrap.Begin("自定义窗口")
+        // ImGUIWrap.Text("Hello, DearImGUI");
+        // if(ImGUIWrap.Button("Click Me To Log!!!")){
+        //     console.warn("Click Click")
+        // }
+        // ImGUIWrap.End()
+        ImGUIWrap.ShowDemoWindow()
     }
     ImGUIInit(): void {
         
@@ -46,28 +47,7 @@ class LevelLoader implements ILogicLevel {
     }
 
     public OnGUI() {
-        // GUI.Box(new UnityEngine.Rect(10, 10, 100, 120), "Test Menu");
-        // if (GUI.Button(new Rect(20, 40, 80, 20), "1280x720")) {
-            
-        // }
-
-        // // 创建第二个按钮。
-        // if(GUI.Button(new Rect(20,70,80,20),"Create File")) 
-        // {
-        //     writeFileSync("CreateByNodejs.txt","Hello HappySharp: "+this.args,{
-        //         encoding:"utf-8"
-        //     })
-        // }
-
-        // if(GUI.Button(new Rect(20,100,80,20),"Quit")) 
-        // {
-        //     Application.Quit()
-        // }
-
-        // GUI.Box(new UnityEngine.Rect(110,10,300,200), "State");
-        // if(this.args != ""){
-        //     GUI.Label(new Rect (125, 25, 300, 80), this.args);
-        // }
+        
     }
 
     public OnStart() {
@@ -75,9 +55,6 @@ class LevelLoader implements ILogicLevel {
         console.warn("Start Load Level ");
 
         this.args = System.Environment.CommandLine
-
-        //UnityEngine.Screen.SetResolution(800,600,UnityEngine.FullScreenMode.Windowed)
-
 
     }
 

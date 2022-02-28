@@ -622,8 +622,12 @@ public unsafe static class ImGUIWrap
     // public static void SetWindowSize(string name, Vector2 size, ImGuiCond cond);
     // public static void ShowAboutWindow();
     // public static void ShowAboutWindow(ref bool p_open);
-    // public static void ShowDemoWindow(ref bool p_open);
-    // public static void ShowDemoWindow();
+    public static void ShowDemoWindow(ref bool p_open){
+        ImGui.ShowDemoWindow(ref p_open);
+    }
+    public static void ShowDemoWindow(){
+        ImGui.ShowDemoWindow();
+    }
     // public static void ShowFontSelector(string label);
     // public static void ShowMetricsWindow();
     // public static void ShowMetricsWindow(ref bool p_open);

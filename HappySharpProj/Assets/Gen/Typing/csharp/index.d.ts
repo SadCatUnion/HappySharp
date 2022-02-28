@@ -44463,6 +44463,11 @@ declare module 'csharp' {
             public constructor ($debugRoot: string)
             public constructor ()
         }
+        class FontInitial extends UnityEngine.MonoBehaviour
+        {
+            public AddChineseFont ($io: ImGuiNET.ImGuiIOPtr) : void
+            public constructor ()
+        }
         class ImGUIWrap extends System.Object
         {
             public static AlignTextToFramePadding () : void
@@ -44482,6 +44487,8 @@ declare module 'csharp' {
             public static InputText ($label: string, $buf: System.Array$1<number>, $buf_size: number, $flags: ImGuiNET.ImGuiInputTextFlags) : boolean
             public static InputTextMultiline ($label: string, $input: $Ref<string>, $maxLength: number, $size: UnityEngine.Vector2, $flags: ImGuiNET.ImGuiInputTextFlags) : boolean
             public static InputTextMultiline ($label: string, $input: $Ref<string>, $maxLength: number, $size: UnityEngine.Vector2) : boolean
+            public static ShowDemoWindow ($p_open: $Ref<boolean>) : void
+            public static ShowDemoWindow () : void
             public static SliderFloat ($label: string, $v: $Ref<number>, $v_min: number, $v_max: number, $format: string, $flags: ImGuiNET.ImGuiSliderFlags) : boolean
             public static SliderFloat ($label: string, $v: $Ref<number>, $v_min: number, $v_max: number) : boolean
             public static SliderFloat ($label: string, $v: $Ref<number>, $v_min: number, $v_max: number, $format: string) : boolean
@@ -44534,6 +44541,9 @@ declare module 'csharp' {
         }
     }
     namespace ImGuiNET {
+        class ImGuiIOPtr extends System.ValueType
+        {
+        }
         enum ImGuiDir
         { None = -1, Left = 0, Right = 1, Up = 2, Down = 3, COUNT = 4 }
         enum ImGuiWindowFlags

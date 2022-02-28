@@ -311,6 +311,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1246176557}
   - component: {fileID: 1246176558}
+  - component: {fileID: 1246176559}
   m_Layer: 0
   m_Name: System
   m_TagString: Untagged
@@ -348,6 +349,18 @@ MonoBehaviour:
   _sliderFloatValue: 1
   _inputText: 
   ModName: LevelLoader
+--- !u!114 &1246176559
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1246176556}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f36940933c2adbc468bb1d0b67711ef8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &1386225150
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,7 +497,19 @@ MonoBehaviour:
     ConfigDockingTransparentPayload: 0
   _fontCustomInitializer:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1246176559}
+        m_TargetAssemblyTypeName: FontInitial, Assembly-CSharp
+        m_MethodName: AddChineseFont
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
   _fontAtlasConfiguration: {fileID: 0}
   _shaders: {fileID: 11400000, guid: 828790bbaf6c9dc4fb368e73dad77e2a, type: 2}
   _style: {fileID: 11400000, guid: fa603a3ba7bb88044960ddec45afedc6, type: 2}
