@@ -44465,10 +44465,17 @@ declare module 'csharp' {
         }
         class FontInitial extends UnityEngine.MonoBehaviour
         {
-            public AddChineseFont ($io: ImGuiNET.ImGuiIOPtr) : void
+            public FontInitName : string
+            public AddUTF8Font ($io: ImGuiNET.ImGuiIOPtr) : void
             public constructor ()
         }
-        class ImGUIWrap extends System.Object
+        class FontHelper extends System.Object
+        {
+            public static io : ImGuiNET.ImGuiIOPtr
+            public static AddFontDefault ($io: ImGuiNET.ImGuiIOPtr) : void
+            public static AddFont ($path: string, $size: number, $range: FontHelper.FontRange) : void
+        }
+        class GUITool extends System.Object
         {
             public static AlignTextToFramePadding () : void
             public static ArrowButton ($str_id: string, $dir: ImGuiNET.ImGuiDir) : boolean
@@ -44479,6 +44486,8 @@ declare module 'csharp' {
             public static Button ($label: string, $size: UnityEngine.Vector2) : boolean
             public static Button ($label: string) : boolean
             public static End () : void
+            public static Indent () : void
+            public static Indent ($indent_w: number) : void
             public static InputText ($label: string, $buf: System.Array$1<number>, $buf_size: number) : boolean
             public static InputText ($label: string, $input: $Ref<string>, $maxLength: number, $flags: ImGuiNET.ImGuiInputTextFlags) : boolean
             public static InputText ($label: string, $input: $Ref<string>, $maxLength: number) : boolean
@@ -44487,12 +44496,29 @@ declare module 'csharp' {
             public static InputText ($label: string, $buf: System.Array$1<number>, $buf_size: number, $flags: ImGuiNET.ImGuiInputTextFlags) : boolean
             public static InputTextMultiline ($label: string, $input: $Ref<string>, $maxLength: number, $size: UnityEngine.Vector2, $flags: ImGuiNET.ImGuiInputTextFlags) : boolean
             public static InputTextMultiline ($label: string, $input: $Ref<string>, $maxLength: number, $size: UnityEngine.Vector2) : boolean
+            public static MenuItem ($label: string, $enabled: boolean) : boolean
+            public static MenuItem ($label: string, $shortcut: string, $selected: boolean) : boolean
+            public static MenuItem ($label: string, $shortcut: string, $p_selected: $Ref<boolean>) : boolean
+            public static MenuItem ($label: string, $shortcut: string, $p_selected: $Ref<boolean>, $enabled: boolean) : boolean
+            public static MenuItem ($label: string) : boolean
+            public static MenuItem ($label: string, $shortcut: string) : boolean
+            public static MenuItem ($label: string, $shortcut: string, $selected: boolean, $enabled: boolean) : boolean
+            public static SameLine ($offset_from_start_x: number, $spacing: number) : void
+            public static SameLine ($offset_from_start_x: number) : void
+            public static SameLine () : void
+            public static Separator () : void
             public static ShowDemoWindow ($p_open: $Ref<boolean>) : void
             public static ShowDemoWindow () : void
             public static SliderFloat ($label: string, $v: $Ref<number>, $v_min: number, $v_max: number, $format: string, $flags: ImGuiNET.ImGuiSliderFlags) : boolean
             public static SliderFloat ($label: string, $v: $Ref<number>, $v_min: number, $v_max: number) : boolean
             public static SliderFloat ($label: string, $v: $Ref<number>, $v_min: number, $v_max: number, $format: string) : boolean
+            public static SmallButton ($label: string) : boolean
+            public static Spacing () : void
+            public static StyleColorsClassic () : void
+            public static StyleColorsDark () : void
+            public static StyleColorsLight () : void
             public static Text ($fmt: string) : void
+            public static TextColored ($col: UnityEngine.Vector4, $fmt: string) : void
         }
         namespace Puerts {
         class JsEnv extends System.Object implements System.IDisposable
@@ -44552,6 +44578,10 @@ declare module 'csharp' {
         { None = 0, CharsDecimal = 1, CharsHexadecimal = 2, CharsUppercase = 4, CharsNoBlank = 8, AutoSelectAll = 16, EnterReturnsTrue = 32, CallbackCompletion = 64, CallbackHistory = 128, CallbackAlways = 256, CallbackCharFilter = 512, AllowTabInput = 1024, CtrlEnterForNewLine = 2048, NoHorizontalScroll = 4096, AlwaysOverwrite = 8192, ReadOnly = 16384, Password = 32768, NoUndoRedo = 65536, CharsScientific = 131072, CallbackResize = 262144, CallbackEdit = 524288 }
         enum ImGuiSliderFlags
         { None = 0, AlwaysClamp = 16, Logarithmic = 32, NoRoundToFormat = 64, NoInput = 128, InvalidMask = 1879048207 }
+    }
+    namespace FontHelper {
+        enum FontRange
+        { ChineseSimple = 0, ChineseFull = 1, Japanese = 2, Korean = 3, Thai = 4, Vietnamese = 5 }
     }
     namespace Puerts.JsEnv {
         interface JsEnvCreateCallback

@@ -4,7 +4,7 @@ using UnityEngine;
 using ImGuiNET;
 using System;
 
-public unsafe static class ImGUIWrap
+public unsafe static class GUITool
 {
     public static void AlignTextToFramePadding()
     {
@@ -329,8 +329,12 @@ public unsafe static class ImGUIWrap
     // public static bool ImageButton(IntPtr user_texture_id, Vector2 size, Vector2 uv0, Vector2 uv1);
     // public static bool ImageButton(IntPtr user_texture_id, Vector2 size, Vector2 uv0, Vector2 uv1, int frame_padding);
     // public static bool ImageButton(IntPtr user_texture_id, Vector2 size, Vector2 uv0, Vector2 uv1, int frame_padding, Vector4 bg_col);
-    // public static void Indent();
-    // public static void Indent(float indent_w);
+    public static void Indent(){
+        ImGui.Indent();
+    }
+    public static void Indent(float indent_w){
+        ImGui.Indent(indent_w);
+    }
     // public static bool InputDouble(string label, ref double v, double step, double step_fast, string format, ImGuiInputTextFlags flags);
     // public static bool InputDouble(string label, ref double v);
     // public static bool InputDouble(string label, ref double v, double step);
@@ -473,13 +477,27 @@ public unsafe static class ImGUIWrap
     // public static void LogToTTY();
     // public static IntPtr MemAlloc(uint size);
     // public static void MemFree(IntPtr ptr);
-    // public static bool MenuItem(string label, bool enabled);
-    // public static bool MenuItem(string label, string shortcut, bool selected);
-    // public static bool MenuItem(string label, string shortcut, ref bool p_selected);
-    // public static bool MenuItem(string label, string shortcut, ref bool p_selected, bool enabled);
-    // public static bool MenuItem(string label);
-    // public static bool MenuItem(string label, string shortcut);
-    // public static bool MenuItem(string label, string shortcut, bool selected, bool enabled);
+    public static bool MenuItem(string label, bool enabled){
+        return ImGui.MenuItem(label,enabled);
+    }
+    public static bool MenuItem(string label, string shortcut, bool selected){
+        return ImGui.MenuItem(label,shortcut,selected);
+    }
+    public static bool MenuItem(string label, string shortcut, ref bool p_selected){
+        return ImGui.MenuItem(label,shortcut,ref p_selected);
+    }
+    public static bool MenuItem(string label, string shortcut, ref bool p_selected, bool enabled){
+        return ImGui.MenuItem(label,shortcut,ref p_selected,enabled);
+    }
+    public static bool MenuItem(string label){
+        return ImGui.MenuItem(label);
+    }
+    public static bool MenuItem(string label, string shortcut){
+        return ImGui.MenuItem(label,shortcut);
+    }
+    public static bool MenuItem(string label, string shortcut, bool selected, bool enabled){
+        return ImGui.MenuItem(label,shortcut,selected,enabled);
+    }
     // public static void NewFrame();
     // public static void NewLine();
     // public static void NextColumn();
@@ -540,9 +558,15 @@ public unsafe static class ImGUIWrap
     // public static void RenderPlatformWindowsDefault(IntPtr platform_render_arg, IntPtr renderer_render_arg);
     // public static void ResetMouseDragDelta(ImGuiMouseButton button);
     // public static void ResetMouseDragDelta();
-    // public static void SameLine(float offset_from_start_x, float spacing);
-    // public static void SameLine(float offset_from_start_x);
-    // public static void SameLine();
+    public static void SameLine(float offset_from_start_x, float spacing){
+        ImGui.SameLine(offset_from_start_x,spacing);
+    }
+    public static void SameLine(float offset_from_start_x){
+        ImGui.SameLine(offset_from_start_x);
+    }
+    public static void SameLine(){
+        ImGui.SameLine();
+    }
     // public static void SaveIniSettingsToDisk(string ini_filename);
     // public static string SaveIniSettingsToMemory();
     // public static string SaveIniSettingsToMemory(out uint out_ini_size);
@@ -553,7 +577,9 @@ public unsafe static class ImGUIWrap
     // public static bool Selectable(string label, ref bool p_selected);
     // public static bool Selectable(string label, ref bool p_selected, ImGuiSelectableFlags flags);
     // public static bool Selectable(string label, ref bool p_selected, ImGuiSelectableFlags flags, Vector2 size);
-    // public static void Separator();
+    public static void Separator(){
+        ImGui.Separator();
+    }
     // public static void SetAllocatorFunctions(IntPtr alloc_func, IntPtr free_func);
     // public static void SetAllocatorFunctions(IntPtr alloc_func, IntPtr free_func, IntPtr user_data);
     // public static void SetClipboardText(string text);
@@ -676,14 +702,24 @@ public unsafe static class ImGUIWrap
     // public static bool SliderScalarN(string label, ImGuiDataType data_type, IntPtr p_data, int components, IntPtr p_min, IntPtr p_max);
     // public static bool SliderScalarN(string label, ImGuiDataType data_type, IntPtr p_data, int components, IntPtr p_min, IntPtr p_max, string format);
     // public static bool SliderScalarN(string label, ImGuiDataType data_type, IntPtr p_data, int components, IntPtr p_min, IntPtr p_max, string format, ImGuiSliderFlags flags);
-    // public static bool SmallButton(string label);
-    // public static void Spacing();
-    // public static void StyleColorsClassic(ImGuiStylePtr dst);
-    // public static void StyleColorsClassic();
-    // public static void StyleColorsDark(ImGuiStylePtr dst);
-    // public static void StyleColorsDark();
-    // public static void StyleColorsLight();
-    // public static void StyleColorsLight(ImGuiStylePtr dst);
+    public static bool SmallButton(string label){
+        return ImGui.SmallButton(label);
+    }
+    public static void Spacing(){
+        ImGui.Spacing();
+    }
+    //public static void StyleColorsClassic(ImGuiStylePtr dst);
+    public static void StyleColorsClassic(){
+        ImGui.StyleColorsClassic();
+    }
+    //public static void StyleColorsDark(ImGuiStylePtr dst);
+    public static void StyleColorsDark(){
+        ImGui.StyleColorsDark();
+    }
+    public static void StyleColorsLight(){
+        ImGui.StyleColorsLight();
+    }
+    //public static void StyleColorsLight(ImGuiStylePtr dst);
     // public static bool TabItemButton(string label, ImGuiTabItemFlags flags);
     // public static bool TabItemButton(string label);
     // public static int TableGetColumnCount();
@@ -713,7 +749,9 @@ public unsafe static class ImGUIWrap
     {
         ImGui.Text(fmt);
     }
-    // public static void TextColored(Vector4 col, string fmt);
+    public static void TextColored(Vector4 col, string fmt){
+        ImGui.TextColored(col,fmt);
+    }
     // public static void TextDisabled(string fmt);
     // public static void TextUnformatted(string text);
     // public static void TextWrapped(string fmt);
