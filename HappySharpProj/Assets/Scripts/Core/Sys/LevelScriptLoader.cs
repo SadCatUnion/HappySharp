@@ -24,8 +24,15 @@ public class LevelScriptLoader : Puerts.ILoader
 
     public bool FileExists(string filepath)
     {
+        Debug.Log(filepath);
         if (filepath.StartsWith("puerts/")) return true;
-
+        if(filepath.StartsWith("node_modules/")){
+            #if UNITY_EDITOR
+                return File.Exists(Path.Combine(Application.streamingAssetsPath,"../../TsProject/",filepath).Replace("\\", "/"));
+            #else
+                return File.Exists(Path.Combine(Application.streamingAssetsPath, filepath).Replace("\\", "/"));
+            #endif
+        }
         return File.Exists(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
     }
 
@@ -40,6 +47,14 @@ public class LevelScriptLoader : Puerts.ILoader
             UnityEngine.TextAsset file = (UnityEngine.TextAsset)UnityEngine.Resources.Load(pathToUse);
 
             return file == null ? null : file.text;
+        }
+
+        if(filepath.StartsWith("node_modules/")){
+            #if UNITY_EDITOR
+                return File.ReadAllText(Path.Combine(Application.streamingAssetsPath,"../../TsProject/",filepath).Replace("\\", "/"));
+            #else
+                return File.ReadAllText(Path.Combine(Application.streamingAssetsPath, filepath).Replace("\\", "/"));
+            #endif
         }
 
         return File.ReadAllText(Path.Combine(Application.streamingAssetsPath, filepath + ".txt").Replace("\\", "/"));
