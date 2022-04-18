@@ -14,12 +14,6 @@ using ImGuiNET;
 public class PuertsConfig
 {
 
-    [Filter]
-    static bool Filter(System.Reflection.MemberInfo memberInfo)
-    {   
-        return (memberInfo.DeclaringType.Name == "ImGuiNET.ImGui" && memberInfo.Name == "GetAllocatorFunctions");
-    }
-
     [Typing]
     static IEnumerable<Type> Typeing
     {
@@ -53,6 +47,7 @@ public class PuertsConfig
                //直接指定的类型
                 typeof(JsEnv),
                 typeof(ILoader),
+                typeof(GUITool)
             };
         }
     }
@@ -68,7 +63,7 @@ public class PuertsConfig
                 "System.IO",
                 "System.Security",
                 "System.Security.Policy",
-                "ImGuiNET"
+                
             };
             var unityTypes = (from assembly in AppDomain.CurrentDomain.GetAssemblies()
                               where !(assembly.ManifestModule is System.Reflection.Emit.ModuleBuilder)
