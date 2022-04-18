@@ -3273,12 +3273,12 @@ declare module 'csharp' {
         }
         class ObsoleteAttribute extends System.Attribute
         {
-            public get Message(): string;
-            public get IsError(): boolean;
             public get DiagnosticId(): string;
             public set DiagnosticId(value: string);
             public get UrlFormat(): string;
             public set UrlFormat(value: string);
+            public get Message(): string;
+            public get IsError(): boolean;
             public constructor ()
             public constructor ($message: string)
             public constructor ($message: string, $error: boolean)
