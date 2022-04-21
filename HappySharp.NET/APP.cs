@@ -4,6 +4,7 @@ using System;
 using System.IO;
 using Num = System.Numerics;
 using ImGuiNET;
+using Puerts;
 
 namespace HappySharp
 {
@@ -13,6 +14,7 @@ namespace HappySharp
         private GraphicsDeviceManager _graphics;
         private ImGuiRenderer _imGuiRenderer;
 
+        private JsEnv env;
         public APP()
         {
             _graphics = new GraphicsDeviceManager(this);
@@ -29,7 +31,11 @@ namespace HappySharp
             _imGuiRenderer = new ImGuiRenderer(this);
             _imGuiRenderer.RebuildFontAtlas();
             base.Initialize();
-            //EmmyLuaService.EnableService();
+            if (env == null)
+            {
+                env = GlobalJSEnv.Env;
+            }
+            
         }
 
         protected override void LoadContent()

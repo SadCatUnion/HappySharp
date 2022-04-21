@@ -15,12 +15,14 @@ public class TxtLoader : ILoader
         );
     }
 
+    private string commonRoot = PathToBinDir("./js/");
     private string root = PathToBinDir("./Resources/Runtime/");
     private string editorRoot = PathToBinDir("./Resources/Editor/");
 
     public bool FileExists(string filepath)
     {
         return mockFileContent.ContainsKey(filepath) ||
+            File.Exists(Path.Combine(commonRoot, filepath)) ||
             File.Exists(Path.Combine(root, filepath)) ||
             File.Exists(Path.Combine(editorRoot, filepath));
     }
